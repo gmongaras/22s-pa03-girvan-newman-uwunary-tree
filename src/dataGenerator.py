@@ -27,26 +27,58 @@ assert P_in > P_out
 G = nx.Graph()
 
 
-
-# Add the nodes to the graph
-if names == True:
-    nodes = [get_full_name() for i in range(0, vertices)]
-elif rand == False:
-    nodes = [i for i in range(0, vertices)]
-elif rand == True:
-    nodes = [random.randint(0, vertices*100) for i in range(0, vertices)]
-G.add_nodes_from(nodes)
-while len(list(G.nodes)) < vertices:
-    if names == True:
-        G.add_node(get_full_name())
-    elif rand == True:
-        G.add_node(random.randint(0, vertices*100))
-
 # Classify each node into a community
 comm = sum([[i for j in range(0, communitySize)] for i in range(0, communities)], [])
 while len(comm) < vertices:
     comm.append(random.choice([i for i in range(0, communitySize)]))
 random.shuffle(comm)
+
+
+### Add the nodes to the graph
+
+# Store names
+if names == True:
+    nodes = []
+    vals = []
+    
+    # Store vertices number of nodes
+    for i in range(0, vertices):
+        # Get a name
+        v = get_full_name()
+        
+        # ensure the name is new
+        while v in vals:
+            v = get_full_name()
+        
+        # Store the name
+        nodes.append((v, {"community":comm[i]}))
+        vals.append(v)
+        
+# Store sequential numbers
+elif rand == False:
+    vals = [i for i in range(0, vertices)]
+    nodes = [(i, {"community":comm[i]}) for i in range(0, vertices)]
+    
+# Store random numbers
+elif rand == True:
+    nodes = []
+    vals = []
+    
+    # Store vertices number of nodes
+    for i in range(0, vertices):
+        # Get a random number
+        v = random.randint(0, vertices*100)
+        
+        # ensure the number is new
+        while v in vals:
+            v = random.randint(0, vertices*100)
+        
+        # Store the number
+        nodes.append((v, {"community":comm[i]}))
+        vals.append(v)
+
+# Add the nodes to the graph
+G.add_nodes_from(nodes)
 
 
 
@@ -58,7 +90,7 @@ for n1 in range(0, vertices):
     # to the current node, n1
     for n2 in range(0, vertices):
         # If the nodes are equal, skip this iteration
-        if nodes[n1] == nodes[n2]:
+        if vals[n1] == vals[n2]:
             continue
         
         # Get a random value between 0 and 1.
@@ -68,13 +100,13 @@ for n1 in range(0, vertices):
         # random value is less than P_in, add an edge between
         # the two nodes
         if comm[n1] == comm[n2] and v < P_in:
-            G.add_edge(nodes[n1], nodes[n2])
+            G.add_edge(vals[n1], vals[n2])
         
         # If the nodes are not a part of the same community and the
         # ranodm value is less than P_out, add an edge between
         # the two nodes
         elif comm[n1] != comm[n2] and v < P_out:
-            G.add_edge(nodes[n1], nodes[n2])
+            G.add_edge(vals[n1], vals[n2])
 
 
 # Save the graph
@@ -102,7 +134,7 @@ if stats == True:
         
         # If the communities are the same, increase the in count
         # for both edges
-        if comm[nodes.index(e[0])] == comm[nodes.index(e[1])]:
+        if comm[vals.index(e[0])] == comm[vals.index(e[1])]:
             degreeCts[e[0]][1] += 1
             degreeCts[e[1]][1] += 1
         # If the communities are different, increase the out count
