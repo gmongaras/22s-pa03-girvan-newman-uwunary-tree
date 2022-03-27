@@ -42,7 +42,7 @@ if names == True:
     vals = []
     
     # Store vertices number of nodes
-    for i in range(0, vertices):
+    for i in range(0, vertices-1):
         # Get a name
         v = get_full_name()
         
@@ -53,6 +53,9 @@ if names == True:
         # Store the name
         nodes.append((v, {"community":comm[i]}))
         vals.append(v)
+    
+    vals.append("Sussy Baka")
+    nodes.append(("Sussy Baka", {"community":comm[i]}))
         
 # Store sequential numbers
 elif rand == False:
