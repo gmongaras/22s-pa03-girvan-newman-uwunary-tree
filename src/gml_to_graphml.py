@@ -3,7 +3,7 @@ from networkx import graphml
 
 
 # Filename to convert
-inFile = "./football/football.gml"
+inFile = "../data/football/football.gml"
 
 # Filename to write to
 outFile = inFile[:inFile.rfind(".")] + ".graphml"

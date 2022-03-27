@@ -7,14 +7,14 @@ import random
 
 
 # Hyperparameters
-outFile = "dataset.graphml"             # File to save the graph to
+outFile = "../data/dataset.graphml"     # File to save the graph to
 vertices = 128                          # Number of vertices (nodes) in the graph
 communities = 4                         # Number of communities in the graph
 communitySize = vertices//communities   # Number of vertices in each community
 rand = True                             # True to generate random values
 names = True                            # True to generate random names
-P_out = 0.03                            # Probability of edge between vertices of different group
-P_in = 23/vertices                      # Probability of edge between vertices of same group
+P_out = 0.02                            # Probability of edge between vertices of different group
+P_in = 0.223                           # Probability of edge between vertices of same group
 stats = True                            # True to see stats after running
 
 
@@ -44,6 +44,8 @@ while len(list(G.nodes)) < vertices:
 
 # Classify each node into a community
 comm = sum([[i for j in range(0, communitySize)] for i in range(0, communities)], [])
+while len(comm) < vertices:
+    comm.append(random.choice([i for i in range(0, communitySize)]))
 random.shuffle(comm)
 
 
