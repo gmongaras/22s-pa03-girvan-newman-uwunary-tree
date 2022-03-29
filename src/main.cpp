@@ -2,6 +2,7 @@
 // https://stackoverflow.com/questions/58974799/how-can-i-solve-this-error-in-printing-nodes-and-edges-boost-graph-library
 // https://stackoverflow.com/questions/49047897/boost-read-graphml-doesnt-read-xml-properly-it-gives-all-the-vertices-but-they
 // https://www.codeproject.com/Articles/820116/Embedding-Python-program-in-a-C-Cplusplus-code (Python Embedding)
+// https://stackoverflow.com/questions/16962430/calling-python-script-from-c-and-using-its-output (Python Embedding)
 
 #include <boost/graph/adjacency_list.hpp>
 #include <boost/graph/breadth_first_search.hpp>
@@ -54,15 +55,9 @@ int main(int argc, char* argv[]) {
         std::ifstream I(argv[1]);
         Graph G = ReadGraph(I); }
     else {
-        PyObject* pInt;
-
-        Py_Initialize();
-
-        PyRun_SimpleString("print('Hello World from Embedded Python!!!')");
-
-        Py_Finalize();
-
-        printf("\nPress any key to exit...\n");
-        return 0;
+        Py_Initialize(); // Initialize Environment
+//        PyRun_SimpleString("import sys"); // Call Import
+//        PyRun_SimpleString("sys.path.append('/src/dataGenerator.py')"); // Can't Get it to work!
+        Py_Finalize(); // End Environment
     }
 }
