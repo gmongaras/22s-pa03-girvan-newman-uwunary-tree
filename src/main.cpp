@@ -1,3 +1,7 @@
+// Some Useful Links:
+// https://stackoverflow.com/questions/58974799/how-can-i-solve-this-error-in-printing-nodes-and-edges-boost-graph-library
+// https://stackoverflow.com/questions/49047897/boost-read-graphml-doesnt-read-xml-properly-it-gives-all-the-vertices-but-they
+
 #include <boost/graph/adjacency_list.hpp>
 #include <boost/graph/breadth_first_search.hpp>
 #include <boost/graph/dijkstra_shortest_paths.hpp>
@@ -6,51 +10,43 @@
 #include <boost/graph/graphml.hpp>
 #include <boost/property_map/dynamic_property_map.hpp>
 #include <boost/property_map/property_map.hpp>
+
 #include <fstream>
 
-struct GraphData { std::string Name; };
-struct VertexProperty { std::string Name; };
-struct EdgeProperty { std::string Name; };
+struct VertexProperty { long value; }; // Vertex ID
+struct EdgeProperty { double weight = 0; }; // Weight Value (Set 0)
 
-using Graph = boost::adjacency_list<boost::setS, boost::vecS, boost::directedS, VertexProperty, EdgeProperty, GraphData>;
+using boost::make_iterator_range; // Iteration
+using Graph = boost::adjacency_list<boost::setS, boost::vecS, boost::undirectedS, VertexProperty, EdgeProperty>; // Graph
 
-Graph ReadGraph(std::istream& is) {
-    Graph graph;
-    boost::dynamic_properties dp(boost::ignore_other_properties);
-    dp.property("Name", boost::get(&VertexProperty::Name, graph));
-
-    boost::read_graphml(is, graph, dp);
-
-    return graph;
+Graph ReadGraph(std::ifstream& I) {
+    Graph G; // Creates Return Variable
+    boost::dynamic_properties D(boost::ignore_other_properties); // Dynamic Properties
+    D.property("Value", boost::get(&VertexProperty::value, G)); // Vertex
+    boost::read_graphml(I, G, D); // Read In Program Argument Graphml
+    return G; // Return Temp Graph
 }
 
-extern std::string const graphml_111;
+// Prints Important Information
+void PrintGraph(Graph const &G) {
+    std::cout << "Initial Statistics:\n";
+    std::cout << "Number of Vertices is :\t" << num_vertices(G) << "\n";
+    std::cout << "Number of Edges is :\t" << num_edges(G) << "\n\n";
 
-int main() {
-    std::istringstream is(graphml_111);
-    Graph g = ReadGraph(is);
-    print_graph(g, get(&VertexProperty::Name, g));
+    // Prints All Connections From All Nodes (Using ID)
+    boost::print_graph(G, boost::get(&VertexProperty::value, G), std::cout);
+
+    // Prints All Node Weights, Edges (Can Change)
+    std::cout << "\n";
+    for (auto v : make_iterator_range(vertices(G))) {
+        for (auto oe : make_iterator_range(out_edges(v, G))) {
+            std::cout << "Edge " << oe << " Weight " << G[oe].weight << "\n";
+        }
+    }
 }
 
-std::string const graphml_111 = R"(<?xml version="1.0" encoding="UTF-8"?>
-<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd">
-  <key id="key0" for="node" attr.name="Name" attr.type="string" />
-  <graph id="G" edgedefault="directed" parse.nodeids="canonical" parse.edgeids="canonical" parse.order="nodesfirst">
-    <node id="n0">
-      <data key="key0">A</data>
-    </node>
-    <node id="n1">
-      <data key="key0">D</data>
-    </node>
-    <node id="n2">
-      <data key="key0">B</data>
-    </node>
-    <node id="n3">
-      <data key="key0">C</data>
-    </node>
-    <edge id="e0" source="n0" target="n1">
-    </edge>
-    <edge id="e1" source="n2" target="n3">
-    </edge>
-  </graph>
-</graphml>)";
+// Handles Main Graph ( PrintGraph(G); )
+int main(int argc, char* argv[]) {
+    std::ifstream I(argv[1]);
+    Graph G = ReadGraph(I);
+}
