@@ -1,6 +1,7 @@
 // Some Useful Links:
 // https://stackoverflow.com/questions/58974799/how-can-i-solve-this-error-in-printing-nodes-and-edges-boost-graph-library
 // https://stackoverflow.com/questions/49047897/boost-read-graphml-doesnt-read-xml-properly-it-gives-all-the-vertices-but-they
+// https://www.codeproject.com/Articles/820116/Embedding-Python-program-in-a-C-Cplusplus-code (Python Embedding)
 
 #include <boost/graph/adjacency_list.hpp>
 #include <boost/graph/breadth_first_search.hpp>
@@ -12,6 +13,7 @@
 #include <boost/property_map/property_map.hpp>
 
 #include <fstream>
+#include <Python.h>
 
 struct VertexProperty { long value; }; // Vertex ID
 struct EdgeProperty { double weight = 0; }; // Weight Value (Set 0)
@@ -46,11 +48,21 @@ void PrintGraph(Graph const &G) {
 }
 
 // Handles Main Graph ( PrintGraph(G); )
+// Argument Example: data/football/football.graphml
 int main(int argc, char* argv[]) {
     if (argc >= 2) {
         std::ifstream I(argv[1]);
         Graph G = ReadGraph(I); }
     else {
-        // Call Python Script
+        PyObject* pInt;
+
+        Py_Initialize();
+
+        PyRun_SimpleString("print('Hello World from Embedded Python!!!')");
+
+        Py_Finalize();
+
+        printf("\nPress any key to exit...\n");
+        return 0;
     }
 }
