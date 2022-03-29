@@ -47,6 +47,10 @@ void PrintGraph(Graph const &G) {
 
 // Handles Main Graph ( PrintGraph(G); )
 int main(int argc, char* argv[]) {
-    std::ifstream I(argv[1]);
-    Graph G = ReadGraph(I);
+    if (argc >= 2) {
+        std::ifstream I(argv[1]);
+        Graph G = ReadGraph(I); }
+    else {
+        // Call Python Script
+    }
 }

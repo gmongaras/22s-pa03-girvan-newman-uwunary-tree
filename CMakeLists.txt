@@ -5,7 +5,7 @@ cmake_minimum_required(VERSION 3.15)
 project(22s-pa03-girvan-newman-uwunary-tree)
 
 # Executable
-add_executable(22s-pa03-girvan-newman-uwunary-tree src/main.cpp)
+add_executable(22s-pa03-girvan-newman-uwunary-tree src/main.cpp src/dataGenerator.py)
 
 # Configure Files
 file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/data DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
