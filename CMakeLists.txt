@@ -29,6 +29,10 @@ message(STATUS "Boost version: ${Boost_VERSION}")
 # Linking Correct Libraries (In Find Package)
 target_link_libraries(22s-pa03-girvan-newman-uwunary-tree PUBLIC Boost::graph PUBLIC Boost::system PUBLIC Boost::filesystem)
 
+# Find Python Packages (Interpreter and Development Artifacts)
+find_package(Python REQUIRED COMPONENTS Interpreter Development)
+message(STATUS "Python version: ${Python_VERSION}")
+
 # Other Important Functions
 # set(CMAKE_CXX_STANDARD 14)
 # configure_file(output/outfile.csv output/outfile.csv COPYONLY)
