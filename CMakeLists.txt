@@ -1,4 +1,7 @@
-# Fantastic Linking Article: https://stackoverflow.com/questions/21530577/fatal-error-python-h-no-such-file-or-directory?page=2&tab=scoredesc#tab-top
+# Fantastic Linking Articles:
+# https://stackoverflow.com/questions/21530577/fatal-error-python-h-no-such-file-or-directory?page=2&tab=scoredesc#tab-top
+# https://stackoverflow.com/questions/26953039/undefined-python-references-in-c-using-cmake
+# https://cmake.org/cmake/help/latest/module/FindPython.html
 
 # Version Requirement
 cmake_minimum_required(VERSION 3.15)
