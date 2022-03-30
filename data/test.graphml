@@ -30,5 +30,4 @@
 <edge source="D" target="G"/>
 <edge source="G" target="F"/>
 <edge source="E" target="F"/>
-<edge source="C" target="F"/>
 </graph></graphml>

@@ -7,123 +7,12 @@ from collections import deque
 
 
 
+
+
 # Parameters
-inFile = "../data/dataset.graphml"  # The datafile to load in
-nodeSubsetPercent = 0.1             # Number of random nodes to pick in the betweeness algorithm
-        
-
-
-
-
-# Inputs:
-#   G - The graph to calculate
-# Output
-#   edges - The betweeness between all edges
-# def calculateBetweeness(G, paths, removedEdges, edges):
-#     # Calculate the number of nodes to sample
-#     nodes = list(G.nodes)
-#     numNodes = len(nodes)
-#     nodeSubsetSize = int(nodeSubsetPercent*numNodes)
-    
-#     # Select a specified percent of nodes to look at
-#     #random.shuffle(nodes)
-#     #selectedNodes = nodes[:nodeSubsetSize]
-    
-    
-#     # If the removed edge is empty, calculate all paths
-#     if removedEdges == None:
-#         # Create a dictionary of edges
-#         edges = {i:0 for i in list(G.edges)}
-        
-#         # Iterate over all selected nodes
-#         for n1 in range(0, numNodes):
-#             # Iterate over all nodes that haven't been visited
-#             for n2 in range(n1+1, numNodes):
-#                 # Find the shortest paths between the nodes if it exists
-#                 try:
-#                     shortestPaths = list(nx.all_shortest_paths(G, nodes[n1], nodes[n2]))
-#                 # If no path exists, skip to the next node
-#                 except nx.NetworkXNoPath:
-#                     continue
-                
-#                 # New edges to add to the total edge counts
-#                 newEdges = dict()
-#                 for path in shortestPaths:
-#                     for i in range(0, len(path)-1):
-#                         try: # Does the key exist
-#                             newEdges[(path[i], path[i+1])] += 1
-#                         except KeyError:
-#                             newEdges[(path[i], path[i+1])] = 1
-                
-#                 # Add all edges to the total edge counts as an inverse
-#                 # of the current value to compensate for multiple paths
-#                 for k in newEdges.keys():
-#                     try: # Should the 0 and 1 indices be flipped?
-#                         edges[(k[0], k[1])] += 1/float(newEdges[k])
-#                     except KeyError:
-#                         edges[(k[1], k[0])] += 1/float(newEdges[k])
-                
-#                 # Add the paths to the paths dict
-#                 for path in shortestPaths:
-#                     # Iterate over each path and add each edge, path
-#                     # combination to the paths dict
-#                     for i in range(0, len(path)-1):
-#                         try: # Does paths have the key already?
-#                             paths[(path[i], path[i+1])].append((path, 1/float(newEdges[(path[i], path[i+1])])))
-#                         except KeyError:
-#                             try: # Swap the order of i and i+1 if needed
-#                                 paths[(path[i], path[i+1])] = [(path, 1/float(newEdges[(path[i], path[i+1])]))]
-#                             except KeyError:
-#                                 paths[(path[i], path[i+1])] = [(path, 1/float(newEdges[(path[i+1], path[i])]))]
-    
-#     # If the removed edge is not None, recalculate paths for the
-#     # removed edge
-#     else:
-#         # Iterate over all removed edges
-#         for edge in removedEdges:
-#             # Iterate over all paths for that edge
-#             for p in paths[edge].copy():
-#                 # Recalculate the path between the two nodes
-                
-#                 # Find the shortest paths between the nodes if it exists
-#                 try:
-#                     shortestPaths = list(nx.all_shortest_paths(G, p[0][0], p[0][-1]))
-#                 # If no path exists, skip to the next node
-#                 except nx.NetworkXNoPath:
-#                     continue
-                
-#                 # New edges to add to the total edge counts
-#                 newEdges = dict()
-#                 for path in shortestPaths:
-#                     for i in range(0, len(path)-1):
-#                         try: # Does the key exist
-#                             newEdges[(path[i], path[i+1])] += 1
-#                         except KeyError:
-#                             newEdges[(path[i], path[i+1])] = 1
-                
-#                 # Add all edges to the total edge counts as an inverse
-#                 # of the current value to compensate for multiple paths
-#                 for k in newEdges.keys():
-#                     try: # Should the 0 and 1 indices be flipped?
-#                         edges[(k[0], k[1])] += 1/float(newEdges[k])
-#                     except KeyError:
-#                         edges[(k[1], k[0])] += 1/float(newEdges[k])
-                
-#                 # Add the paths to the paths dict
-#                 for path in shortestPaths:
-#                     # Iterate over each path and add each edge, path
-#                     # combination to the paths dict
-#                     for i in range(0, len(path)-1):
-#                         try: # Does paths have the key already?
-#                             paths[(path[i], path[i+1])].append((path, 1/float(newEdges[(path[i], path[i+1])])))
-#                         except KeyError:
-#                             try: # Swap the order of i and i+1 if needed
-#                                 paths[(path[i], path[i+1])] = [(path, 1/float(newEdges[(path[i], path[i+1])]))]
-#                             except KeyError:
-#                                 paths[(path[i], path[i+1])] = [(path, 1/float(newEdges[(path[i+1], path[i])]))]
-        
-#     # return the betweeness and the updated paths
-#     return edges, paths
+inFile = "../data/test.graphml"  # The datafile to load in
+nodeSubsetPercent = 0.9             # Number of random nodes to pick in the betweeness algorithm
+betThreshold = 4                    # Threshold betweeness value to remove
     
     
     
@@ -140,6 +29,7 @@ class Node:
         self.parents = []       # The parents of this node
         self.sameLevel = []     # Nodes on same level as this one
         self.level = level      # The level of the node
+        self.labeled = False
     
     # Test if two nodes are equal
     # Inputs:
@@ -177,6 +67,24 @@ class Node:
 # Output:
 #   None (edges is changed in the function)
 def edgeLabelling(node, parent, edges):
+    if node.labeled == True:
+        # Divide the betweeness between the parent nodes
+        if len(node.children) == 0:
+            betweeness = 1/float(len(node.parents))
+        else:
+            betweeness = node.shortestPaths/float(len(node.parents))
+        
+        # Store the betweeness of this node and its parent
+        try: # Does the key (parent, child) exist?
+            edges[(parent.val, node.val)] += betweeness
+        except KeyError:
+            try: # Does the key (child, parent) exist?
+                edges[(node.val, parent.val)] += betweeness
+            except KeyError:
+                # Add the key (parent, child)
+                edges[(parent.val, node.val)] = betweeness
+        return
+    
     # If node is a root node, iterate to the child nodes and
     # calculate their betweeness
     
@@ -233,6 +141,8 @@ def edgeLabelling(node, parent, edges):
             except KeyError:
                 # Add the key (parent, child)
                 edges[(parent.val, node.val)] = betweeness
+        
+    node.labeled = True
 
 
 
@@ -254,11 +164,11 @@ def single_source_shortest_path(G, n, edges):
     
     ### Step 1 and 2 - Breadth First Search and Node Labelling
     
-    # Queue used for BFS
-    q = deque()
+    # Stack used for BFS
+    s = deque()
     
-    # Enqueue the root node
-    q.append(tree)
+    # push the root node
+    s.append(tree)
     visited.append(tree)
     
     # BFS variables
@@ -267,9 +177,9 @@ def single_source_shortest_path(G, n, edges):
     level = 1           # The current level of the tree
     
     # Iterate until the queue is empty
-    while q:
-        # Dequeue the queue
-        cur = q.pop()
+    while s:
+        # Dequeue the stack
+        cur = s.pop()
         
         # The current level is the level of the current node + 1
         level = cur.level + 1
@@ -299,10 +209,10 @@ def single_source_shortest_path(G, n, edges):
                         cur.addParent(node)
                 
             
-            # If the node isn't visited, enqueue it and add
+            # If the node isn't visited, push it and add
             # it to the tree
             except ValueError:
-                q.append(node)
+                s.append(node)
                 visited.append(node)
                 cur.addChild(node)
     
@@ -319,13 +229,13 @@ def single_source_shortest_path(G, n, edges):
     # Add the betweeness to the total edges dictionary
     for edge in bet.keys():
         try: # Does the edge exist?
-            edges[edge] += bet[edge]
+            edges[edge] += bet[edge]/2
         except KeyError:
             try: # Does the reverse of the edge exist?
-                edges[(edge[1], edge[0])] += bet[edge]
+                edges[(edge[1], edge[0])] += bet[edge]/2
             except KeyError:
                 # If the edge does not exist, add it
-                edges[edge] = bet[edge]
+                edges[edge] = bet[edge]/2
     
     # Return the edges
     return edges
@@ -341,22 +251,35 @@ def calculateBetweeness(G):
     # map:   edge -> betweeness
     betweeness = dict()
     
+    # Get a subset of the graph
+    e = list(G.edges)
+    random.shuffle(e)
+    sub = G.edge_subgraph(e[:int(len(e)*nodeSubsetPercent)])
+    
     # Iterate over all nodes
-    for n in list(G.nodes):
+    for n in list(sub.nodes):
         # Calculate the betweeness for all paths from that node
-        #bet = nx.single_source_shortest_path(G, n)
-        single_source_shortest_path(G, n, betweeness)
-        
-        # # Store the betweeness
-        # for edge in bet.keys():
-        #     # Does the edge exist in thedictionary?
-        #     try:
-        #         betweeness[edge] += bet[edge]
-        #     except:
-        #         betweeness[edge] = bet[edge]
+        single_source_shortest_path(sub, n, betweeness)
     
     # Return the betweeness
     return betweeness
+
+
+
+
+# Input:
+#   G - The graph to iterate
+#   node - The node to look at in the graph
+#   visited - The already visited nodes
+def findCommunities(G, node, visited):
+    # Iterate over all nodes adjacent to this node
+    # and add them to the visited nodes
+    for n in list(G.neighbors(node)):
+        # If the node hasn't been visited, add it
+        # to the community and visit its neighbors
+        if n not in visited:
+            visited.append(n)
+            findCommunities(G, n, visited)
                 
 
 
@@ -366,59 +289,40 @@ def main():
     # Read in the graph and store data on it
     G = graphml.read_graphml(inFile)
     
-    # edges and paths that go through them
-    # paths = dict()
-    # removedEdges = None
-    # betweeness = None
-    
     # Iterate until the number of edges is 0
-    while (len(G.edges) > 0):
+    maxBetweeness = [0]
+    while (len(G.edges) and len(maxBetweeness) > 0):
         
         # Calculate the betweeness of all edges in the graph
-        betweeness2 = nx.edge_betweenness_centrality(G)
         betweeness = calculateBetweeness(G)
         
-        # Get the edge with the max betweeness
-        maxBetweeness = np.argwhere(np.array(list(betweeness.values()), dtype=np.float16) == max(np.array(list(betweeness.values()), dtype=np.float16)))
-        maxBetweeness2 = np.argwhere(np.array(list(betweeness2.values()), dtype=np.float16) == max(np.array(list(betweeness2.values()), dtype=np.float16)))
+        # Get the edges with the max betweeness
+        maxBetweeness = np.argwhere(np.array(list(betweeness.values()), dtype=np.float16) >= 4)[:30]
         
         # Remove all max edges from the graph
         for edge in maxBetweeness:
             e = list(betweeness.keys())[edge.item()]
             G.remove_edge(e[0], e[1])
-        print(len(G.edges))
         
-        # # Calculate the betweeness of all edges in the graph
-        # betweeness, paths = calculateBetweeness(G, paths, removedEdges, betweeness)
         
-        # # Get the edge with the max betweeness
-        # maxBetweeness = np.argwhere(np.array(list(betweeness.values()), dtype=np.float16) == max(np.array(list(betweeness.values()), dtype=np.float16)))
-
-        # # Reduce the edge betweeness for all paths that include
-        # # the edges to remove
-        # for val in maxBetweeness:
-        #     # Get the paths
-        #     maxEdge = list(betweeness.keys())[val.item()]
-        #     edgePaths = paths[maxEdge]
-            
-            
-        #     # Iterate over all paths
-        #     for path in edgePaths:
-        #         # Iterate over all pairs in the paths
-        #         for i in range(0, len(path[0])-1):
-        #             try: # Swap i and i+1 if needed
-        #                 betweeness[(path[0][i], path[0][i+1])] -= path[1]
-        #             except:
-        #                 betweeness[(path[0][i+1], path[0][i])] -= path[1]
-
-        # # Remove the edges with the max betweeness
-        # for val in maxBetweeness:
-        #     maxEdge = list(betweeness.keys())[val.item()]
-        #     G.remove_edge(maxEdge[0], maxEdge[1])
-        
-        # print(len(G.edges))
-        # removedEdges = [list(betweeness.keys())[val.item()] for val in maxBetweeness]
+    # Iterate over all nodes and find the communities
+    comm = []           # The communities found
+    totalVisited = []   # The total visited nodes
+    for node in list(G.nodes):
+        # If the node has been visited, skip this iteration
+        if node in totalVisited:
+            continue
     
+        visited = []    # The nodes that were visited already
+        findCommunities(G, node, visited)
+        
+        # Add the visited nodes to the communities
+        if len(visited) != 0:
+            comm.append(visited)
+        
+        # Add the visited nodes to the total visited nodes
+        totalVisited += visited
+        
     print()
 
 
