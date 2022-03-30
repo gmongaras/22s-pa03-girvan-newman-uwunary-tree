@@ -1,0 +1,34 @@
+<?xml version='1.0' encoding='utf-8'?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd"><key id="d0" for="node" attr.name="community" attr.type="long"/>
+<graph edgedefault="undirected"><node id="A">
+  <data key="d0">2</data>
+</node>
+<node id="B">
+  <data key="d0">2</data>
+</node>
+<node id="C">
+  <data key="d0">3</data>
+</node>
+<node id="D">
+  <data key="d0">2</data>
+</node>
+<node id="E">
+  <data key="d0">1</data>
+</node>
+<node id="F">
+  <data key="d0">2</data>
+</node>
+<node id="G">
+  <data key="d0">0</data>
+</node>
+<edge source="A" target="B"/>
+<edge source="A" target="C"/>
+<edge source="C" target="B"/>
+<edge source="B" target="D"/>
+<edge source="D" target="E"/>
+<edge source="D" target="F"/>
+<edge source="D" target="G"/>
+<edge source="G" target="F"/>
+<edge source="E" target="F"/>
+<edge source="C" target="F"/>
+</graph></graphml>

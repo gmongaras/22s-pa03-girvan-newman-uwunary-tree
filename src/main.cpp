@@ -1,12 +1,17 @@
 #include <boost/graph/adjacency_list.hpp>
 #include <boost/graph/breadth_first_search.hpp>
-#include <boost/graph/dijkstra_shortest_paths.hpp>
 
-#include <boost/graph/graph_utility.hpp>
 #include <boost/graph/graphml.hpp>
 #include <boost/property_map/dynamic_property_map.hpp>
+<<<<<<< Updated upstream
 #include <boost/property_map/property_map.hpp>
+=======
+
+>>>>>>> Stashed changes
 #include <fstream>
+#include <string>
+#include <iostream>
+#include <istream>
 
 struct GraphData { std::string Name; };
 struct VertexProperty { std::string Name; };
@@ -14,7 +19,15 @@ struct EdgeProperty { std::string Name; };
 
 using Graph = boost::adjacency_list<boost::setS, boost::vecS, boost::directedS, VertexProperty, EdgeProperty, GraphData>;
 
+<<<<<<< Updated upstream
 Graph ReadGraph(std::istream& is) {
+=======
+    //std::istringstream graphml("data/football/football.graphml");
+    std::filebuf fb;
+    fb.open("data/football/football.graphml", std::ios::in);
+    std::istream graphml(&fb);
+    typedef boost::adjacency_list<> Graph;
+>>>>>>> Stashed changes
     Graph graph;
     boost::dynamic_properties dp(boost::ignore_other_properties);
     dp.property("Name", boost::get(&VertexProperty::Name, graph));
