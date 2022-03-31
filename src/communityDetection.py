@@ -5,14 +5,16 @@ import numpy as np
 import random
 from collections import deque
 import math
+import random
+import matplotlib.pyplot as plt
 
 
 
 
 
 # Parameters
-inFile = "../data/dataset.graphml"  # The datafile to load in
-nodeSubsetPercent = 0.8             # Number of random nodes to pick in the betweeness algorithm
+inFile = "../data/football/football.graphml"  # The datafile to load in
+nodeSubsetPercent = 1.8             # Number of random nodes to pick in the betweeness algorithm
 betThreshold = 4                    # Threshold betweeness value to remove
     
     
@@ -289,11 +291,13 @@ def findCommunities(G, node, visited):
 def main():
     # Read in the graph and store data on it
     G = graphml.read_graphml(inFile)
+    orig = G.copy()
     
     # Iterate until the Q value is no longer increasing
     Q_prev = -np.inf
     Q = -np.inf
     maxBetweeness = [0]
+    iter = 1
     while (Q >= Q_prev):#len(G.edges) and len(maxBetweeness) > 0):
         # Update the Q_prev value
         Q_prev = Q
@@ -301,9 +305,16 @@ def main():
         # Calculate the betweeness of all edges in the graph
         betweeness = calculateBetweeness(G)
         
+        # If the betweeness is empty, break the loop
+        if len(betweeness.keys()) == 0:
+            break
+        
         # Get the edges with the max betweeness
+        a = list(betweeness.values())[np.argmax(np.array(list(betweeness.values()), dtype=np.float16))]
+        maxBetweeness = np.argwhere(np.array(list(betweeness.values()), dtype=np.float16) >= a/5)
         #maxBetweeness = np.argwhere(np.array(list(betweeness.values()), dtype=np.float16) == list(betweeness.values())[np.argmax(np.array(list(betweeness.values()), dtype=np.float16))])
-        maxBetweeness = np.argwhere(np.array(list(betweeness.values()), dtype=np.float16) >= 3*math.log2(len(list(G.edges))))
+        #maxBetweeness = np.argwhere(np.array(list(betweeness.values()), dtype=np.float16) >= list(betweeness.values())[np.argmax(np.array(list(betweeness.values()), dtype=np.float16))]-(math.log2(len(list(G.edges)))))
+        #maxBetweeness = np.argwhere(np.array(list(betweeness.values()), dtype=np.float16) >= 3*math.log2(len(list(G.edges))))
         
         # Store the number of edges before removing any edges (m)
         m = len(list(G.edges))
@@ -315,6 +326,8 @@ def main():
         for edge in maxBetweeness:
             e = list(betweeness.keys())[edge.item()]
             G.remove_edge(e[0], e[1])
+        
+        print(f"Iters: {iter},  Removes: {len(maxBetweeness)}")
         
         
         
@@ -340,10 +353,14 @@ def main():
         sum1 = 0
         sum2 = 0
         for i in list(oldG.nodes):
+            k_i = len(list(G.neighbors(i)))
+            
+            comm = []
+            findCommunities(G, i, comm)
+            
             # Iterate over all nodes in the new graph (j)
             for j in list(G.nodes):
                 # Calculate the B value
-                k_i = len(list(G.neighbors(i)))
                 k_j = len(list(G.neighbors(j)))
                 A = 1 if ((i, j) in G.edges or (j, i) in G.edges) else 0
                 
@@ -351,8 +368,6 @@ def main():
                 
                 
                 # Calculate the s value (s_i * s_j) + 1
-                comm = []
-                findCommunities(G, i, comm)
                 s = 1 if j in comm else -1
                 s += 1
                 
@@ -365,9 +380,10 @@ def main():
                 sum2 += B_2
         
         # Compute the final Q value
-        Q = (1/2*m)*(0.5*sum1 - sum2)
+        Q = (1/(2*m))*(0.5*sum1 - sum2)
         
-        print()
+        print(f"Iter {iter} Modularity: {Q}")
+        iter += 1
         
     Q = oldG
         
@@ -391,10 +407,36 @@ def main():
         # Add the visited nodes to the total visited nodes
         totalVisited += visited
     
-    c = nx.community.girvan_newman(G) 
-    k = 3   # number of communities
-    for _ in range(k-1):
-        comms = next(c)
+    ### Graphing
+    
+    # Get some random colors to classify every node
+    vals = "123456789ABCDEF"
+    colors = dict()
+    for i in range(0, len(comm)):
+        colors[i] = "#"+"".join([random.choice(vals) for j in range(0, 6)])
+    
+    # Color each node
+    color_map = []
+    for node in G:
+        group = 0
+        for g in range(0, len(comm)):
+            if node in comm[g]:
+                group = g
+                break
+        color_map.append(colors[group])
+    
+    # Create the graph
+    nx.draw(orig, node_color=color_map, with_labels=True)
+    plt.show()
+    
+    # Print the classes
+    print("\n\n")
+    for c in range(0, len(comm)):
+        print(f"Class {c}: ", end="")
+        for v in comm[c][:-1]:
+            print(v, end=", ")
+        print(comm[c][-1])
+    
     print()
 
 
