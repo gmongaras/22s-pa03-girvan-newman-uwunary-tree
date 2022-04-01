@@ -17,8 +17,8 @@
 #include <Python.h>
 
 struct VertexProperty { long value; }; // Vertex ID (Community Number)
-struct EdgeProperty { int count = 0; }; // Shortest Path Crossings Count
-using Graph = boost::adjacency_list<boost::setS, boost::vecS, boost::undirectedS, VertexProperty, EdgeProperty>;
+using Graph = boost::adjacency_list<boost::setS, boost::vecS, boost::undirectedS, VertexProperty>;
+using vertex_descriptor = boost::graph_traits<Graph>::vertex_descriptor;
 
 Graph ReadGraph(std::ifstream& I) {
     Graph G; // Creates Return Variable
@@ -30,8 +30,8 @@ Graph ReadGraph(std::ifstream& I) {
 
 // Prints Important Information
 void PrintGraph(Graph const &G) {
-    std::cout << "Number of Vertices is :" << num_vertices(G) << "\n";
-    std::cout << "Number of Edges is :" << num_edges(G) << "\n";
+    std::cout << "Vertex Amount: " << num_vertices(G) << "\n";
+    std::cout << "Edge Amount: " << num_edges(G) << "\n";
 
     // Prints All Connections From All Nodes (Using ID)
     boost::print_graph(G, boost::get(&VertexProperty::value, G), std::cout);
@@ -49,8 +49,15 @@ int main(int argc, char* argv[]) {
     if (argc >= 2) {
         std::ifstream I(argv[1]);
         Graph G = ReadGraph(I);
-        PrintGraph(G);
-        std::cout << G.m_vertices[0].m_property.value;
+
+        boost::queue<vertex_descriptor> Q;
+        boost::default_bfs_visitor V;
+
+        auto index_map = boost::get(boost::vertex_index, G);
+        auto color_map = boost::make_vector_property_map<boost::default_color_type>(index_map);
+
+        boost::breadth_first_visit(G, 0, Q, V, color_map);
+
     }
     else {
         Py_Initialize(); // Initialize Environment
