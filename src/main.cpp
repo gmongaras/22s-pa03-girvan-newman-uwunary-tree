@@ -6,8 +6,6 @@
 
 #include <boost/graph/adjacency_list.hpp>
 #include <boost/graph/breadth_first_search.hpp>
-#include <boost/graph/dijkstra_shortest_paths.hpp>
-
 #include <boost/graph/graph_utility.hpp>
 #include <boost/graph/graphml.hpp>
 #include <boost/property_map/dynamic_property_map.hpp>
@@ -56,7 +54,16 @@ int main(int argc, char* argv[]) {
         auto index_map = boost::get(boost::vertex_index, G);
         auto color_map = boost::make_vector_property_map<boost::default_color_type>(index_map);
 
-        boost::breadth_first_visit(G, 0, Q, V, color_map);
+//        for (auto vd : boost::make_iterator_range(vertices(G))) {
+//            std::cout << "vertex descriptor #" << vd
+//                      << " degree:" << degree(vd, G)
+//                      << " community:"     << G[vd].value
+//                      << "\n";
+//        }
+
+        for (auto vd : boost::make_iterator_range(vertices(G))) {
+            boost::breadth_first_search(G, vd, Q, V, color_map); // Time Complexity: O(E + V)
+        }
 
     }
     else {
