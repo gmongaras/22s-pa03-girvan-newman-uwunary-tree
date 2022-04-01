@@ -14,7 +14,7 @@ import matplotlib.pyplot as plt
 
 # Parameters
 inFile = "../data/football/football.graphml"  # The datafile to load in
-nodeSubsetPercent = 1.8             # Number of random nodes to pick in the betweeness algorithm
+nodeSubsetPercent = 0.8             # Number of random nodes to pick in the betweeness algorithm
 betThreshold = 4                    # Threshold betweeness value to remove
     
     
@@ -298,7 +298,7 @@ def main():
     Q = -np.inf
     maxBetweeness = [0]
     iter = 1
-    while (Q >= Q_prev):#len(G.edges) and len(maxBetweeness) > 0):
+    while (Q+0.05 >= Q_prev):#len(G.edges) and len(maxBetweeness) > 0):
         # Update the Q_prev value
         Q_prev = Q
         
@@ -311,7 +311,7 @@ def main():
         
         # Get the edges with the max betweeness
         a = list(betweeness.values())[np.argmax(np.array(list(betweeness.values()), dtype=np.float16))]
-        maxBetweeness = np.argwhere(np.array(list(betweeness.values()), dtype=np.float16) >= a/5)
+        maxBetweeness = np.argwhere(np.array(list(betweeness.values()), dtype=np.float16) >= a/2)
         #maxBetweeness = np.argwhere(np.array(list(betweeness.values()), dtype=np.float16) == list(betweeness.values())[np.argmax(np.array(list(betweeness.values()), dtype=np.float16))])
         #maxBetweeness = np.argwhere(np.array(list(betweeness.values()), dtype=np.float16) >= list(betweeness.values())[np.argmax(np.array(list(betweeness.values()), dtype=np.float16))]-(math.log2(len(list(G.edges)))))
         #maxBetweeness = np.argwhere(np.array(list(betweeness.values()), dtype=np.float16) >= 3*math.log2(len(list(G.edges))))
@@ -338,8 +338,7 @@ def main():
         
         # Compute the differences B_ij
         # - B_ij = (A - (k_i-k_j)/2m)
-        #    - A = 1 if an egde is between node i and j
-        #           in the new graph
+        #    - A_ij = Number of edges between node i and j
         #    - k_i = degree of node i
         #    - k_j = degree of node j
         #    - m = number of edges in the old graph
@@ -353,7 +352,8 @@ def main():
         sum1 = 0
         sum2 = 0
         for i in list(oldG.nodes):
-            k_i = len(list(G.neighbors(i)))
+            neighbors_i = list(G.neighbors(i))
+            k_i = len(neighbors_i)
             
             comm = []
             findCommunities(G, i, comm)
@@ -361,10 +361,12 @@ def main():
             # Iterate over all nodes in the new graph (j)
             for j in list(G.nodes):
                 # Calculate the B value
-                k_j = len(list(G.neighbors(j)))
-                A = 1 if ((i, j) in G.edges or (j, i) in G.edges) else 0
+                neighbors_j = list(G.neighbors(j))
+                k_j = len(neighbors_j)
+                #A_ij = 1 if ((i, j) in G.edges or (j, i) in G.edges) else 0
+                A_ij = len(list(set(neighbors_i) & set(neighbors_j)))
                 
-                B = A - (k_i*k_j)/2*m
+                B = A_ij - (k_i*k_j)/(2*m)
                 
                 
                 # Calculate the s value (s_i * s_j) + 1
@@ -408,6 +410,18 @@ def main():
         totalVisited += visited
     
     ### Graphing
+    
+    # Put all the leftover nodes (nodes without a class)
+    # into the same class
+    leftovers = []
+    for c in range(0, len(comm)):
+        if len(comm[c]) == 1:
+            leftovers.append(comm[c][0])
+    
+    # Store the leftovers in the main list
+    for l in range(0, len(leftovers)):
+        comm.remove([leftovers[l]])
+    comm.append(leftovers)
     
     # Get some random colors to classify every node
     vals = "123456789ABCDEF"
