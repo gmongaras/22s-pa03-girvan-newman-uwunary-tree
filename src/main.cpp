@@ -22,12 +22,7 @@ using vertex_descriptor = boost::graph_traits<Graph>::vertex_descriptor;
 Graph ReadGraph(std::ifstream& I) {
     Graph G; // Creates Return Variable
     boost::dynamic_properties D(boost::ignore_other_properties); // Dynamic Properties
-
-    //boost::dynamic_properties dp;
-    //D.property("Name", boost::get(&GraphData::Name, G));
-
-    D.property("value", boost::get(&VertexProperty::value, G)); // Vertex ID Getter
-    D.property("id", boost::get(&VertexProperty::id, G)); // Vertex ID Getter
+    D.property("value", boost::get(&VertexProperty::value, G)); // Vertex Community Getter
     boost::read_graphml(I, G, D); // Read In Program Argument Graphml
     return G; // Return Variable
 }
