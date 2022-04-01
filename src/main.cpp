@@ -16,35 +16,30 @@
 #include <fstream>
 #include <Python.h>
 
-struct VertexProperty { long value; }; // Vertex ID
-struct EdgeProperty { double weight = 0; }; // Weight Value (Set 0)
-
-using boost::make_iterator_range; // Iteration
-using Graph = boost::adjacency_list<boost::setS, boost::vecS, boost::undirectedS, VertexProperty, EdgeProperty>; // Graph
+struct VertexProperty { long value; }; // Vertex ID (Community Number)
+struct EdgeProperty { int count = 0; }; // Shortest Path Crossings Count
+using Graph = boost::adjacency_list<boost::setS, boost::vecS, boost::undirectedS, VertexProperty, EdgeProperty>;
 
 Graph ReadGraph(std::ifstream& I) {
     Graph G; // Creates Return Variable
     boost::dynamic_properties D(boost::ignore_other_properties); // Dynamic Properties
-    D.property("Value", boost::get(&VertexProperty::value, G)); // Vertex
+    D.property("value", boost::get(&VertexProperty::value, G)); // Vertex ID Getter
     boost::read_graphml(I, G, D); // Read In Program Argument Graphml
-    return G; // Return Temp Graph
+    return G; // Return Variable
 }
 
 // Prints Important Information
 void PrintGraph(Graph const &G) {
-    std::cout << "Initial Statistics:\n";
-    std::cout << "Number of Vertices is :\t" << num_vertices(G) << "\n";
-    std::cout << "Number of Edges is :\t" << num_edges(G) << "\n\n";
+    std::cout << "Number of Vertices is :" << num_vertices(G) << "\n";
+    std::cout << "Number of Edges is :" << num_edges(G) << "\n";
 
     // Prints All Connections From All Nodes (Using ID)
     boost::print_graph(G, boost::get(&VertexProperty::value, G), std::cout);
 
-    // Prints All Node Weights, Edges (Can Change)
-    std::cout << "\n";
-    for (auto v : make_iterator_range(vertices(G))) {
-        for (auto oe : make_iterator_range(out_edges(v, G))) {
-            std::cout << "Edge " << oe << " Weight " << G[oe].weight << "\n";
-        }
+    // Prints All Edges
+    auto es = boost::edges(G);
+    for (auto eit = es.first; eit != es.second; ++eit) {
+        std::cout << boost::source(*eit, G) << ' ' << boost::target(*eit, G) << std::endl;
     }
 }
 
@@ -53,7 +48,10 @@ void PrintGraph(Graph const &G) {
 int main(int argc, char* argv[]) {
     if (argc >= 2) {
         std::ifstream I(argv[1]);
-        Graph G = ReadGraph(I); }
+        Graph G = ReadGraph(I);
+        PrintGraph(G);
+        std::cout << G.m_vertices[0].m_property.value;
+    }
     else {
         Py_Initialize(); // Initialize Environment
 //        PyRun_SimpleString("import sys"); // Call Import
