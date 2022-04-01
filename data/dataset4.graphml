@@ -1,0 +1,1396 @@
+<?xml version='1.0' encoding='utf-8'?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd"><key id="d0" for="node" attr.name="community" attr.type="long"/>
+<graph edgedefault="undirected"><node id="Chris Durden">
+  <data key="d0">3</data>
+</node>
+<node id="Richard Rowe">
+  <data key="d0">2</data>
+</node>
+<node id="Bernice Custer">
+  <data key="d0">3</data>
+</node>
+<node id="Rhonda Jarvis">
+  <data key="d0">0</data>
+</node>
+<node id="Jack Robichaux">
+  <data key="d0">3</data>
+</node>
+<node id="Daniel Muzzarelli">
+  <data key="d0">0</data>
+</node>
+<node id="Delores Ortiz">
+  <data key="d0">2</data>
+</node>
+<node id="David Guerrero">
+  <data key="d0">2</data>
+</node>
+<node id="Dorothy Mizer">
+  <data key="d0">3</data>
+</node>
+<node id="Wanda Peters">
+  <data key="d0">3</data>
+</node>
+<node id="Sidney Deleon">
+  <data key="d0">3</data>
+</node>
+<node id="Christina Joseph">
+  <data key="d0">3</data>
+</node>
+<node id="Kevin Dacruz">
+  <data key="d0">3</data>
+</node>
+<node id="Jennifer Schmidt">
+  <data key="d0">3</data>
+</node>
+<node id="John Kaufmann">
+  <data key="d0">3</data>
+</node>
+<node id="Mary Sells">
+  <data key="d0">1</data>
+</node>
+<node id="Sandra Parnell">
+  <data key="d0">1</data>
+</node>
+<node id="Micaela Blocker">
+  <data key="d0">2</data>
+</node>
+<node id="Gary Culpepper">
+  <data key="d0">1</data>
+</node>
+<node id="Imogene Craiger">
+  <data key="d0">1</data>
+</node>
+<node id="Charles Baca">
+  <data key="d0">3</data>
+</node>
+<node id="Penny Oneil">
+  <data key="d0">0</data>
+</node>
+<node id="Rena Broome">
+  <data key="d0">3</data>
+</node>
+<node id="Dorothy Biggs">
+  <data key="d0">0</data>
+</node>
+<node id="Kevin Person">
+  <data key="d0">3</data>
+</node>
+<node id="Leila Wagner">
+  <data key="d0">0</data>
+</node>
+<node id="Peter Schultz">
+  <data key="d0">3</data>
+</node>
+<node id="Kelly Taylor">
+  <data key="d0">0</data>
+</node>
+<node id="Cherie Arellano">
+  <data key="d0">2</data>
+</node>
+<node id="Amber Ashford">
+  <data key="d0">1</data>
+</node>
+<node id="Michelle Burdett">
+  <data key="d0">3</data>
+</node>
+<node id="Henry Chatham">
+  <data key="d0">1</data>
+</node>
+<node id="Steven Reardon">
+  <data key="d0">0</data>
+</node>
+<node id="Eleanor Dickens">
+  <data key="d0">2</data>
+</node>
+<node id="John Telleria">
+  <data key="d0">2</data>
+</node>
+<node id="Linda Baxley">
+  <data key="d0">3</data>
+</node>
+<node id="Marion Meeks">
+  <data key="d0">0</data>
+</node>
+<node id="Brian Harr">
+  <data key="d0">0</data>
+</node>
+<node id="Fannie Styons">
+  <data key="d0">2</data>
+</node>
+<node id="Cathy Rogers">
+  <data key="d0">2</data>
+</node>
+<node id="Donna Murray">
+  <data key="d0">2</data>
+</node>
+<node id="Carole Gomez">
+  <data key="d0">2</data>
+</node>
+<node id="Mark Johnson">
+  <data key="d0">0</data>
+</node>
+<node id="Shizue Gargus">
+  <data key="d0">1</data>
+</node>
+<node id="Melinda Ament">
+  <data key="d0">2</data>
+</node>
+<node id="William Cahoon">
+  <data key="d0">2</data>
+</node>
+<node id="Christopher Abplanalp">
+  <data key="d0">1</data>
+</node>
+<node id="Steve Shackelford">
+  <data key="d0">3</data>
+</node>
+<node id="Timothy Bing">
+  <data key="d0">1</data>
+</node>
+<node id="Francisco Thomas">
+  <data key="d0">3</data>
+</node>
+<node id="Rayford Haynes">
+  <data key="d0">1</data>
+</node>
+<node id="Robert Turja">
+  <data key="d0">1</data>
+</node>
+<node id="Thomas Gamboa">
+  <data key="d0">1</data>
+</node>
+<node id="Charles Barlow">
+  <data key="d0">2</data>
+</node>
+<node id="Annie Walters">
+  <data key="d0">1</data>
+</node>
+<node id="John Rieck">
+  <data key="d0">3</data>
+</node>
+<node id="Barry Alexander">
+  <data key="d0">3</data>
+</node>
+<node id="Michael Gunter">
+  <data key="d0">0</data>
+</node>
+<node id="Anthony Castro">
+  <data key="d0">0</data>
+</node>
+<node id="Virginia Streeter">
+  <data key="d0">2</data>
+</node>
+<node id="Tina Primm">
+  <data key="d0">0</data>
+</node>
+<node id="Catherine Cruz">
+  <data key="d0">1</data>
+</node>
+<node id="Deborah Glaab">
+  <data key="d0">0</data>
+</node>
+<node id="Pauline Andrew">
+  <data key="d0">1</data>
+</node>
+<node id="Daniel Utecht">
+  <data key="d0">0</data>
+</node>
+<node id="Kerry Diaz">
+  <data key="d0">2</data>
+</node>
+<node id="Caroline Crespo">
+  <data key="d0">1</data>
+</node>
+<node id="Darrell Searle">
+  <data key="d0">2</data>
+</node>
+<node id="Ronald Thomas">
+  <data key="d0">1</data>
+</node>
+<node id="David Hartis">
+  <data key="d0">0</data>
+</node>
+<node id="Wendy Radune">
+  <data key="d0">1</data>
+</node>
+<node id="Melissa Edelen">
+  <data key="d0">1</data>
+</node>
+<node id="Annette Palmer">
+  <data key="d0">1</data>
+</node>
+<node id="Tequila Mix">
+  <data key="d0">0</data>
+</node>
+<node id="Marie Baugh">
+  <data key="d0">1</data>
+</node>
+<node id="Richard Green">
+  <data key="d0">1</data>
+</node>
+<node id="James Martin">
+  <data key="d0">3</data>
+</node>
+<node id="Manuel Salcedo">
+  <data key="d0">1</data>
+</node>
+<node id="John Baron">
+  <data key="d0">3</data>
+</node>
+<node id="Larry James">
+  <data key="d0">1</data>
+</node>
+<node id="Dale Aguiniga">
+  <data key="d0">0</data>
+</node>
+<node id="Jacqueline Werner">
+  <data key="d0">2</data>
+</node>
+<node id="George Tavana">
+  <data key="d0">2</data>
+</node>
+<node id="Joy Smith">
+  <data key="d0">0</data>
+</node>
+<node id="Margarito Jette">
+  <data key="d0">0</data>
+</node>
+<node id="Jackie Perez">
+  <data key="d0">1</data>
+</node>
+<node id="Michael Dudas">
+  <data key="d0">0</data>
+</node>
+<node id="Kimberly Otero">
+  <data key="d0">3</data>
+</node>
+<node id="Maria Chambers">
+  <data key="d0">2</data>
+</node>
+<node id="Trevor Fairbank">
+  <data key="d0">3</data>
+</node>
+<node id="Gertrude Hinkson">
+  <data key="d0">0</data>
+</node>
+<node id="Francisco Pointer">
+  <data key="d0">1</data>
+</node>
+<node id="Deborah Holman">
+  <data key="d0">2</data>
+</node>
+<node id="Richard Martinez">
+  <data key="d0">3</data>
+</node>
+<node id="Mickey Moczo">
+  <data key="d0">2</data>
+</node>
+<node id="William Phillips">
+  <data key="d0">2</data>
+</node>
+<node id="Richard Bentz">
+  <data key="d0">2</data>
+</node>
+<node id="Gladys Pena">
+  <data key="d0">0</data>
+</node>
+<node id="Beverly Barber">
+  <data key="d0">2</data>
+</node>
+<node id="Fred Grisham">
+  <data key="d0">3</data>
+</node>
+<node id="Nicole Bethea">
+  <data key="d0">2</data>
+</node>
+<node id="Gail Hoover">
+  <data key="d0">1</data>
+</node>
+<node id="Peggy Palmer">
+  <data key="d0">0</data>
+</node>
+<node id="Anna Webb">
+  <data key="d0">3</data>
+</node>
+<node id="Jason Colon">
+  <data key="d0">0</data>
+</node>
+<node id="Judy Asbell">
+  <data key="d0">2</data>
+</node>
+<node id="Thomas Irick">
+  <data key="d0">1</data>
+</node>
+<node id="Michael Russell">
+  <data key="d0">3</data>
+</node>
+<node id="Paula Kimrey">
+  <data key="d0">0</data>
+</node>
+<node id="Kareem Lopez">
+  <data key="d0">0</data>
+</node>
+<node id="Carter Orsborn">
+  <data key="d0">3</data>
+</node>
+<node id="Frank Allmon">
+  <data key="d0">3</data>
+</node>
+<node id="Laverne Hernandez">
+  <data key="d0">0</data>
+</node>
+<node id="Clarence Gillham">
+  <data key="d0">1</data>
+</node>
+<node id="Leroy Falls">
+  <data key="d0">1</data>
+</node>
+<node id="Wendy Fowler">
+  <data key="d0">2</data>
+</node>
+<node id="Helena French">
+  <data key="d0">2</data>
+</node>
+<node id="Shelley Grider">
+  <data key="d0">0</data>
+</node>
+<node id="Mary Luong">
+  <data key="d0">0</data>
+</node>
+<node id="Esther Lynch">
+  <data key="d0">2</data>
+</node>
+<node id="Barbara Newcombe">
+  <data key="d0">0</data>
+</node>
+<node id="Jacqueline Bazan">
+  <data key="d0">3</data>
+</node>
+<node id="Cynthia Beasley">
+  <data key="d0">0</data>
+</node>
+<node id="Porfirio Harness">
+  <data key="d0">2</data>
+</node>
+<node id="Sonja Benett">
+  <data key="d0">1</data>
+</node>
+<node id="Peter Perkins">
+  <data key="d0">1</data>
+</node>
+<node id="Thomas Fitzwater">
+  <data key="d0">3</data>
+</node>
+<node id="Sussy Baka">
+  <data key="d0">3</data>
+</node>
+<edge source="Chris Durden" target="Christina Joseph"/>
+<edge source="Chris Durden" target="Charles Baca"/>
+<edge source="Chris Durden" target="Penny Oneil"/>
+<edge source="Chris Durden" target="Peter Schultz"/>
+<edge source="Chris Durden" target="Michelle Burdett"/>
+<edge source="Chris Durden" target="John Baron"/>
+<edge source="Chris Durden" target="Francisco Pointer"/>
+<edge source="Chris Durden" target="Carter Orsborn"/>
+<edge source="Chris Durden" target="Laverne Hernandez"/>
+<edge source="Chris Durden" target="Leroy Falls"/>
+<edge source="Chris Durden" target="Jack Robichaux"/>
+<edge source="Chris Durden" target="Imogene Craiger"/>
+<edge source="Chris Durden" target="Rena Broome"/>
+<edge source="Chris Durden" target="Mark Johnson"/>
+<edge source="Chris Durden" target="Francisco Thomas"/>
+<edge source="Chris Durden" target="Maria Chambers"/>
+<edge source="Chris Durden" target="Richard Martinez"/>
+<edge source="Chris Durden" target="Wendy Fowler"/>
+<edge source="Chris Durden" target="Esther Lynch"/>
+<edge source="Richard Rowe" target="Micaela Blocker"/>
+<edge source="Richard Rowe" target="John Telleria"/>
+<edge source="Richard Rowe" target="William Cahoon"/>
+<edge source="Richard Rowe" target="Deborah Holman"/>
+<edge source="Richard Rowe" target="Judy Asbell"/>
+<edge source="Richard Rowe" target="Helena French"/>
+<edge source="Richard Rowe" target="Esther Lynch"/>
+<edge source="Richard Rowe" target="Cherie Arellano"/>
+<edge source="Richard Rowe" target="Carole Gomez"/>
+<edge source="Richard Rowe" target="Shizue Gargus"/>
+<edge source="Richard Rowe" target="Charles Barlow"/>
+<edge source="Richard Rowe" target="Ronald Thomas"/>
+<edge source="Richard Rowe" target="George Tavana"/>
+<edge source="Richard Rowe" target="Maria Chambers"/>
+<edge source="Richard Rowe" target="William Phillips"/>
+<edge source="Richard Rowe" target="Richard Bentz"/>
+<edge source="Richard Rowe" target="Porfirio Harness"/>
+<edge source="Bernice Custer" target="Jack Robichaux"/>
+<edge source="Bernice Custer" target="Peter Schultz"/>
+<edge source="Bernice Custer" target="Trevor Fairbank"/>
+<edge source="Bernice Custer" target="Peggy Palmer"/>
+<edge source="Bernice Custer" target="Frank Allmon"/>
+<edge source="Bernice Custer" target="Kevin Dacruz"/>
+<edge source="Bernice Custer" target="Mary Sells"/>
+<edge source="Bernice Custer" target="Henry Chatham"/>
+<edge source="Bernice Custer" target="Wendy Radune"/>
+<edge source="Bernice Custer" target="Michael Russell"/>
+<edge source="Bernice Custer" target="Esther Lynch"/>
+<edge source="Rhonda Jarvis" target="Imogene Craiger"/>
+<edge source="Rhonda Jarvis" target="Marion Meeks"/>
+<edge source="Rhonda Jarvis" target="Fannie Styons"/>
+<edge source="Rhonda Jarvis" target="Anthony Castro"/>
+<edge source="Rhonda Jarvis" target="Deborah Glaab"/>
+<edge source="Rhonda Jarvis" target="Joy Smith"/>
+<edge source="Rhonda Jarvis" target="Peggy Palmer"/>
+<edge source="Rhonda Jarvis" target="Wendy Fowler"/>
+<edge source="Rhonda Jarvis" target="Shelley Grider"/>
+<edge source="Rhonda Jarvis" target="Daniel Muzzarelli"/>
+<edge source="Rhonda Jarvis" target="Gary Culpepper"/>
+<edge source="Rhonda Jarvis" target="Steven Reardon"/>
+<edge source="Rhonda Jarvis" target="Rayford Haynes"/>
+<edge source="Rhonda Jarvis" target="David Hartis"/>
+<edge source="Rhonda Jarvis" target="Manuel Salcedo"/>
+<edge source="Rhonda Jarvis" target="John Baron"/>
+<edge source="Rhonda Jarvis" target="Dale Aguiniga"/>
+<edge source="Rhonda Jarvis" target="Thomas Irick"/>
+<edge source="Rhonda Jarvis" target="Laverne Hernandez"/>
+<edge source="Rhonda Jarvis" target="Mary Luong"/>
+<edge source="Jack Robichaux" target="Penny Oneil"/>
+<edge source="Jack Robichaux" target="Michelle Burdett"/>
+<edge source="Jack Robichaux" target="Wendy Radune"/>
+<edge source="Jack Robichaux" target="Jackie Perez"/>
+<edge source="Jack Robichaux" target="Trevor Fairbank"/>
+<edge source="Jack Robichaux" target="Anna Webb"/>
+<edge source="Jack Robichaux" target="Wendy Fowler"/>
+<edge source="Jack Robichaux" target="Cynthia Beasley"/>
+<edge source="Jack Robichaux" target="Thomas Fitzwater"/>
+<edge source="Jack Robichaux" target="Kevin Dacruz"/>
+<edge source="Jack Robichaux" target="Steven Reardon"/>
+<edge source="Jack Robichaux" target="Rayford Haynes"/>
+<edge source="Jack Robichaux" target="John Rieck"/>
+<edge source="Jack Robichaux" target="John Baron"/>
+<edge source="Jack Robichaux" target="Michael Russell"/>
+<edge source="Daniel Muzzarelli" target="Tina Primm"/>
+<edge source="Daniel Muzzarelli" target="David Hartis"/>
+<edge source="Daniel Muzzarelli" target="Gladys Pena"/>
+<edge source="Daniel Muzzarelli" target="Laverne Hernandez"/>
+<edge source="Daniel Muzzarelli" target="Sonja Benett"/>
+<edge source="Daniel Muzzarelli" target="Kelly Taylor"/>
+<edge source="Daniel Muzzarelli" target="Brian Harr"/>
+<edge source="Daniel Muzzarelli" target="Dale Aguiniga"/>
+<edge source="Daniel Muzzarelli" target="Anna Webb"/>
+<edge source="Delores Ortiz" target="Christina Joseph"/>
+<edge source="Delores Ortiz" target="John Telleria"/>
+<edge source="Delores Ortiz" target="Cathy Rogers"/>
+<edge source="Delores Ortiz" target="Carole Gomez"/>
+<edge source="Delores Ortiz" target="William Phillips"/>
+<edge source="Delores Ortiz" target="Helena French"/>
+<edge source="David Guerrero" target="Sandra Parnell"/>
+<edge source="David Guerrero" target="Eleanor Dickens"/>
+<edge source="David Guerrero" target="Cathy Rogers"/>
+<edge source="David Guerrero" target="Christopher Abplanalp"/>
+<edge source="David Guerrero" target="Maria Chambers"/>
+<edge source="David Guerrero" target="Richard Bentz"/>
+<edge source="David Guerrero" target="Thomas Irick"/>
+<edge source="David Guerrero" target="Leroy Falls"/>
+<edge source="David Guerrero" target="Wendy Fowler"/>
+<edge source="David Guerrero" target="Fannie Styons"/>
+<edge source="David Guerrero" target="Barry Alexander"/>
+<edge source="David Guerrero" target="Michael Dudas"/>
+<edge source="David Guerrero" target="William Phillips"/>
+<edge source="David Guerrero" target="Beverly Barber"/>
+<edge source="David Guerrero" target="Nicole Bethea"/>
+<edge source="David Guerrero" target="Gail Hoover"/>
+<edge source="David Guerrero" target="Kareem Lopez"/>
+<edge source="David Guerrero" target="Helena French"/>
+<edge source="David Guerrero" target="Jacqueline Bazan"/>
+<edge source="Dorothy Mizer" target="Leila Wagner"/>
+<edge source="Dorothy Mizer" target="David Hartis"/>
+<edge source="Dorothy Mizer" target="James Martin"/>
+<edge source="Dorothy Mizer" target="Kimberly Otero"/>
+<edge source="Dorothy Mizer" target="Christina Joseph"/>
+<edge source="Dorothy Mizer" target="Kevin Dacruz"/>
+<edge source="Dorothy Mizer" target="Charles Baca"/>
+<edge source="Dorothy Mizer" target="Kevin Person"/>
+<edge source="Dorothy Mizer" target="Peter Schultz"/>
+<edge source="Dorothy Mizer" target="Timothy Bing"/>
+<edge source="Dorothy Mizer" target="John Baron"/>
+<edge source="Dorothy Mizer" target="Fred Grisham"/>
+<edge source="Dorothy Mizer" target="Jacqueline Bazan"/>
+<edge source="Wanda Peters" target="Christina Joseph"/>
+<edge source="Wanda Peters" target="John Kaufmann"/>
+<edge source="Wanda Peters" target="Charles Baca"/>
+<edge source="Wanda Peters" target="Linda Baxley"/>
+<edge source="Wanda Peters" target="James Martin"/>
+<edge source="Wanda Peters" target="John Baron"/>
+<edge source="Wanda Peters" target="Fred Grisham"/>
+<edge source="Wanda Peters" target="Judy Asbell"/>
+<edge source="Wanda Peters" target="Clarence Gillham"/>
+<edge source="Wanda Peters" target="Helena French"/>
+<edge source="Wanda Peters" target="Jennifer Schmidt"/>
+<edge source="Wanda Peters" target="Imogene Craiger"/>
+<edge source="Wanda Peters" target="Annie Walters"/>
+<edge source="Wanda Peters" target="Kimberly Otero"/>
+<edge source="Wanda Peters" target="Anna Webb"/>
+<edge source="Wanda Peters" target="Jacqueline Bazan"/>
+<edge source="Wanda Peters" target="Cynthia Beasley"/>
+<edge source="Wanda Peters" target="Sonja Benett"/>
+<edge source="Sidney Deleon" target="Henry Chatham"/>
+<edge source="Sidney Deleon" target="Linda Baxley"/>
+<edge source="Sidney Deleon" target="Barry Alexander"/>
+<edge source="Sidney Deleon" target="Caroline Crespo"/>
+<edge source="Sidney Deleon" target="James Martin"/>
+<edge source="Sidney Deleon" target="Jacqueline Werner"/>
+<edge source="Sidney Deleon" target="Joy Smith"/>
+<edge source="Sidney Deleon" target="Kimberly Otero"/>
+<edge source="Sidney Deleon" target="Carter Orsborn"/>
+<edge source="Sidney Deleon" target="Thomas Fitzwater"/>
+<edge source="Sidney Deleon" target="Rena Broome"/>
+<edge source="Sidney Deleon" target="Charles Barlow"/>
+<edge source="Sidney Deleon" target="John Rieck"/>
+<edge source="Sidney Deleon" target="Maria Chambers"/>
+<edge source="Sidney Deleon" target="Trevor Fairbank"/>
+<edge source="Christina Joseph" target="Barry Alexander"/>
+<edge source="Christina Joseph" target="Marie Baugh"/>
+<edge source="Christina Joseph" target="Jacqueline Werner"/>
+<edge source="Christina Joseph" target="George Tavana"/>
+<edge source="Christina Joseph" target="Kimberly Otero"/>
+<edge source="Christina Joseph" target="Jason Colon"/>
+<edge source="Christina Joseph" target="Linda Baxley"/>
+<edge source="Christina Joseph" target="Francisco Thomas"/>
+<edge source="Christina Joseph" target="Tina Primm"/>
+<edge source="Christina Joseph" target="Fred Grisham"/>
+<edge source="Christina Joseph" target="Judy Asbell"/>
+<edge source="Christina Joseph" target="Frank Allmon"/>
+<edge source="Kevin Dacruz" target="Charles Baca"/>
+<edge source="Kevin Dacruz" target="Linda Baxley"/>
+<edge source="Kevin Dacruz" target="Francisco Thomas"/>
+<edge source="Kevin Dacruz" target="Annette Palmer"/>
+<edge source="Kevin Dacruz" target="Maria Chambers"/>
+<edge source="Kevin Dacruz" target="Michael Russell"/>
+<edge source="Kevin Dacruz" target="Paula Kimrey"/>
+<edge source="Kevin Dacruz" target="John Kaufmann"/>
+<edge source="Kevin Dacruz" target="Rena Broome"/>
+<edge source="Kevin Dacruz" target="Tequila Mix"/>
+<edge source="Kevin Dacruz" target="James Martin"/>
+<edge source="Kevin Dacruz" target="Kimberly Otero"/>
+<edge source="Kevin Dacruz" target="Richard Martinez"/>
+<edge source="Jennifer Schmidt" target="Kelly Taylor"/>
+<edge source="Jennifer Schmidt" target="Timothy Bing"/>
+<edge source="Jennifer Schmidt" target="Francisco Thomas"/>
+<edge source="Jennifer Schmidt" target="Barry Alexander"/>
+<edge source="Jennifer Schmidt" target="George Tavana"/>
+<edge source="Jennifer Schmidt" target="Paula Kimrey"/>
+<edge source="Jennifer Schmidt" target="Wendy Fowler"/>
+<edge source="Jennifer Schmidt" target="Charles Baca"/>
+<edge source="Jennifer Schmidt" target="Mark Johnson"/>
+<edge source="Jennifer Schmidt" target="Richard Bentz"/>
+<edge source="Jennifer Schmidt" target="Anna Webb"/>
+<edge source="Jennifer Schmidt" target="Carter Orsborn"/>
+<edge source="Jennifer Schmidt" target="Leroy Falls"/>
+<edge source="John Kaufmann" target="Micaela Blocker"/>
+<edge source="John Kaufmann" target="Imogene Craiger"/>
+<edge source="John Kaufmann" target="Leila Wagner"/>
+<edge source="John Kaufmann" target="Peter Schultz"/>
+<edge source="John Kaufmann" target="John Telleria"/>
+<edge source="John Kaufmann" target="Barry Alexander"/>
+<edge source="John Kaufmann" target="George Tavana"/>
+<edge source="John Kaufmann" target="Jackie Perez"/>
+<edge source="John Kaufmann" target="Kimberly Otero"/>
+<edge source="John Kaufmann" target="Trevor Fairbank"/>
+<edge source="John Kaufmann" target="Beverly Barber"/>
+<edge source="John Kaufmann" target="Anna Webb"/>
+<edge source="John Kaufmann" target="Paula Kimrey"/>
+<edge source="John Kaufmann" target="Charles Baca"/>
+<edge source="John Kaufmann" target="Kelly Taylor"/>
+<edge source="John Kaufmann" target="Michelle Burdett"/>
+<edge source="John Kaufmann" target="Steve Shackelford"/>
+<edge source="John Kaufmann" target="David Hartis"/>
+<edge source="John Kaufmann" target="Jacqueline Bazan"/>
+<edge source="Mary Sells" target="Timothy Bing"/>
+<edge source="Mary Sells" target="John Rieck"/>
+<edge source="Mary Sells" target="Pauline Andrew"/>
+<edge source="Mary Sells" target="Deborah Holman"/>
+<edge source="Mary Sells" target="Richard Martinez"/>
+<edge source="Mary Sells" target="Richard Bentz"/>
+<edge source="Mary Sells" target="Gail Hoover"/>
+<edge source="Mary Sells" target="Thomas Irick"/>
+<edge source="Mary Sells" target="Paula Kimrey"/>
+<edge source="Mary Sells" target="Gary Culpepper"/>
+<edge source="Mary Sells" target="Imogene Craiger"/>
+<edge source="Mary Sells" target="Henry Chatham"/>
+<edge source="Mary Sells" target="Caroline Crespo"/>
+<edge source="Mary Sells" target="Ronald Thomas"/>
+<edge source="Mary Sells" target="Jackie Perez"/>
+<edge source="Mary Sells" target="Kimberly Otero"/>
+<edge source="Mary Sells" target="Cynthia Beasley"/>
+<edge source="Sandra Parnell" target="Christopher Abplanalp"/>
+<edge source="Sandra Parnell" target="Annie Walters"/>
+<edge source="Sandra Parnell" target="Melissa Edelen"/>
+<edge source="Sandra Parnell" target="Annette Palmer"/>
+<edge source="Sandra Parnell" target="Richard Green"/>
+<edge source="Sandra Parnell" target="Gertrude Hinkson"/>
+<edge source="Sandra Parnell" target="Thomas Irick"/>
+<edge source="Sandra Parnell" target="Clarence Gillham"/>
+<edge source="Sandra Parnell" target="Leroy Falls"/>
+<edge source="Sandra Parnell" target="Mary Luong"/>
+<edge source="Sandra Parnell" target="Peter Perkins"/>
+<edge source="Sandra Parnell" target="Dorothy Biggs"/>
+<edge source="Sandra Parnell" target="Shizue Gargus"/>
+<edge source="Sandra Parnell" target="Timothy Bing"/>
+<edge source="Sandra Parnell" target="Caroline Crespo"/>
+<edge source="Sandra Parnell" target="Wendy Radune"/>
+<edge source="Sandra Parnell" target="Tequila Mix"/>
+<edge source="Sandra Parnell" target="Francisco Pointer"/>
+<edge source="Sandra Parnell" target="Peggy Palmer"/>
+<edge source="Sandra Parnell" target="Judy Asbell"/>
+<edge source="Micaela Blocker" target="Cherie Arellano"/>
+<edge source="Micaela Blocker" target="Cathy Rogers"/>
+<edge source="Micaela Blocker" target="Donna Murray"/>
+<edge source="Micaela Blocker" target="William Cahoon"/>
+<edge source="Micaela Blocker" target="Joy Smith"/>
+<edge source="Micaela Blocker" target="Anna Webb"/>
+<edge source="Micaela Blocker" target="Porfirio Harness"/>
+<edge source="Micaela Blocker" target="Peter Perkins"/>
+<edge source="Micaela Blocker" target="Melinda Ament"/>
+<edge source="Micaela Blocker" target="Maria Chambers"/>
+<edge source="Micaela Blocker" target="Mickey Moczo"/>
+<edge source="Micaela Blocker" target="Gail Hoover"/>
+<edge source="Micaela Blocker" target="Jason Colon"/>
+<edge source="Micaela Blocker" target="Helena French"/>
+<edge source="Gary Culpepper" target="Rayford Haynes"/>
+<edge source="Gary Culpepper" target="Robert Turja"/>
+<edge source="Gary Culpepper" target="Manuel Salcedo"/>
+<edge source="Gary Culpepper" target="Larry James"/>
+<edge source="Gary Culpepper" target="Francisco Pointer"/>
+<edge source="Gary Culpepper" target="Richard Bentz"/>
+<edge source="Gary Culpepper" target="Annette Palmer"/>
+<edge source="Gary Culpepper" target="Richard Green"/>
+<edge source="Gary Culpepper" target="Michael Russell"/>
+<edge source="Gary Culpepper" target="Peter Perkins"/>
+<edge source="Imogene Craiger" target="Dorothy Biggs"/>
+<edge source="Imogene Craiger" target="Christopher Abplanalp"/>
+<edge source="Imogene Craiger" target="Rayford Haynes"/>
+<edge source="Imogene Craiger" target="Annie Walters"/>
+<edge source="Imogene Craiger" target="Darrell Searle"/>
+<edge source="Imogene Craiger" target="Ronald Thomas"/>
+<edge source="Imogene Craiger" target="Francisco Pointer"/>
+<edge source="Imogene Craiger" target="Barbara Newcombe"/>
+<edge source="Imogene Craiger" target="Peter Perkins"/>
+<edge source="Imogene Craiger" target="Brian Harr"/>
+<edge source="Imogene Craiger" target="Timothy Bing"/>
+<edge source="Imogene Craiger" target="Melissa Edelen"/>
+<edge source="Imogene Craiger" target="Annette Palmer"/>
+<edge source="Imogene Craiger" target="Maria Chambers"/>
+<edge source="Charles Baca" target="Steve Shackelford"/>
+<edge source="Charles Baca" target="Barry Alexander"/>
+<edge source="Charles Baca" target="Annette Palmer"/>
+<edge source="Charles Baca" target="Margarito Jette"/>
+<edge source="Charles Baca" target="Frank Allmon"/>
+<edge source="Charles Baca" target="Thomas Fitzwater"/>
+<edge source="Charles Baca" target="Brian Harr"/>
+<edge source="Charles Baca" target="Cathy Rogers"/>
+<edge source="Charles Baca" target="Christopher Abplanalp"/>
+<edge source="Charles Baca" target="Marie Baugh"/>
+<edge source="Penny Oneil" target="Marion Meeks"/>
+<edge source="Penny Oneil" target="David Hartis"/>
+<edge source="Penny Oneil" target="Joy Smith"/>
+<edge source="Penny Oneil" target="Gertrude Hinkson"/>
+<edge source="Penny Oneil" target="Peggy Palmer"/>
+<edge source="Penny Oneil" target="Paula Kimrey"/>
+<edge source="Penny Oneil" target="Leroy Falls"/>
+<edge source="Penny Oneil" target="Barbara Newcombe"/>
+<edge source="Penny Oneil" target="Kelly Taylor"/>
+<edge source="Penny Oneil" target="Amber Ashford"/>
+<edge source="Penny Oneil" target="Cathy Rogers"/>
+<edge source="Penny Oneil" target="Charles Barlow"/>
+<edge source="Penny Oneil" target="Michael Dudas"/>
+<edge source="Penny Oneil" target="Jason Colon"/>
+<edge source="Penny Oneil" target="Cynthia Beasley"/>
+<edge source="Rena Broome" target="Cathy Rogers"/>
+<edge source="Rena Broome" target="Carole Gomez"/>
+<edge source="Rena Broome" target="Francisco Thomas"/>
+<edge source="Rena Broome" target="Ronald Thomas"/>
+<edge source="Rena Broome" target="John Baron"/>
+<edge source="Rena Broome" target="Michael Russell"/>
+<edge source="Rena Broome" target="Thomas Fitzwater"/>
+<edge source="Rena Broome" target="Leila Wagner"/>
+<edge source="Rena Broome" target="Henry Chatham"/>
+<edge source="Rena Broome" target="Linda Baxley"/>
+<edge source="Rena Broome" target="Fred Grisham"/>
+<edge source="Dorothy Biggs" target="Steven Reardon"/>
+<edge source="Dorothy Biggs" target="Marion Meeks"/>
+<edge source="Dorothy Biggs" target="Brian Harr"/>
+<edge source="Dorothy Biggs" target="Deborah Glaab"/>
+<edge source="Dorothy Biggs" target="Carter Orsborn"/>
+<edge source="Dorothy Biggs" target="Laverne Hernandez"/>
+<edge source="Dorothy Biggs" target="Cynthia Beasley"/>
+<edge source="Dorothy Biggs" target="Leila Wagner"/>
+<edge source="Dorothy Biggs" target="Charles Barlow"/>
+<edge source="Dorothy Biggs" target="Virginia Streeter"/>
+<edge source="Dorothy Biggs" target="Ronald Thomas"/>
+<edge source="Dorothy Biggs" target="Manuel Salcedo"/>
+<edge source="Dorothy Biggs" target="Dale Aguiniga"/>
+<edge source="Dorothy Biggs" target="Michael Dudas"/>
+<edge source="Dorothy Biggs" target="Gladys Pena"/>
+<edge source="Dorothy Biggs" target="Jason Colon"/>
+<edge source="Dorothy Biggs" target="Frank Allmon"/>
+<edge source="Dorothy Biggs" target="Thomas Fitzwater"/>
+<edge source="Kevin Person" target="Jacqueline Bazan"/>
+<edge source="Kevin Person" target="Francisco Thomas"/>
+<edge source="Kevin Person" target="John Rieck"/>
+<edge source="Kevin Person" target="Kimberly Otero"/>
+<edge source="Kevin Person" target="Fred Grisham"/>
+<edge source="Leila Wagner" target="Kelly Taylor"/>
+<edge source="Leila Wagner" target="Brian Harr"/>
+<edge source="Leila Wagner" target="David Hartis"/>
+<edge source="Leila Wagner" target="Peggy Palmer"/>
+<edge source="Leila Wagner" target="Dale Aguiniga"/>
+<edge source="Leila Wagner" target="Margarito Jette"/>
+<edge source="Leila Wagner" target="Jason Colon"/>
+<edge source="Leila Wagner" target="Shelley Grider"/>
+<edge source="Leila Wagner" target="Barbara Newcombe"/>
+<edge source="Peter Schultz" target="Michelle Burdett"/>
+<edge source="Peter Schultz" target="Kimberly Otero"/>
+<edge source="Peter Schultz" target="Leroy Falls"/>
+<edge source="Peter Schultz" target="James Martin"/>
+<edge source="Peter Schultz" target="Fred Grisham"/>
+<edge source="Peter Schultz" target="Thomas Fitzwater"/>
+<edge source="Kelly Taylor" target="Shizue Gargus"/>
+<edge source="Kelly Taylor" target="Annie Walters"/>
+<edge source="Kelly Taylor" target="David Hartis"/>
+<edge source="Kelly Taylor" target="Joy Smith"/>
+<edge source="Kelly Taylor" target="Gladys Pena"/>
+<edge source="Kelly Taylor" target="Jason Colon"/>
+<edge source="Kelly Taylor" target="Kareem Lopez"/>
+<edge source="Kelly Taylor" target="Henry Chatham"/>
+<edge source="Kelly Taylor" target="Timothy Bing"/>
+<edge source="Kelly Taylor" target="Michael Gunter"/>
+<edge source="Kelly Taylor" target="Wendy Radune"/>
+<edge source="Kelly Taylor" target="Paula Kimrey"/>
+<edge source="Kelly Taylor" target="Helena French"/>
+<edge source="Kelly Taylor" target="Cynthia Beasley"/>
+<edge source="Cherie Arellano" target="Amber Ashford"/>
+<edge source="Cherie Arellano" target="Linda Baxley"/>
+<edge source="Cherie Arellano" target="Cathy Rogers"/>
+<edge source="Cherie Arellano" target="Donna Murray"/>
+<edge source="Cherie Arellano" target="Timothy Bing"/>
+<edge source="Cherie Arellano" target="Barry Alexander"/>
+<edge source="Cherie Arellano" target="Tina Primm"/>
+<edge source="Cherie Arellano" target="Kerry Diaz"/>
+<edge source="Cherie Arellano" target="Darrell Searle"/>
+<edge source="Cherie Arellano" target="Tequila Mix"/>
+<edge source="Cherie Arellano" target="Jacqueline Werner"/>
+<edge source="Cherie Arellano" target="George Tavana"/>
+<edge source="Cherie Arellano" target="Leroy Falls"/>
+<edge source="Cherie Arellano" target="Shelley Grider"/>
+<edge source="Cherie Arellano" target="Fannie Styons"/>
+<edge source="Cherie Arellano" target="Shizue Gargus"/>
+<edge source="Cherie Arellano" target="Wendy Radune"/>
+<edge source="Cherie Arellano" target="Deborah Holman"/>
+<edge source="Cherie Arellano" target="Richard Bentz"/>
+<edge source="Cherie Arellano" target="Judy Asbell"/>
+<edge source="Cherie Arellano" target="Jacqueline Bazan"/>
+<edge source="Amber Ashford" target="John Telleria"/>
+<edge source="Amber Ashford" target="Carole Gomez"/>
+<edge source="Amber Ashford" target="Robert Turja"/>
+<edge source="Amber Ashford" target="Annie Walters"/>
+<edge source="Amber Ashford" target="Richard Green"/>
+<edge source="Amber Ashford" target="Trevor Fairbank"/>
+<edge source="Amber Ashford" target="Gertrude Hinkson"/>
+<edge source="Amber Ashford" target="Gail Hoover"/>
+<edge source="Amber Ashford" target="Peggy Palmer"/>
+<edge source="Amber Ashford" target="Jason Colon"/>
+<edge source="Amber Ashford" target="Michael Russell"/>
+<edge source="Amber Ashford" target="Rayford Haynes"/>
+<edge source="Amber Ashford" target="Francisco Pointer"/>
+<edge source="Amber Ashford" target="Richard Bentz"/>
+<edge source="Amber Ashford" target="Thomas Irick"/>
+<edge source="Amber Ashford" target="Kareem Lopez"/>
+<edge source="Amber Ashford" target="Clarence Gillham"/>
+<edge source="Amber Ashford" target="Sussy Baka"/>
+<edge source="Michelle Burdett" target="Steve Shackelford"/>
+<edge source="Michelle Burdett" target="Marie Baugh"/>
+<edge source="Michelle Burdett" target="John Baron"/>
+<edge source="Michelle Burdett" target="Jackie Perez"/>
+<edge source="Michelle Burdett" target="Anna Webb"/>
+<edge source="Michelle Burdett" target="Thomas Fitzwater"/>
+<edge source="Michelle Burdett" target="Sussy Baka"/>
+<edge source="Henry Chatham" target="Fannie Styons"/>
+<edge source="Henry Chatham" target="Timothy Bing"/>
+<edge source="Henry Chatham" target="Rayford Haynes"/>
+<edge source="Henry Chatham" target="Robert Turja"/>
+<edge source="Henry Chatham" target="Michael Gunter"/>
+<edge source="Henry Chatham" target="Wendy Radune"/>
+<edge source="Henry Chatham" target="Thomas Irick"/>
+<edge source="Henry Chatham" target="Paula Kimrey"/>
+<edge source="Henry Chatham" target="Shelley Grider"/>
+<edge source="Henry Chatham" target="Brian Harr"/>
+<edge source="Henry Chatham" target="Christopher Abplanalp"/>
+<edge source="Henry Chatham" target="Annie Walters"/>
+<edge source="Henry Chatham" target="Kerry Diaz"/>
+<edge source="Henry Chatham" target="Richard Green"/>
+<edge source="Henry Chatham" target="Gladys Pena"/>
+<edge source="Henry Chatham" target="Gail Hoover"/>
+<edge source="Henry Chatham" target="Leroy Falls"/>
+<edge source="Steven Reardon" target="Linda Baxley"/>
+<edge source="Steven Reardon" target="Mark Johnson"/>
+<edge source="Steven Reardon" target="Francisco Thomas"/>
+<edge source="Steven Reardon" target="Michael Gunter"/>
+<edge source="Steven Reardon" target="Deborah Glaab"/>
+<edge source="Steven Reardon" target="Dale Aguiniga"/>
+<edge source="Steven Reardon" target="Joy Smith"/>
+<edge source="Steven Reardon" target="Gertrude Hinkson"/>
+<edge source="Steven Reardon" target="Anthony Castro"/>
+<edge source="Steven Reardon" target="Tina Primm"/>
+<edge source="Steven Reardon" target="Tequila Mix"/>
+<edge source="Steven Reardon" target="George Tavana"/>
+<edge source="Steven Reardon" target="Michael Dudas"/>
+<edge source="Steven Reardon" target="Peggy Palmer"/>
+<edge source="Steven Reardon" target="Laverne Hernandez"/>
+<edge source="Eleanor Dickens" target="Mark Johnson"/>
+<edge source="Eleanor Dickens" target="Charles Barlow"/>
+<edge source="Eleanor Dickens" target="Anthony Castro"/>
+<edge source="Eleanor Dickens" target="Catherine Cruz"/>
+<edge source="Eleanor Dickens" target="Kerry Diaz"/>
+<edge source="Eleanor Dickens" target="Darrell Searle"/>
+<edge source="Eleanor Dickens" target="Deborah Holman"/>
+<edge source="Eleanor Dickens" target="Mickey Moczo"/>
+<edge source="Eleanor Dickens" target="William Phillips"/>
+<edge source="Eleanor Dickens" target="Melinda Ament"/>
+<edge source="Eleanor Dickens" target="William Cahoon"/>
+<edge source="Eleanor Dickens" target="Wendy Radune"/>
+<edge source="Eleanor Dickens" target="Michael Dudas"/>
+<edge source="Eleanor Dickens" target="Maria Chambers"/>
+<edge source="Eleanor Dickens" target="Richard Bentz"/>
+<edge source="Eleanor Dickens" target="Nicole Bethea"/>
+<edge source="Eleanor Dickens" target="Esther Lynch"/>
+<edge source="Eleanor Dickens" target="Sonja Benett"/>
+<edge source="Eleanor Dickens" target="Sussy Baka"/>
+<edge source="John Telleria" target="Donna Murray"/>
+<edge source="John Telleria" target="Kerry Diaz"/>
+<edge source="John Telleria" target="Beverly Barber"/>
+<edge source="John Telleria" target="Sussy Baka"/>
+<edge source="John Telleria" target="Melinda Ament"/>
+<edge source="John Telleria" target="Esther Lynch"/>
+<edge source="Linda Baxley" target="Jackie Perez"/>
+<edge source="Linda Baxley" target="Judy Asbell"/>
+<edge source="Linda Baxley" target="Thomas Fitzwater"/>
+<edge source="Linda Baxley" target="John Rieck"/>
+<edge source="Linda Baxley" target="Barry Alexander"/>
+<edge source="Linda Baxley" target="Wendy Radune"/>
+<edge source="Linda Baxley" target="James Martin"/>
+<edge source="Linda Baxley" target="Maria Chambers"/>
+<edge source="Linda Baxley" target="Gail Hoover"/>
+<edge source="Linda Baxley" target="Sonja Benett"/>
+<edge source="Marion Meeks" target="Michael Gunter"/>
+<edge source="Marion Meeks" target="Anthony Castro"/>
+<edge source="Marion Meeks" target="Tina Primm"/>
+<edge source="Marion Meeks" target="Thomas Fitzwater"/>
+<edge source="Marion Meeks" target="David Hartis"/>
+<edge source="Marion Meeks" target="Gertrude Hinkson"/>
+<edge source="Marion Meeks" target="Gladys Pena"/>
+<edge source="Marion Meeks" target="Beverly Barber"/>
+<edge source="Marion Meeks" target="Paula Kimrey"/>
+<edge source="Marion Meeks" target="Laverne Hernandez"/>
+<edge source="Brian Harr" target="Mark Johnson"/>
+<edge source="Brian Harr" target="Tina Primm"/>
+<edge source="Brian Harr" target="Deborah Glaab"/>
+<edge source="Brian Harr" target="David Hartis"/>
+<edge source="Brian Harr" target="Tequila Mix"/>
+<edge source="Brian Harr" target="Dale Aguiniga"/>
+<edge source="Brian Harr" target="Margarito Jette"/>
+<edge source="Brian Harr" target="Trevor Fairbank"/>
+<edge source="Brian Harr" target="Judy Asbell"/>
+<edge source="Brian Harr" target="Paula Kimrey"/>
+<edge source="Brian Harr" target="Peter Perkins"/>
+<edge source="Brian Harr" target="Francisco Thomas"/>
+<edge source="Brian Harr" target="Anthony Castro"/>
+<edge source="Brian Harr" target="George Tavana"/>
+<edge source="Brian Harr" target="Michael Dudas"/>
+<edge source="Brian Harr" target="Gertrude Hinkson"/>
+<edge source="Brian Harr" target="Laverne Hernandez"/>
+<edge source="Brian Harr" target="Mary Luong"/>
+<edge source="Brian Harr" target="Barbara Newcombe"/>
+<edge source="Fannie Styons" target="Barry Alexander"/>
+<edge source="Fannie Styons" target="Deborah Glaab"/>
+<edge source="Fannie Styons" target="Jacqueline Werner"/>
+<edge source="Fannie Styons" target="George Tavana"/>
+<edge source="Fannie Styons" target="Mickey Moczo"/>
+<edge source="Fannie Styons" target="William Phillips"/>
+<edge source="Fannie Styons" target="Paula Kimrey"/>
+<edge source="Fannie Styons" target="Sussy Baka"/>
+<edge source="Fannie Styons" target="Kerry Diaz"/>
+<edge source="Fannie Styons" target="Judy Asbell"/>
+<edge source="Fannie Styons" target="Wendy Fowler"/>
+<edge source="Cathy Rogers" target="Beverly Barber"/>
+<edge source="Cathy Rogers" target="Leroy Falls"/>
+<edge source="Cathy Rogers" target="Esther Lynch"/>
+<edge source="Cathy Rogers" target="William Cahoon"/>
+<edge source="Cathy Rogers" target="Annie Walters"/>
+<edge source="Cathy Rogers" target="Ronald Thomas"/>
+<edge source="Cathy Rogers" target="Jacqueline Werner"/>
+<edge source="Cathy Rogers" target="Nicole Bethea"/>
+<edge source="Cathy Rogers" target="Porfirio Harness"/>
+<edge source="Donna Murray" target="Pauline Andrew"/>
+<edge source="Donna Murray" target="Melissa Edelen"/>
+<edge source="Donna Murray" target="Mickey Moczo"/>
+<edge source="Donna Murray" target="Judy Asbell"/>
+<edge source="Donna Murray" target="Wendy Fowler"/>
+<edge source="Donna Murray" target="Carole Gomez"/>
+<edge source="Donna Murray" target="Jacqueline Werner"/>
+<edge source="Donna Murray" target="William Phillips"/>
+<edge source="Donna Murray" target="Richard Bentz"/>
+<edge source="Donna Murray" target="Peggy Palmer"/>
+<edge source="Carole Gomez" target="Tina Primm"/>
+<edge source="Carole Gomez" target="Dale Aguiniga"/>
+<edge source="Carole Gomez" target="Richard Martinez"/>
+<edge source="Carole Gomez" target="Wendy Fowler"/>
+<edge source="Carole Gomez" target="Esther Lynch"/>
+<edge source="Carole Gomez" target="Porfirio Harness"/>
+<edge source="Carole Gomez" target="William Cahoon"/>
+<edge source="Carole Gomez" target="Darrell Searle"/>
+<edge source="Carole Gomez" target="Mickey Moczo"/>
+<edge source="Carole Gomez" target="Nicole Bethea"/>
+<edge source="Carole Gomez" target="Mary Luong"/>
+<edge source="Mark Johnson" target="Daniel Utecht"/>
+<edge source="Mark Johnson" target="Gladys Pena"/>
+<edge source="Mark Johnson" target="Darrell Searle"/>
+<edge source="Mark Johnson" target="Michael Dudas"/>
+<edge source="Mark Johnson" target="Shelley Grider"/>
+<edge source="Shizue Gargus" target="Robert Turja"/>
+<edge source="Shizue Gargus" target="Anthony Castro"/>
+<edge source="Shizue Gargus" target="Caroline Crespo"/>
+<edge source="Shizue Gargus" target="Wendy Radune"/>
+<edge source="Shizue Gargus" target="Annette Palmer"/>
+<edge source="Shizue Gargus" target="Margarito Jette"/>
+<edge source="Shizue Gargus" target="Jackie Perez"/>
+<edge source="Shizue Gargus" target="Shelley Grider"/>
+<edge source="Shizue Gargus" target="Steve Shackelford"/>
+<edge source="Shizue Gargus" target="Timothy Bing"/>
+<edge source="Shizue Gargus" target="Thomas Gamboa"/>
+<edge source="Shizue Gargus" target="Annie Walters"/>
+<edge source="Shizue Gargus" target="Melissa Edelen"/>
+<edge source="Shizue Gargus" target="Manuel Salcedo"/>
+<edge source="Shizue Gargus" target="Dale Aguiniga"/>
+<edge source="Shizue Gargus" target="Kimberly Otero"/>
+<edge source="Shizue Gargus" target="Judy Asbell"/>
+<edge source="Shizue Gargus" target="Sonja Benett"/>
+<edge source="Melinda Ament" target="Joy Smith"/>
+<edge source="Melinda Ament" target="Maria Chambers"/>
+<edge source="Melinda Ament" target="Gertrude Hinkson"/>
+<edge source="Melinda Ament" target="Deborah Holman"/>
+<edge source="Melinda Ament" target="Mickey Moczo"/>
+<edge source="Melinda Ament" target="Esther Lynch"/>
+<edge source="Melinda Ament" target="Porfirio Harness"/>
+<edge source="Melinda Ament" target="Annette Palmer"/>
+<edge source="Melinda Ament" target="Kimberly Otero"/>
+<edge source="Melinda Ament" target="Richard Bentz"/>
+<edge source="Melinda Ament" target="Fred Grisham"/>
+<edge source="Melinda Ament" target="Judy Asbell"/>
+<edge source="Melinda Ament" target="Sussy Baka"/>
+<edge source="William Cahoon" target="Charles Barlow"/>
+<edge source="William Cahoon" target="Daniel Utecht"/>
+<edge source="William Cahoon" target="Maria Chambers"/>
+<edge source="William Cahoon" target="Deborah Holman"/>
+<edge source="William Cahoon" target="Nicole Bethea"/>
+<edge source="William Cahoon" target="Thomas Irick"/>
+<edge source="William Cahoon" target="Jacqueline Werner"/>
+<edge source="William Cahoon" target="Richard Bentz"/>
+<edge source="William Cahoon" target="Porfirio Harness"/>
+<edge source="William Cahoon" target="Peter Perkins"/>
+<edge source="Christopher Abplanalp" target="Pauline Andrew"/>
+<edge source="Christopher Abplanalp" target="Wendy Radune"/>
+<edge source="Christopher Abplanalp" target="Richard Green"/>
+<edge source="Christopher Abplanalp" target="Annette Palmer"/>
+<edge source="Christopher Abplanalp" target="Tequila Mix"/>
+<edge source="Christopher Abplanalp" target="Manuel Salcedo"/>
+<edge source="Christopher Abplanalp" target="Frank Allmon"/>
+<edge source="Christopher Abplanalp" target="Clarence Gillham"/>
+<edge source="Steve Shackelford" target="John Rieck"/>
+<edge source="Steve Shackelford" target="Kerry Diaz"/>
+<edge source="Steve Shackelford" target="Michael Russell"/>
+<edge source="Steve Shackelford" target="Barbara Newcombe"/>
+<edge source="Steve Shackelford" target="Jacqueline Bazan"/>
+<edge source="Steve Shackelford" target="Francisco Thomas"/>
+<edge source="Steve Shackelford" target="Rayford Haynes"/>
+<edge source="Steve Shackelford" target="James Martin"/>
+<edge source="Steve Shackelford" target="Judy Asbell"/>
+<edge source="Steve Shackelford" target="Paula Kimrey"/>
+<edge source="Timothy Bing" target="Rayford Haynes"/>
+<edge source="Timothy Bing" target="Thomas Gamboa"/>
+<edge source="Timothy Bing" target="Ronald Thomas"/>
+<edge source="Timothy Bing" target="Melissa Edelen"/>
+<edge source="Timothy Bing" target="Jackie Perez"/>
+<edge source="Timothy Bing" target="Thomas Irick"/>
+<edge source="Timothy Bing" target="Annie Walters"/>
+<edge source="Timothy Bing" target="Catherine Cruz"/>
+<edge source="Timothy Bing" target="Marie Baugh"/>
+<edge source="Timothy Bing" target="Manuel Salcedo"/>
+<edge source="Timothy Bing" target="Francisco Pointer"/>
+<edge source="Timothy Bing" target="Fred Grisham"/>
+<edge source="Timothy Bing" target="Judy Asbell"/>
+<edge source="Timothy Bing" target="Leroy Falls"/>
+<edge source="Francisco Thomas" target="George Tavana"/>
+<edge source="Francisco Thomas" target="Jacqueline Bazan"/>
+<edge source="Francisco Thomas" target="Rayford Haynes"/>
+<edge source="Francisco Thomas" target="James Martin"/>
+<edge source="Francisco Thomas" target="Gail Hoover"/>
+<edge source="Rayford Haynes" target="Robert Turja"/>
+<edge source="Rayford Haynes" target="Caroline Crespo"/>
+<edge source="Rayford Haynes" target="Marie Baugh"/>
+<edge source="Rayford Haynes" target="Thomas Irick"/>
+<edge source="Rayford Haynes" target="Peter Perkins"/>
+<edge source="Rayford Haynes" target="Thomas Gamboa"/>
+<edge source="Rayford Haynes" target="Clarence Gillham"/>
+<edge source="Rayford Haynes" target="Wendy Fowler"/>
+<edge source="Robert Turja" target="Annie Walters"/>
+<edge source="Robert Turja" target="Tina Primm"/>
+<edge source="Robert Turja" target="Annette Palmer"/>
+<edge source="Robert Turja" target="Deborah Holman"/>
+<edge source="Robert Turja" target="William Phillips"/>
+<edge source="Robert Turja" target="Richard Bentz"/>
+<edge source="Robert Turja" target="Thomas Gamboa"/>
+<edge source="Robert Turja" target="Michael Gunter"/>
+<edge source="Robert Turja" target="George Tavana"/>
+<edge source="Robert Turja" target="Peter Perkins"/>
+<edge source="Thomas Gamboa" target="Larry James"/>
+<edge source="Thomas Gamboa" target="Jackie Perez"/>
+<edge source="Thomas Gamboa" target="Michael Dudas"/>
+<edge source="Thomas Gamboa" target="Thomas Irick"/>
+<edge source="Thomas Gamboa" target="Paula Kimrey"/>
+<edge source="Thomas Gamboa" target="Sonja Benett"/>
+<edge source="Thomas Gamboa" target="Annie Walters"/>
+<edge source="Thomas Gamboa" target="Pauline Andrew"/>
+<edge source="Thomas Gamboa" target="Wendy Radune"/>
+<edge source="Thomas Gamboa" target="Melissa Edelen"/>
+<edge source="Thomas Gamboa" target="Manuel Salcedo"/>
+<edge source="Thomas Gamboa" target="Gertrude Hinkson"/>
+<edge source="Thomas Gamboa" target="Clarence Gillham"/>
+<edge source="Charles Barlow" target="Darrell Searle"/>
+<edge source="Charles Barlow" target="Judy Asbell"/>
+<edge source="Charles Barlow" target="Frank Allmon"/>
+<edge source="Charles Barlow" target="Esther Lynch"/>
+<edge source="Charles Barlow" target="Porfirio Harness"/>
+<edge source="Charles Barlow" target="Larry James"/>
+<edge source="Charles Barlow" target="Wendy Fowler"/>
+<edge source="Charles Barlow" target="Shelley Grider"/>
+<edge source="Annie Walters" target="Francisco Pointer"/>
+<edge source="Annie Walters" target="Gail Hoover"/>
+<edge source="Annie Walters" target="Carter Orsborn"/>
+<edge source="Annie Walters" target="Ronald Thomas"/>
+<edge source="Annie Walters" target="Richard Green"/>
+<edge source="Annie Walters" target="Beverly Barber"/>
+<edge source="Annie Walters" target="Michael Russell"/>
+<edge source="Annie Walters" target="Sonja Benett"/>
+<edge source="Annie Walters" target="Peter Perkins"/>
+<edge source="John Rieck" target="Kimberly Otero"/>
+<edge source="John Rieck" target="Gertrude Hinkson"/>
+<edge source="John Rieck" target="Mickey Moczo"/>
+<edge source="John Rieck" target="Michael Russell"/>
+<edge source="John Rieck" target="Paula Kimrey"/>
+<edge source="John Rieck" target="Carter Orsborn"/>
+<edge source="John Rieck" target="Porfirio Harness"/>
+<edge source="John Rieck" target="John Baron"/>
+<edge source="John Rieck" target="Michael Dudas"/>
+<edge source="John Rieck" target="Esther Lynch"/>
+<edge source="Barry Alexander" target="Darrell Searle"/>
+<edge source="Barry Alexander" target="David Hartis"/>
+<edge source="Barry Alexander" target="Manuel Salcedo"/>
+<edge source="Barry Alexander" target="Michael Russell"/>
+<edge source="Barry Alexander" target="Frank Allmon"/>
+<edge source="Michael Gunter" target="Deborah Glaab"/>
+<edge source="Michael Gunter" target="Tequila Mix"/>
+<edge source="Michael Gunter" target="Joy Smith"/>
+<edge source="Michael Gunter" target="Richard Martinez"/>
+<edge source="Michael Gunter" target="Kareem Lopez"/>
+<edge source="Michael Gunter" target="Cynthia Beasley"/>
+<edge source="Michael Gunter" target="Anthony Castro"/>
+<edge source="Michael Gunter" target="Daniel Utecht"/>
+<edge source="Michael Gunter" target="Marie Baugh"/>
+<edge source="Michael Gunter" target="Gladys Pena"/>
+<edge source="Michael Gunter" target="Peggy Palmer"/>
+<edge source="Anthony Castro" target="Larry James"/>
+<edge source="Anthony Castro" target="Fred Grisham"/>
+<edge source="Anthony Castro" target="Jason Colon"/>
+<edge source="Anthony Castro" target="Richard Green"/>
+<edge source="Anthony Castro" target="Margarito Jette"/>
+<edge source="Anthony Castro" target="Gertrude Hinkson"/>
+<edge source="Anthony Castro" target="Nicole Bethea"/>
+<edge source="Anthony Castro" target="Laverne Hernandez"/>
+<edge source="Anthony Castro" target="Mary Luong"/>
+<edge source="Virginia Streeter" target="Tina Primm"/>
+<edge source="Virginia Streeter" target="Joy Smith"/>
+<edge source="Virginia Streeter" target="Maria Chambers"/>
+<edge source="Virginia Streeter" target="Nicole Bethea"/>
+<edge source="Virginia Streeter" target="Laverne Hernandez"/>
+<edge source="Virginia Streeter" target="Esther Lynch"/>
+<edge source="Tina Primm" target="Peggy Palmer"/>
+<edge source="Tina Primm" target="Paula Kimrey"/>
+<edge source="Tina Primm" target="Jacqueline Bazan"/>
+<edge source="Tina Primm" target="Margarito Jette"/>
+<edge source="Tina Primm" target="Kimberly Otero"/>
+<edge source="Tina Primm" target="Richard Bentz"/>
+<edge source="Catherine Cruz" target="Wendy Radune"/>
+<edge source="Catherine Cruz" target="Tequila Mix"/>
+<edge source="Catherine Cruz" target="Michael Dudas"/>
+<edge source="Catherine Cruz" target="Gertrude Hinkson"/>
+<edge source="Catherine Cruz" target="Francisco Pointer"/>
+<edge source="Catherine Cruz" target="William Phillips"/>
+<edge source="Catherine Cruz" target="Carter Orsborn"/>
+<edge source="Catherine Cruz" target="Thomas Fitzwater"/>
+<edge source="Catherine Cruz" target="Pauline Andrew"/>
+<edge source="Catherine Cruz" target="Richard Green"/>
+<edge source="Catherine Cruz" target="John Baron"/>
+<edge source="Catherine Cruz" target="Thomas Irick"/>
+<edge source="Catherine Cruz" target="Leroy Falls"/>
+<edge source="Catherine Cruz" target="Esther Lynch"/>
+<edge source="Deborah Glaab" target="David Hartis"/>
+<edge source="Deborah Glaab" target="Michael Dudas"/>
+<edge source="Deborah Glaab" target="Dale Aguiniga"/>
+<edge source="Deborah Glaab" target="Francisco Pointer"/>
+<edge source="Deborah Glaab" target="Barbara Newcombe"/>
+<edge source="Pauline Andrew" target="Manuel Salcedo"/>
+<edge source="Pauline Andrew" target="Jackie Perez"/>
+<edge source="Pauline Andrew" target="Francisco Pointer"/>
+<edge source="Pauline Andrew" target="Anna Webb"/>
+<edge source="Pauline Andrew" target="Clarence Gillham"/>
+<edge source="Pauline Andrew" target="Porfirio Harness"/>
+<edge source="Pauline Andrew" target="Peter Perkins"/>
+<edge source="Pauline Andrew" target="Gertrude Hinkson"/>
+<edge source="Pauline Andrew" target="Barbara Newcombe"/>
+<edge source="Pauline Andrew" target="Sonja Benett"/>
+<edge source="Daniel Utecht" target="James Martin"/>
+<edge source="Daniel Utecht" target="Dale Aguiniga"/>
+<edge source="Daniel Utecht" target="Michael Dudas"/>
+<edge source="Daniel Utecht" target="David Hartis"/>
+<edge source="Daniel Utecht" target="George Tavana"/>
+<edge source="Daniel Utecht" target="Gertrude Hinkson"/>
+<edge source="Daniel Utecht" target="Peggy Palmer"/>
+<edge source="Daniel Utecht" target="Kareem Lopez"/>
+<edge source="Kerry Diaz" target="Fred Grisham"/>
+<edge source="Kerry Diaz" target="Esther Lynch"/>
+<edge source="Kerry Diaz" target="Darrell Searle"/>
+<edge source="Kerry Diaz" target="Mary Luong"/>
+<edge source="Caroline Crespo" target="Ronald Thomas"/>
+<edge source="Caroline Crespo" target="Dale Aguiniga"/>
+<edge source="Caroline Crespo" target="Clarence Gillham"/>
+<edge source="Caroline Crespo" target="Leroy Falls"/>
+<edge source="Caroline Crespo" target="Marie Baugh"/>
+<edge source="Darrell Searle" target="Maria Chambers"/>
+<edge source="Darrell Searle" target="Deborah Holman"/>
+<edge source="Darrell Searle" target="Judy Asbell"/>
+<edge source="Darrell Searle" target="Thomas Irick"/>
+<edge source="Darrell Searle" target="Mary Luong"/>
+<edge source="Darrell Searle" target="Sussy Baka"/>
+<edge source="Darrell Searle" target="Mickey Moczo"/>
+<edge source="Darrell Searle" target="Richard Bentz"/>
+<edge source="Ronald Thomas" target="Annette Palmer"/>
+<edge source="Ronald Thomas" target="Judy Asbell"/>
+<edge source="Ronald Thomas" target="Thomas Irick"/>
+<edge source="Ronald Thomas" target="Wendy Fowler"/>
+<edge source="Ronald Thomas" target="Sonja Benett"/>
+<edge source="Ronald Thomas" target="George Tavana"/>
+<edge source="Ronald Thomas" target="Fred Grisham"/>
+<edge source="Ronald Thomas" target="Frank Allmon"/>
+<edge source="Ronald Thomas" target="Peter Perkins"/>
+<edge source="David Hartis" target="Michael Dudas"/>
+<edge source="David Hartis" target="Richard Martinez"/>
+<edge source="David Hartis" target="Wendy Fowler"/>
+<edge source="David Hartis" target="Cynthia Beasley"/>
+<edge source="David Hartis" target="James Martin"/>
+<edge source="Wendy Radune" target="Marie Baugh"/>
+<edge source="Wendy Radune" target="Manuel Salcedo"/>
+<edge source="Wendy Radune" target="Larry James"/>
+<edge source="Wendy Radune" target="Thomas Irick"/>
+<edge source="Wendy Radune" target="Peter Perkins"/>
+<edge source="Melissa Edelen" target="Gail Hoover"/>
+<edge source="Melissa Edelen" target="Leroy Falls"/>
+<edge source="Melissa Edelen" target="Sonja Benett"/>
+<edge source="Melissa Edelen" target="Richard Martinez"/>
+<edge source="Melissa Edelen" target="Mickey Moczo"/>
+<edge source="Melissa Edelen" target="Clarence Gillham"/>
+<edge source="Annette Palmer" target="Marie Baugh"/>
+<edge source="Annette Palmer" target="Larry James"/>
+<edge source="Annette Palmer" target="Gertrude Hinkson"/>
+<edge source="Annette Palmer" target="Francisco Pointer"/>
+<edge source="Annette Palmer" target="Deborah Holman"/>
+<edge source="Annette Palmer" target="Thomas Irick"/>
+<edge source="Annette Palmer" target="Jacqueline Bazan"/>
+<edge source="Annette Palmer" target="James Martin"/>
+<edge source="Annette Palmer" target="Jackie Perez"/>
+<edge source="Tequila Mix" target="Carter Orsborn"/>
+<edge source="Tequila Mix" target="Frank Allmon"/>
+<edge source="Tequila Mix" target="Clarence Gillham"/>
+<edge source="Tequila Mix" target="Barbara Newcombe"/>
+<edge source="Tequila Mix" target="Paula Kimrey"/>
+<edge source="Marie Baugh" target="Manuel Salcedo"/>
+<edge source="Marie Baugh" target="Francisco Pointer"/>
+<edge source="Marie Baugh" target="Judy Asbell"/>
+<edge source="Marie Baugh" target="Laverne Hernandez"/>
+<edge source="Marie Baugh" target="Shelley Grider"/>
+<edge source="Marie Baugh" target="Larry James"/>
+<edge source="Marie Baugh" target="Gladys Pena"/>
+<edge source="Marie Baugh" target="Leroy Falls"/>
+<edge source="Richard Green" target="Manuel Salcedo"/>
+<edge source="Richard Green" target="Richard Martinez"/>
+<edge source="Richard Green" target="Leroy Falls"/>
+<edge source="Richard Green" target="Porfirio Harness"/>
+<edge source="Richard Green" target="Dale Aguiniga"/>
+<edge source="Richard Green" target="Michael Dudas"/>
+<edge source="Richard Green" target="Sussy Baka"/>
+<edge source="James Martin" target="Manuel Salcedo"/>
+<edge source="James Martin" target="John Baron"/>
+<edge source="James Martin" target="Dale Aguiniga"/>
+<edge source="James Martin" target="Anna Webb"/>
+<edge source="James Martin" target="Thomas Fitzwater"/>
+<edge source="James Martin" target="Trevor Fairbank"/>
+<edge source="James Martin" target="Michael Russell"/>
+<edge source="James Martin" target="Jacqueline Bazan"/>
+<edge source="Manuel Salcedo" target="Clarence Gillham"/>
+<edge source="Manuel Salcedo" target="Leroy Falls"/>
+<edge source="John Baron" target="Michael Russell"/>
+<edge source="John Baron" target="Carter Orsborn"/>
+<edge source="John Baron" target="Shelley Grider"/>
+<edge source="John Baron" target="Gladys Pena"/>
+<edge source="John Baron" target="Frank Allmon"/>
+<edge source="John Baron" target="Jacqueline Bazan"/>
+<edge source="Larry James" target="Maria Chambers"/>
+<edge source="Larry James" target="Jacqueline Werner"/>
+<edge source="Dale Aguiniga" target="Joy Smith"/>
+<edge source="Dale Aguiniga" target="Margarito Jette"/>
+<edge source="Dale Aguiniga" target="Gladys Pena"/>
+<edge source="Dale Aguiniga" target="Jason Colon"/>
+<edge source="Dale Aguiniga" target="Barbara Newcombe"/>
+<edge source="Dale Aguiniga" target="Cynthia Beasley"/>
+<edge source="Dale Aguiniga" target="Kareem Lopez"/>
+<edge source="Jacqueline Werner" target="George Tavana"/>
+<edge source="Jacqueline Werner" target="Joy Smith"/>
+<edge source="Jacqueline Werner" target="Deborah Holman"/>
+<edge source="Jacqueline Werner" target="Mickey Moczo"/>
+<edge source="Jacqueline Werner" target="William Phillips"/>
+<edge source="Jacqueline Werner" target="Richard Bentz"/>
+<edge source="Jacqueline Werner" target="Kareem Lopez"/>
+<edge source="Jacqueline Werner" target="Leroy Falls"/>
+<edge source="Jacqueline Werner" target="Wendy Fowler"/>
+<edge source="Jacqueline Werner" target="Mary Luong"/>
+<edge source="George Tavana" target="Maria Chambers"/>
+<edge source="George Tavana" target="William Phillips"/>
+<edge source="George Tavana" target="Gladys Pena"/>
+<edge source="George Tavana" target="Beverly Barber"/>
+<edge source="Joy Smith" target="Peggy Palmer"/>
+<edge source="Margarito Jette" target="Richard Martinez"/>
+<edge source="Margarito Jette" target="Peggy Palmer"/>
+<edge source="Margarito Jette" target="Leroy Falls"/>
+<edge source="Margarito Jette" target="Shelley Grider"/>
+<edge source="Margarito Jette" target="Barbara Newcombe"/>
+<edge source="Margarito Jette" target="Beverly Barber"/>
+<edge source="Margarito Jette" target="Mary Luong"/>
+<edge source="Jackie Perez" target="Francisco Pointer"/>
+<edge source="Jackie Perez" target="Mickey Moczo"/>
+<edge source="Jackie Perez" target="Sonja Benett"/>
+<edge source="Jackie Perez" target="Kimberly Otero"/>
+<edge source="Jackie Perez" target="Richard Martinez"/>
+<edge source="Michael Dudas" target="Carter Orsborn"/>
+<edge source="Michael Dudas" target="Laverne Hernandez"/>
+<edge source="Michael Dudas" target="Gertrude Hinkson"/>
+<edge source="Michael Dudas" target="Paula Kimrey"/>
+<edge source="Michael Dudas" target="Esther Lynch"/>
+<edge source="Kimberly Otero" target="Peter Perkins"/>
+<edge source="Kimberly Otero" target="Thomas Fitzwater"/>
+<edge source="Kimberly Otero" target="Paula Kimrey"/>
+<edge source="Maria Chambers" target="Nicole Bethea"/>
+<edge source="Maria Chambers" target="Helena French"/>
+<edge source="Maria Chambers" target="Sussy Baka"/>
+<edge source="Maria Chambers" target="Richard Martinez"/>
+<edge source="Maria Chambers" target="William Phillips"/>
+<edge source="Maria Chambers" target="Richard Bentz"/>
+<edge source="Maria Chambers" target="Beverly Barber"/>
+<edge source="Trevor Fairbank" target="Fred Grisham"/>
+<edge source="Trevor Fairbank" target="Nicole Bethea"/>
+<edge source="Trevor Fairbank" target="Michael Russell"/>
+<edge source="Trevor Fairbank" target="Carter Orsborn"/>
+<edge source="Trevor Fairbank" target="Peggy Palmer"/>
+<edge source="Trevor Fairbank" target="Anna Webb"/>
+<edge source="Trevor Fairbank" target="Jason Colon"/>
+<edge source="Gertrude Hinkson" target="Richard Martinez"/>
+<edge source="Gertrude Hinkson" target="Fred Grisham"/>
+<edge source="Gertrude Hinkson" target="Wendy Fowler"/>
+<edge source="Gertrude Hinkson" target="Kareem Lopez"/>
+<edge source="Francisco Pointer" target="Michael Russell"/>
+<edge source="Francisco Pointer" target="Clarence Gillham"/>
+<edge source="Francisco Pointer" target="Leroy Falls"/>
+<edge source="Francisco Pointer" target="Laverne Hernandez"/>
+<edge source="Francisco Pointer" target="Peter Perkins"/>
+<edge source="Deborah Holman" target="Beverly Barber"/>
+<edge source="Deborah Holman" target="Nicole Bethea"/>
+<edge source="Deborah Holman" target="Sussy Baka"/>
+<edge source="Deborah Holman" target="Mickey Moczo"/>
+<edge source="Deborah Holman" target="Richard Bentz"/>
+<edge source="Deborah Holman" target="Barbara Newcombe"/>
+<edge source="Richard Martinez" target="Mickey Moczo"/>
+<edge source="Richard Martinez" target="Carter Orsborn"/>
+<edge source="Richard Martinez" target="Fred Grisham"/>
+<edge source="Richard Martinez" target="Nicole Bethea"/>
+<edge source="Richard Martinez" target="Cynthia Beasley"/>
+<edge source="Richard Martinez" target="Thomas Fitzwater"/>
+<edge source="Mickey Moczo" target="Richard Bentz"/>
+<edge source="Mickey Moczo" target="Sonja Benett"/>
+<edge source="Mickey Moczo" target="Wendy Fowler"/>
+<edge source="William Phillips" target="Judy Asbell"/>
+<edge source="William Phillips" target="Sussy Baka"/>
+<edge source="Richard Bentz" target="Anna Webb"/>
+<edge source="Richard Bentz" target="Helena French"/>
+<edge source="Richard Bentz" target="Shelley Grider"/>
+<edge source="Richard Bentz" target="Beverly Barber"/>
+<edge source="Richard Bentz" target="Porfirio Harness"/>
+<edge source="Gladys Pena" target="Peggy Palmer"/>
+<edge source="Gladys Pena" target="Kareem Lopez"/>
+<edge source="Gladys Pena" target="Barbara Newcombe"/>
+<edge source="Beverly Barber" target="Porfirio Harness"/>
+<edge source="Beverly Barber" target="Sussy Baka"/>
+<edge source="Fred Grisham" target="Esther Lynch"/>
+<edge source="Fred Grisham" target="Thomas Fitzwater"/>
+<edge source="Fred Grisham" target="Barbara Newcombe"/>
+<edge source="Nicole Bethea" target="Wendy Fowler"/>
+<edge source="Nicole Bethea" target="Thomas Fitzwater"/>
+<edge source="Nicole Bethea" target="Kareem Lopez"/>
+<edge source="Nicole Bethea" target="Helena French"/>
+<edge source="Nicole Bethea" target="Sussy Baka"/>
+<edge source="Gail Hoover" target="Frank Allmon"/>
+<edge source="Gail Hoover" target="Clarence Gillham"/>
+<edge source="Gail Hoover" target="Peter Perkins"/>
+<edge source="Peggy Palmer" target="Wendy Fowler"/>
+<edge source="Peggy Palmer" target="Carter Orsborn"/>
+<edge source="Peggy Palmer" target="Barbara Newcombe"/>
+<edge source="Peggy Palmer" target="Jacqueline Bazan"/>
+<edge source="Anna Webb" target="Paula Kimrey"/>
+<edge source="Anna Webb" target="Frank Allmon"/>
+<edge source="Jason Colon" target="Mary Luong"/>
+<edge source="Judy Asbell" target="Thomas Irick"/>
+<edge source="Judy Asbell" target="Kareem Lopez"/>
+<edge source="Judy Asbell" target="Sussy Baka"/>
+<edge source="Judy Asbell" target="Mary Luong"/>
+<edge source="Thomas Irick" target="Michael Russell"/>
+<edge source="Thomas Irick" target="Sonja Benett"/>
+<edge source="Thomas Irick" target="Clarence Gillham"/>
+<edge source="Michael Russell" target="Sussy Baka"/>
+<edge source="Michael Russell" target="Frank Allmon"/>
+<edge source="Michael Russell" target="Jacqueline Bazan"/>
+<edge source="Michael Russell" target="Cynthia Beasley"/>
+<edge source="Paula Kimrey" target="Mary Luong"/>
+<edge source="Paula Kimrey" target="Kareem Lopez"/>
+<edge source="Paula Kimrey" target="Barbara Newcombe"/>
+<edge source="Kareem Lopez" target="Laverne Hernandez"/>
+<edge source="Kareem Lopez" target="Wendy Fowler"/>
+<edge source="Kareem Lopez" target="Shelley Grider"/>
+<edge source="Kareem Lopez" target="Barbara Newcombe"/>
+<edge source="Frank Allmon" target="Sussy Baka"/>
+<edge source="Laverne Hernandez" target="Sussy Baka"/>
+<edge source="Leroy Falls" target="Thomas Fitzwater"/>
+<edge source="Wendy Fowler" target="Helena French"/>
+<edge source="Wendy Fowler" target="Porfirio Harness"/>
+<edge source="Wendy Fowler" target="Barbara Newcombe"/>
+<edge source="Helena French" target="Esther Lynch"/>
+<edge source="Helena French" target="Jacqueline Bazan"/>
+<edge source="Helena French" target="Sussy Baka"/>
+<edge source="Shelley Grider" target="Cynthia Beasley"/>
+<edge source="Esther Lynch" target="Sonja Benett"/>
+<edge source="Esther Lynch" target="Porfirio Harness"/>
+</graph></graphml>

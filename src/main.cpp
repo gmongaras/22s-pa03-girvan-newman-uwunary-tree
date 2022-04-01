@@ -13,6 +13,7 @@
 
 #include <fstream>
 #include <Python.h>
+#include <string>
 
 struct VertexProperty { long value; }; // Vertex ID (Community Number)
 using Graph = boost::adjacency_list<boost::setS, boost::vecS, boost::undirectedS, VertexProperty>;
@@ -21,7 +22,12 @@ using vertex_descriptor = boost::graph_traits<Graph>::vertex_descriptor;
 Graph ReadGraph(std::ifstream& I) {
     Graph G; // Creates Return Variable
     boost::dynamic_properties D(boost::ignore_other_properties); // Dynamic Properties
+
+    //boost::dynamic_properties dp;
+    //D.property("Name", boost::get(&GraphData::Name, G));
+
     D.property("value", boost::get(&VertexProperty::value, G)); // Vertex ID Getter
+    D.property("id", boost::get(&VertexProperty::id, G)); // Vertex ID Getter
     boost::read_graphml(I, G, D); // Read In Program Argument Graphml
     return G; // Return Variable
 }
@@ -40,6 +46,7 @@ void PrintGraph(Graph const &G) {
         std::cout << boost::source(*eit, G) << ' ' << boost::target(*eit, G) << std::endl;
     }
 }
+
 
 // Handles Main Graph ( PrintGraph(G); )
 // Argument Example: data/football/football.graphml
@@ -64,7 +71,6 @@ int main(int argc, char* argv[]) {
         for (auto vd : boost::make_iterator_range(vertices(G))) {
             boost::breadth_first_search(G, vd, Q, V, color_map); // Time Complexity: O(E + V)
         }
-
     }
     else {
         Py_Initialize(); // Initialize Environment

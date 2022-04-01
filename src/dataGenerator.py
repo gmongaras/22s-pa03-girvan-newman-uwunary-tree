@@ -13,7 +13,7 @@ communities = 4                         # Number of communities in the graph
 communitySize = vertices//communities   # Number of vertices in each community
 rand = True                             # True to generate random values
 names = True                            # True to generate random names
-P_out = 0.02                            # Probability of edge between vertices of different group
+P_out = 0.03                            # Probability of edge between vertices of different group
 P_in = -4.1171*P_out + 0.3063           # Probability of edge between vertices of same group
 stats = True                            # True to see stats after running
 

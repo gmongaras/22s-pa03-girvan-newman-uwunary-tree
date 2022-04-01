@@ -32,7 +32,7 @@ class Node:
         self.parents = []       # The parents of this node
         self.sameLevel = []     # Nodes on same level as this one
         self.level = level      # The level of the node
-        self.labeled = False
+        self.labeled = False    # Has the node been visited in BFS?
     
     # Test if two nodes are equal
     # Inputs:
@@ -144,7 +144,8 @@ def edgeLabelling(node, parent, edges):
             except KeyError:
                 # Add the key (parent, child)
                 edges[(parent.val, node.val)] = betweeness
-        
+    
+    # Label the node as visited
     node.labeled = True
 
 
@@ -175,8 +176,6 @@ def single_source_shortest_path(G, n, edges):
     visited.append(tree)
     
     # BFS variables
-    curNode = tree.val  # Stores the current node being examined
-    subTree = tree      # Subtree of the entire tree used to add more nodes
     level = 1           # The current level of the tree
     
     # Iterate until the queue is empty
@@ -421,7 +420,8 @@ def main():
     # Store the leftovers in the main list
     for l in range(0, len(leftovers)):
         comm.remove([leftovers[l]])
-    comm.append(leftovers)
+    if len(leftovers) > 0:
+        comm.append(leftovers)
     
     # Get some random colors to classify every node
     vals = "123456789ABCDEF"
