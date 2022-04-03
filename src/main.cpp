@@ -22,6 +22,37 @@ typedef boost::adjacency_list<boost::setS, boost::vecS, boost::undirectedS> Grap
 
 class Node {
 
+private:
+    float value;
+    int level;
+    int shortestPaths = 1;
+    std::vector<Node> children;
+    std::vector<Node> parents;
+    std::vector<Node> sameLevel;
+    bool labelled = false;
+
+public:
+
+    Node(float value, int level) {
+        this->value = value;
+        this->level = level;
+    }
+
+    void addChild(Node& c) {
+        children.push_back(c);
+        c.parents.push_back(*this);
+    }
+
+    void addParent(Node& p) {
+        parents.push_back(p);
+        p.children.push_back(*this);
+        shortestPaths += 1;
+    }
+
+    bool operator==(Node& n) const {
+        return value == n.value;
+    }
+
 };
 
 // Prints Important Information
@@ -61,6 +92,9 @@ template < typename T > void shuffle( std::list<T>& lst )
 void SSSP(Graph const &G,
           boost::list_edge<unsigned long, boost::no_property>& n,
           std::map<std::tuple<int, int>, float> edges) {
+
+    std::vector<Node> visited;
+    auto tree = Node(n.m_source, 1);
 
 }
 
