@@ -13,7 +13,7 @@ import matplotlib.pyplot as plt
 
 
 # Parameters
-inFile = "../data/football/football.graphml"  # The datafile to load in
+inFile = "../data/dataset.graphml"  # The datafile to load in
 nodeSubsetPercent = 0.8             # Number of random nodes to pick in the betweeness algorithm
 betThreshold = 4                    # Threshold betweeness value to remove
     
@@ -287,11 +287,13 @@ def findCommunities(G, node, visited):
 
 
 
-def main():
-    # Read in the graph and store data on it
-    G = graphml.read_graphml(inFile)
-    orig = G.copy()
-    
+# Use the normal Q value to stop the loop when removing
+# edges from the graph
+# Inputs:
+#   G - The graph to remove edges from
+# Outputs:
+#   G - New graph with edges remove
+def normalLoop(G):
     # Iterate until the Q value is no longer increasing
     Q_prev = -np.inf
     Q = -np.inf
@@ -335,7 +337,6 @@ def main():
         ### Compute the modularity (Q)
         # https://www.pnas.org/doi/full/10.1073/pnas.0601602103#FD3
         
-        # Compute the differences B_ij
         # - B_ij = (A - (k_i-k_j)/2m)
         #    - A_ij = Number of edges between node i and j
         #    - k_i = degree of node i
@@ -385,8 +386,22 @@ def main():
         
         print(f"Iter {iter} Modularity: {Q}")
         iter += 1
-        
-    Q = oldG
+    
+    # We want the graph from the itertion before the last since the last
+    # iteration ended with a lower Q score
+    G = oldG
+    
+    return G
+
+
+
+def main():
+    # Read in the graph and store data on it
+    G = graphml.read_graphml(inFile)
+    orig = G.copy()
+    
+    # Remove edges from the graph to get the communities
+    G = normalLoop(G)
         
     # Iterate over all nodes and find the communities
     comm = []           # The communities found
@@ -450,9 +465,8 @@ def main():
         for v in comm[c][:-1]:
             print(v, end=", ")
         print(comm[c][-1])
-    
-    print()
 
 
 
-main()
+if __name__ == '__main__':
+    main()
