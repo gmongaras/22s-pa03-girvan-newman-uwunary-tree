@@ -8,7 +8,7 @@ GN Algo: https://www.pnas.org/doi/epdf/10.1073/pnas.122653799
 
 # General Project Information
 
-**Title:** Project 3 - [Sorting](https://docs.google.com/document/d/1kzxZlTZV8M57DKrXZFGYVOAaDaBW9JjPwcKYHjFEC04/edit)</br>
+**Title:** Project 3 - [Community Detection in Networks](https://docs.google.com/document/d/1kzxZlTZV8M57DKrXZFGYVOAaDaBW9JjPwcKYHjFEC04/edit)</br>
 **Department:** Computer Science</br>
 **Professor:** Dr. Fontenot</br>
 
@@ -26,7 +26,8 @@ GN Algo: https://www.pnas.org/doi/epdf/10.1073/pnas.122653799
 
 ## The Algorithm
 
-algo
+
+### Girvan Newman
 
 
 # Installation, Configuration, Execution
