@@ -5,7 +5,7 @@
 // https://stackoverflow.com/questions/16962430/calling-python-script-from-c-and-using-its-output (Python Embedding)
 
 #include <boost/graph/adjacency_list.hpp>
-#include <boost/graph/breadth_first_search.hpp>
+#include <boost/graph/subgraph.hpp>
 #include <boost/graph/graph_utility.hpp>
 #include <boost/graph/graphml.hpp>
 #include <boost/property_map/dynamic_property_map.hpp>
@@ -18,7 +18,11 @@
 #include <list>
 
 // Adjacency List
-using Graph = boost::adjacency_list<boost::setS, boost::vecS, boost::undirectedS>;
+typedef boost::adjacency_list<boost::setS, boost::vecS, boost::undirectedS> Graph;
+
+class Node {
+
+};
 
 // Prints Important Information
 void PrintGraph(Graph const &G) {
@@ -54,11 +58,24 @@ template < typename T > void shuffle( std::list<T>& lst )
     lst.swap(shuffled_list) ;
 }
 
+void SSSP(Graph const &G,
+          boost::list_edge<unsigned long, boost::no_property>& n,
+          std::map<std::tuple<int, int>, float> edges) {
+
+}
+
 std::map<std::tuple<int, int>, float> calculateBetweenness(Graph const &G) {
 
      std::map<std::tuple<int, int>, float> betweenness;
      auto edges = G.m_edges;
      shuffle(edges);
+
+     for (auto& n : edges) {
+         SSSP(G, n, betweenness);
+     }
+
+     return betweenness;
+
 }
 
 Graph normalLoop(Graph const &G) {
