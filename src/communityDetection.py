@@ -13,9 +13,12 @@ import matplotlib.pyplot as plt
 
 
 # Parameters
-inFile = "../data/dataset.graphml"  # The datafile to load in
+inFile = "../data/dataset4.graphml"  # The datafile to load in
 nodeSubsetPercent = 0.8             # Number of random nodes to pick in the betweeness algorithm
 betThreshold = 4                    # Threshold betweeness value to remove
+mode = "NN"                         # More to evaluate the Q value, use NN for neural network
+                                    # and "Normal" (or anything else) for normal Q function.
+commName = "community"              # The name of the community label in the graphml file
     
     
     
@@ -395,6 +398,61 @@ def normalLoop(G):
 
 
 
+# Calculate the accuracy of a graph given the labelled nodes of
+# a graph and the actual labels for each node
+# Inputs:
+#   X - The predicted labels of the nodes in the graph
+#   y - The actual labels of the nodes in the graph
+def calculateAccuracy(X, y):
+    correct = 0                     # Number of nodes classified correctly
+    
+    # Calculate the total number of nodes in the graph
+    total = 0
+    for i in X:
+        total += len(i)
+    
+    # Iterate through all communities in X
+    for xComm in X:
+        ## Find the y community that matches most with the X community.
+        ## The best one has the greatest intersection
+        best = None     # The best group match
+        bestIdx = None  # Index in y of the best match
+        bestScore = 0   # The best number of nodes that match between the groups
+        
+        # Iterate over all communities in y
+        for yComm_idx in range(0, len(y)):
+            yComm = y[yComm_idx]
+            
+            # Get the intersection of the two lists
+            intersection = list(set(xComm) & set(yComm))
+            
+            # Store the y list if it matches better than the rest
+            if len(intersection) > bestScore:
+                best = yComm
+                bestIdx = yComm_idx
+                bestScore = len(intersection)
+        
+        
+        # If there is a best score, update the accumulators
+        if bestScore > 0:
+            # Update the number of nodes that were classified correctly
+            correct += bestScore
+            
+            # Remove the y community from the labels
+            del y[bestIdx]
+            
+            # Stop the loop if there are no more nodes in y
+            if len(y) == 0:
+                break
+    
+    # Calculate the accuracy
+    accuracy = float(correct)/float(total)
+    
+    return accuracy
+            
+
+
+
 def main():
     # Read in the graph and store data on it
     G = graphml.read_graphml(inFile)
@@ -465,6 +523,23 @@ def main():
         for v in comm[c][:-1]:
             print(v, end=", ")
         print(comm[c][-1])
+        
+    # Get the communiteis fro each node
+    y_communities = dict()
+    for n in orig._node.keys():
+        try:
+            y_communities[orig._node[n][commName]].append(n)
+        except KeyError:
+            y_communities[orig._node[n][commName]] = [n]
+    
+    # Convert the dictionary to a list
+    y = [i for i in y_communities.values()]
+    
+    # Calculate the accuracy
+    acc = calculateAccuracy(comm, y)
+    
+    # Display the accuracy
+    print(f"Accuracy: {acc}")
 
 
 
