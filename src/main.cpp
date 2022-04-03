@@ -22,7 +22,7 @@ typedef boost::adjacency_list<boost::setS, boost::vecS, boost::undirectedS> Grap
 
 class Node {
 
-private:
+public:
     float value;
     int level;
     int shortestPaths = 1;
@@ -30,8 +30,6 @@ private:
     std::vector<Node> parents;
     std::vector<Node> sameLevel;
     bool labelled = false;
-
-public:
 
     Node(float value, int level) {
         this->value = value;
@@ -96,6 +94,22 @@ void SSSP(Graph const &G,
     std::vector<Node> visited;
     auto tree = Node(n.m_source, 1);
 
+    std::stack<Node> s;
+    s.push(tree);
+    visited.push_back(tree);
+
+    int level = 1;
+    while (!s.empty()) {
+        auto curr = s.top();
+        s.pop();
+
+        level = curr.level + 1;
+
+        auto neighbors = boost::adjacent_vertices((curr.value), G);
+        for (auto n : make_iterator_range(neighbors)) {
+
+        }
+    }
 }
 
 std::map<std::tuple<int, int>, float> calculateBetweenness(Graph const &G) {
