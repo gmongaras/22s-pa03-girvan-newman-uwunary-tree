@@ -4,14 +4,16 @@
 // https://www.codeproject.com/Articles/820116/Embedding-Python-program-in-a-C-Cplusplus-code (Python Embedding)
 // https://stackoverflow.com/questions/16962430/calling-python-script-from-c-and-using-its-output (Python Embedding)
 
+// Boost Includes
 #include <boost/graph/adjacency_list.hpp>
 #include <boost/graph/subgraph.hpp>
 #include <boost/graph/graph_utility.hpp>
 #include <boost/graph/graphml.hpp>
 #include <boost/property_map/dynamic_property_map.hpp>
 
-#include <fstream>
+// Standard Includes
 #include <Python.h>
+#include <fstream>
 #include <random>
 #include <string>
 #include <map>
@@ -22,33 +24,38 @@ typedef boost::adjacency_list<boost::setS, boost::vecS, boost::undirectedS> Grap
 typedef boost::list_edge<unsigned long, boost::no_property> BasicNode;
 typedef std::map<std::tuple<int, int>, float> EdgeStd;
 
+// Nowode Class! OwO :)
 class Node {
 
 public:
-    int value;
-    int level;
-    int shortestPaths = 1;
-    std::vector<Node> children;
-    std::vector<Node> parents;
-    std::vector<Node> sameLevel;
-    bool labelled = false;
+    int value; // Value Stored Within Node
+    int level; // Level of Node
+    int shortestPaths = 1; // Number of Shortest Paths that can Reach this Node from Root
+    std::vector<Node> children; // Children of Node
+    std::vector<Node> parents; // Parents of Node
+    std::vector<Node> sameLevel; // Nodes on Same Level
+    bool labelled = false; // Has Node Been Visited in BFS?
 
+    // Constructor, Must be Called
     Node(int value, int level) {
         this->value = value;
         this->level = level;
     }
 
+    // Add Child to Node
     void addChild(Node& c) {
         children.push_back(c);
         c.parents.push_back(*this);
     }
 
+    // Add Parent to Node
     void addParent(Node& p) {
         parents.push_back(p);
         p.children.push_back(*this);
         shortestPaths += 1;
     }
 
+    // Tests if two Nodes are Equal
     bool operator==(Node& n) const {
         return value == n.value;
     }
@@ -236,7 +243,7 @@ void SSSP(Graph const& G, BasicNode& n, EdgeStd& edges) {
             isFound = false; // Reusing isFound
             node = visited[loc];
             if (node.level == curr.level) {
-                for (auto& sNode : node.sameLevel) {
+                for (auto sNode : node.sameLevel) {
                     if (curr == sNode) isFound = true; }
                 if (!isFound) {
                     node.sameLevel.push_back(curr);
@@ -245,7 +252,7 @@ void SSSP(Graph const& G, BasicNode& n, EdgeStd& edges) {
             }
 
             else if (node.level < curr.level) {
-                for (auto& pNode : curr.parents) {
+                for (auto pNode : curr.parents) {
                     if (node == pNode) isFound = true; }
                 if (!isFound) curr.addParent(node);
             }
@@ -266,6 +273,15 @@ void SSSP(Graph const& G, BasicNode& n, EdgeStd& edges) {
         // FIXME
     }
 
+    // // Does Key (parent, child) Exist?
+    //        // Does Key (child, parent) Exist?
+    //        // Add Key (parent, child)
+    //        if (edges.find(std::make_tuple(parent.value, node.value)) != edges.end()) {
+    //            edges[std::make_tuple(parent.value, node.value)] += betweenness; }
+    //        else if (edges.find(std::make_tuple(node.value, parent.value)) != edges.end()) {
+    //            edges[std::make_tuple(node.value, parent.value)] += betweenness; }
+    //        else { edges[std::make_tuple(parent.value, node.value)] = betweenness; }
+
     //    # Add the betweenness to the total edges dictionary
     //    for edge in bet.keys():
     //        try: # Does the edge exist?
@@ -276,6 +292,7 @@ void SSSP(Graph const& G, BasicNode& n, EdgeStd& edges) {
     //            except KeyError:
     //                # If the edge does not exist, add it
     //                edges[edge] = bet[edge]/2
+
 }
 
 EdgeStd calculateBetweenness(Graph const& G) {
@@ -285,15 +302,14 @@ EdgeStd calculateBetweenness(Graph const& G) {
      shuffle(edges);
 
      for (auto& n : edges) {
-         SSSP(G, n, betweenness);
-     }
+         SSSP(G, n, betweenness); }
 
      return betweenness;
 
 }
 
-// Use Neural Network to Find Q Value to
-// Stop Loop When Removing Edges From Graph
+// Use the Normal Q value to
+// Stop Loop when Removing
 
 // Inputs:
 // G = Our Graph
