@@ -87,6 +87,12 @@ template < typename T > void shuffle( std::list<T>& lst )
     lst.swap(shuffled_list) ;
 }
 
+// Inputs:
+// G = Our Graph
+// n = Specific Node to find Paths
+// edges = Dictionary of Edges
+// Outputs:
+// None (Edges Changed Within Function)
 void SSSP(Graph const &G,
           boost::list_edge<unsigned long, boost::no_property>& n,
           std::map<std::tuple<int, int>, float> edges) {
@@ -107,9 +113,72 @@ void SSSP(Graph const &G,
 
         auto neighbors = boost::adjacent_vertices((curr.value), G);
         for (auto n : make_iterator_range(neighbors)) {
+            auto node = Node(n, level);
 
+            int loc; // Iterator
+            bool isFound = false;
+
+            // Try (No ValueError)
+            for (loc = 0; loc < visited.size(); loc++) {
+                if (visited[loc] == node) {
+                    isFound = true;
+                    break;
+                }
+            }
+
+            // Catch (No ValueError): If Node is Unvisited, Push
+            if (!isFound) {
+                s.push(node);
+                visited.push_back(node);
+                curr.addChild(node);
+                continue;
+            }
+
+            isFound = false; // Reusing isFound
+            node = visited[loc];
+            if (node.level == curr.level) {
+                for (auto& sNode : node.sameLevel) {
+                    if (curr == sNode) isFound = true; }
+                if (!isFound) {
+                    node.sameLevel.push_back(curr);
+                    curr.sameLevel.push_back(node); }
+                isFound = false; // Reusing isFound
+            }
+
+            else if (node.level < curr.level) {
+                for (auto& pNode : curr.parents) {
+                    if (node == pNode) isFound = true; }
+                if (!isFound) curr.addParent(node);
+            }
         }
     }
+
+    // Step 3 = Edge Labelling
+
+    // Iterate Over All Root Node Children
+    std::map<std::tuple<int, int>, float> bet;
+    for (auto& cNode : tree.children) {
+
+    }
+
+
+    //### Step 3 - edge labelling
+    //
+    //    # Iterate over all children of the root node
+    //    bet = dict()
+    //    for c in tree.children:
+    //        edgeLabelling(c, tree, bet)
+    //
+    //    # Add the betweeness to the total edges dictionary
+    //    for edge in bet.keys():
+    //        try: # Does the edge exist?
+    //            edges[edge] += bet[edge]/2
+    //        except KeyError:
+    //            try: # Does the reverse of the edge exist?
+    //                edges[(edge[1], edge[0])] += bet[edge]/2
+    //            except KeyError:
+    //                # If the edge does not exist, add it
+    //                edges[edge] = bet[edge]/2
 }
 
 std::map<std::tuple<int, int>, float> calculateBetweenness(Graph const &G) {
