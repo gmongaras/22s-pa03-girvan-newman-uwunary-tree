@@ -99,8 +99,9 @@ template <typename T> void shuffle(std::list<T>& lst) {
 // None (Edges Changed Within Function)
 void edgeLabelling(Node& node, Node& parent, EdgeStd& edges) {
 
-    // Used Throughout
-    float betweenness;
+    // Used Throughout, Starts at
+    // 1 For Less Hassle Later
+    float betweenness = 1;
 
     if (node.labelled) {
 
@@ -133,6 +134,22 @@ void edgeLabelling(Node& node, Node& parent, EdgeStd& edges) {
         for (auto cNode : node.children) {
             edgeLabelling(cNode, node, edges); }
 
+        for (auto cNode : node.children) {
+
+            try { // If No Key Exists, Stop Program
+
+                // Does Key (parent, child) Exist?
+                // Does Key (child, parent) Exist?
+                // Add Key (parent, child)
+                if (edges.find(std::make_tuple(node.value, cNode.value)) != edges.end()) {
+                    edges[std::make_tuple(node.value, cNode.value)] += betweenness; }
+                else if (edges.find(std::make_tuple(cNode.value, node.value)) != edges.end()) {
+                    edges[std::make_tuple(cNode.value, node.value)] += betweenness; }
+                else { throw std::invalid_argument("Key Must Exist"); }
+
+            } catch (std::invalid_argument& e) { std::cerr << e.what() << std::endl; }
+
+        }
 
     }
 
