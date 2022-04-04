@@ -108,8 +108,8 @@ void edgeLabelling(Node& node, Node& parent, EdgeStd& edges) {
         // Divide Betweenness of Parent Nodes
         // If Root Node, Iterate to the Child Nodes and Calculate Their Betweenness
         // If Leaf Node, Calculate Betweenness of the Edges Between it and Parent
-        if (node.children.empty()) betweenness = 1 / float(node.parents.size());
-        else betweenness = node.shortestPaths / float(node.parents.size());
+        if (node.children.empty()) { betweenness = 1 / float(node.parents.size()); }
+        else { betweenness = node.shortestPaths / float(node.parents.size()); }
 
         // Store Betweenness of Node and Parent
         // Does Key (parent, child) Exist?
@@ -125,7 +125,22 @@ void edgeLabelling(Node& node, Node& parent, EdgeStd& edges) {
 
     }
 
-    // FIXME Maybe add second if statement?
+    // If Node is a Leaf Node
+    if (node.children.empty()) {
+
+        betweenness = 1 / float(node.parents.size());
+
+        // Store Betweenness of Node and Parent
+        // Does Key (parent, child) Exist?
+        // Does Key (child, parent) Exist?
+        // Add Key (parent, child)
+        if (edges.find(std::make_tuple(parent.value, node.value)) != edges.end()) {
+            edges[std::make_tuple(parent.value, node.value)] += betweenness; }
+        else if (edges.find(std::make_tuple(node.value, parent.value)) != edges.end()) {
+            edges[std::make_tuple(node.value, parent.value)] += betweenness; }
+        else { edges[std::make_tuple(parent.value, node.value)] = betweenness; }
+
+    }
 
     // If Node isn't a Leaf Node
     else {
@@ -138,20 +153,38 @@ void edgeLabelling(Node& node, Node& parent, EdgeStd& edges) {
 
             try { // If No Key Exists, Stop Program
 
-                // Does Key (parent, child) Exist?
-                // Does Key (child, parent) Exist?
-                // Add Key (parent, child)
+                // Does Key (node, child) Exist?
+                // Does Key (child, node) Exist?
+                // Throw Exception, Stop Program
                 if (edges.find(std::make_tuple(node.value, cNode.value)) != edges.end()) {
-                    edges[std::make_tuple(node.value, cNode.value)] += betweenness; }
+                    betweenness += edges[std::make_tuple(node.value, cNode.value)]; }
                 else if (edges.find(std::make_tuple(cNode.value, node.value)) != edges.end()) {
-                    edges[std::make_tuple(cNode.value, node.value)] += betweenness; }
+                    betweenness += edges[std::make_tuple(cNode.value, node.value)]; }
                 else { throw std::invalid_argument("Key Must Exist"); }
 
             } catch (std::invalid_argument& e) { std::cerr << e.what() << std::endl; }
 
         }
 
+        // Update shortestPaths Value of Node
+        node.shortestPaths = betweenness;
+
+        // Divide Betweenness Between Parent Nodes
+        betweenness /= float(node.parents.size());
+
+        // Does Key (parent, child) Exist?
+        // Does Key (child, parent) Exist?
+        // Add Key (parent, child)
+        if (edges.find(std::make_tuple(parent.value, node.value)) != edges.end()) {
+            edges[std::make_tuple(parent.value, node.value)] += betweenness; }
+        else if (edges.find(std::make_tuple(node.value, parent.value)) != edges.end()) {
+            edges[std::make_tuple(node.value, parent.value)] += betweenness; }
+        else { edges[std::make_tuple(parent.value, node.value)] = betweenness; }
+
     }
+
+    // Label Node Visited
+    node.labelled = true;
 
 }
 
