@@ -17,14 +17,15 @@
 #include <map>
 #include <list>
 
-// Adjacency List and Node Definitions
+// Adjacency List, Basic Node, Standard Edge Definitions
 typedef boost::adjacency_list<boost::setS, boost::vecS, boost::undirectedS> Graph;
 typedef boost::list_edge<unsigned long, boost::no_property> BasicNode;
+typedef std::map<std::tuple<int, int>, float> EdgeStd;
 
 class Node {
 
 public:
-    float value;
+    int value;
     int level;
     int shortestPaths = 1;
     std::vector<Node> children;
@@ -32,7 +33,7 @@ public:
     std::vector<Node> sameLevel;
     bool labelled = false;
 
-    Node(float value, int level) {
+    Node(int value, int level) {
         this->value = value;
         this->level = level;
     }
@@ -64,6 +65,7 @@ void PrintGraph(Graph const &G) {
     }
 }
 
+// Reads In Graph
 Graph ReadGraph(std::ifstream& I) {
     Graph G; // Creates Return Variable
     boost::dynamic_properties D(boost::ignore_other_properties); // Dynamic Properties
@@ -72,25 +74,69 @@ Graph ReadGraph(std::ifstream& I) {
 }
 
 // Shuffle List Contents
-template < typename T > void shuffle( std::list<T>& lst )
-{
-    // create a vector of (wrapped) references to elements in the list
+template <typename T> void shuffle(std::list<T>& lst) {
+
+    // Create a vector of (wrapped) references to elements in the list
     // http://en.cppreference.com/w/cpp/utility/functional/reference_wrapper
-    std::vector< std::reference_wrapper< const T > > vec( lst.begin(), lst.end() ) ;
+    std::vector<std::reference_wrapper<const T>> vec(lst.begin(), lst.end());
 
-    // shuffle (the references in) the vector
-    std::shuffle( vec.begin(), vec.end(), std::mt19937{ std::random_device{}() } ) ;
+    // Shuffle (the references in) the vector
+    std::shuffle(vec.begin(), vec.end(), std::mt19937{std::random_device{}()});
 
-    // copy the shuffled sequence into a new list
-    std::list<T> shuffled_list {  vec.begin(), vec.end() } ;
+    // Copy the shuffled sequence into a new list
+    std::list<T> shuffled_list { vec.begin(), vec.end()};
 
-    // swap the old list with the shuffled list
-    lst.swap(shuffled_list) ;
+    // Swap the old list with the shuffled list
+    lst.swap(shuffled_list);
+
 }
 
-//void edgeLabelling(node, parent, edges) {
-//
-//}
+// Inputs:
+// node = Node of Tree of Graph
+// parent = Parent of Given Node
+// edges = Dictionary of Edges
+// Outputs:
+// None (Edges Changed Within Function)
+void edgeLabelling(Node& node, Node& parent, EdgeStd& edges) {
+
+    // Used Throughout
+    float betweenness;
+
+    if (node.labelled) {
+
+        // Divide Betweenness of Parent Nodes
+        // If Root Node, Iterate to the Child Nodes and Calculate Their Betweenness
+        // If Leaf Node, Calculate Betweenness of the Edges Between it and Parent
+        if (node.children.empty()) betweenness = 1 / float(node.parents.size());
+        else betweenness = node.shortestPaths / float(node.parents.size());
+
+        // Store Betweenness of Node and Parent
+        // Does Key (parent, child) Exist?
+        // Does Key (child, parent) Exist?
+        // Add Key (parent, child)
+        if (edges.find(std::make_tuple(parent.value, node.value)) != edges.end()) {
+            edges[std::make_tuple(parent.value, node.value)] += betweenness; }
+        else if (edges.find(std::make_tuple(node.value, parent.value)) != edges.end()) {
+            edges[std::make_tuple(node.value, parent.value)] += betweenness; }
+        else { edges[std::make_tuple(parent.value, node.value)] = betweenness; }
+
+        return;
+
+    }
+
+    // FIXME Maybe add second if statement?
+
+    // If Node isn't a Leaf Node
+    else {
+
+        // Calculate Betweenness of all Children
+        for (auto cNode : node.children) {
+            edgeLabelling(cNode, node, edges); }
+
+
+    }
+
+}
 
 // Inputs:
 // G = Our Graph
@@ -98,9 +144,7 @@ template < typename T > void shuffle( std::list<T>& lst )
 // edges = Dictionary of Edges
 // Outputs:
 // None (Edges Changed Within Function)
-void SSSP(Graph const &G,
-          boost::list_edge<unsigned long, boost::no_property>& n,
-          std::map<std::tuple<int, int>, float> edges) {
+void SSSP(Graph const& G, BasicNode& n, EdgeStd& edges) {
 
     std::vector<Node> visited;
     auto tree = Node(n.m_source, 1);
@@ -117,8 +161,8 @@ void SSSP(Graph const &G,
         level = curr.level + 1;
 
         auto neighbors = boost::adjacent_vertices((curr.value), G);
-        for (auto n : make_iterator_range(neighbors)) {
-            auto node = Node(n, level);
+        for (auto nNode : make_iterator_range(neighbors)) {
+            auto node = Node(nNode, level);
 
             int loc; // Iterator
             bool isFound = false;
@@ -161,9 +205,9 @@ void SSSP(Graph const &G,
     // Step 3 = Edge Labelling
 
     // Iterate Over All Root Node Children
-    std::map<std::tuple<int, int>, float> bet;
-    for (auto& cNode : tree.children) {
-//        edgeLabelling(cNode, tree, bet);
+    EdgeStd bet;
+    for (auto cNode : tree.children) {
+        edgeLabelling(cNode, tree, bet);
     }
 
     // Add Betweenness to Total Edges Dictionary
@@ -172,7 +216,7 @@ void SSSP(Graph const &G,
         // FIXME
     }
 
-    //    # Add the betweeness to the total edges dictionary
+    //    # Add the betweenness to the total edges dictionary
     //    for edge in bet.keys():
     //        try: # Does the edge exist?
     //            edges[edge] += bet[edge]/2
@@ -184,9 +228,9 @@ void SSSP(Graph const &G,
     //                edges[edge] = bet[edge]/2
 }
 
-std::map<std::tuple<int, int>, float> calculateBetweenness(Graph const &G) {
+EdgeStd calculateBetweenness(Graph const& G) {
 
-     std::map<std::tuple<int, int>, float> betweenness;
+     EdgeStd betweenness;
      auto edges = G.m_edges;
      shuffle(edges);
 
@@ -198,17 +242,36 @@ std::map<std::tuple<int, int>, float> calculateBetweenness(Graph const &G) {
 
 }
 
+// Use Neural Network to Find Q Value to
+// Stop Loop When Removing Edges From Graph
+
+// Inputs:
+// G = Our Graph
+// Outputs:
+// G = New Graph (Removed Edges
 Graph normalLoop(Graph const &G) {
 
+    // Iterate Until Q Value isn't Increasing
     int Q_prev = INT_MIN;
     int Q = INT_MIN;
     int* maxBetweenness = new int[0];
     int i = 1;
 
-    while (Q + 0.05 >= Q_prev) {
+    while (Q + 0.05 >= Q_prev) { // Update Q_prev Value
+
         Q_prev = Q;
+
+        // Calculate Betweenness of All Edges in Graph
         auto betweenness = calculateBetweenness(G);
+
+        // If Betweenness Empty, Break Loop
+        if (betweenness.empty()) break;
+
+        // FIXME
+
     }
+
+
 
 }
 
