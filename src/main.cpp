@@ -17,8 +17,9 @@
 #include <map>
 #include <list>
 
-// Adjacency List
+// Adjacency List and Node Definitions
 typedef boost::adjacency_list<boost::setS, boost::vecS, boost::undirectedS> Graph;
+typedef boost::list_edge<unsigned long, boost::no_property> BasicNode;
 
 class Node {
 
@@ -86,6 +87,10 @@ template < typename T > void shuffle( std::list<T>& lst )
     // swap the old list with the shuffled list
     lst.swap(shuffled_list) ;
 }
+
+//void edgeLabelling(node, parent, edges) {
+//
+//}
 
 // Inputs:
 // G = Our Graph
@@ -158,17 +163,15 @@ void SSSP(Graph const &G,
     // Iterate Over All Root Node Children
     std::map<std::tuple<int, int>, float> bet;
     for (auto& cNode : tree.children) {
-
+//        edgeLabelling(cNode, tree, bet);
     }
 
+    // Add Betweenness to Total Edges Dictionary
+    for (auto kvPair : bet) {
+        auto edge = kvPair.first;
+        // FIXME
+    }
 
-    //### Step 3 - edge labelling
-    //
-    //    # Iterate over all children of the root node
-    //    bet = dict()
-    //    for c in tree.children:
-    //        edgeLabelling(c, tree, bet)
-    //
     //    # Add the betweeness to the total edges dictionary
     //    for edge in bet.keys():
     //        try: # Does the edge exist?
