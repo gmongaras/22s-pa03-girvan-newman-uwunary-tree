@@ -369,15 +369,28 @@ Graph normalLoop(Graph& G) {
 
         // Remove all Max Edges from Graph
         auto es = boost::edges(G);
-        for (auto eit = es.first; eit != es.second; ++eit) {
-            for (auto edge : maxBetweenness) {
-                if (std::get<0>(edge) == boost::source(*eit, G) && std::get<1>(edge) == boost::target(*eit, G)) {
-                    boost::remove_edge(std::get<0>(edge), std::get<1>(edge), G);
-                }
-            }
+//        for (auto eit : make_iterator_range(es)) {
+////            auto source = eit.m_source;
+////            auto target = eit.m_target;
+////
+////            // Save the edge if the
+//            boost::remove_edge(eit.m_source, eit.m_target, G);
+//        }
+
+        for (auto b : maxBetweenness) {
+            boost::remove_edge(std::get<0>(b), std::get<1>(b), G);
         }
 
+//        for (auto eit = es.first; eit != es.second; ++eit) {
+//            for (auto edge : maxBetweenness) {
+//                if (std::get<0>(edge) == boost::source(*eit, G) && std::get<1>(edge) == boost::target(*eit, G)) {
+//                    boost::remove_edge(std::get<0>(edge), std::get<1>(edge), G);
+//                }
+//            }
+//        }
+
         std::cout << "Iters: " << i << ", Removes: " << maxBetweenness.size();
+        PrintGraph(G);
 
         // Compute the modularity (Q)
 
