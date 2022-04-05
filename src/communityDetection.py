@@ -18,13 +18,15 @@ import torch
 
 
 
-# Parameters
+# All Model Parameters
+mode = "NN"                         # More to evaluate the Q value, use NN for neural network
+                                    # and "GN" (or anything else) for normal Q function.
+commName = "community"              # The name of the community label in the graphml file
+
+# Girvan Newman Parameters
 inFile = "../data/dataset.graphml"  # The datafile to load in
 nodeSubsetPercent = 0.8             # Number of random nodes to pick in the betweeness algorithm
 betThreshold = 4                    # Threshold betweeness value to remove
-mode = "NN"                         # More to evaluate the Q value, use NN for neural network
-                                    # and "Normal" (or anything else) for normal Q function.
-commName = "community"              # The name of the community label in the graphml file
 
 # Neural Network Parameters
 configFileName = "./networkParams.yml"  # The configuration file for the model
