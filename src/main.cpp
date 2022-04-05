@@ -380,15 +380,15 @@ Graph normalLoop(Graph& G) {
 
         // Compute the modularity (Q)
 
-        // Iterate over Nodes in Old Graph (OG)
         float sum1 = 0;
         float sum2 = 0;
 
+        // Iterate over Nodes in Old Graph (OG)
         IndexMap indexOld = get(boost::vertex_index, OG);
         for (auto nOld = vertices(OG); nOld.first != nOld.second; ++nOld.first) {
             auto nOldNeighbors = boost::adjacent_vertices(indexOld[*nOld.first], OG);
 
-            // Number of Neighbors to N
+            // Number of Neighbors to nOld
             int oldNeighborAmount = 0;
             for (auto noVal : make_iterator_range(nOldNeighbors)) { ++oldNeighborAmount; }
 
@@ -399,25 +399,26 @@ Graph normalLoop(Graph& G) {
             // Iterate over Nodes in New Graph (G)
             IndexMap indexNew = get(boost::vertex_index, G);
             for (auto nNew = vertices(G); nNew.first != nNew.second; ++nNew.first) {
-                auto nNewNeighbors = boost::adjacent_vertices(indexOld[*nNew.first], G);
+                auto nNewNeighbors = boost::adjacent_vertices(indexNew[*nNew.first], G);
 
-                // Calculate B Value
+                // Number of Neighbors to nNew
                 int newNeighborAmount = 0;
                 for (auto noVal : make_iterator_range(nNewNeighbors)) { ++newNeighborAmount; }
 
                 // Find Number of Edges Between Old and New
-                int amountCross = 0;
-                for (auto oldNode : make_iterator_range(nOldNeighbors)) {
-                    for (auto newNode : make_iterator_range(nNewNeighbors)) {
-                        if (oldNode == newNode) {
-                            amountCross++;
-                        }
+                int amountBet = 0;
+                for (auto adjNeighbor : make_iterator_range(nOldNeighbors)) {
+                    if (adjNeighbor == indexNew[*nNew.first]) {
+                        amountBet = 1;
                     }
                 }
 
                 // Getting B
-                auto B = amountCross - (oldNeighborAmount * newNeighborAmount) / (numEdges * 2);
+                auto B = amountBet - (oldNeighborAmount * newNeighborAmount) / (numEdges * 2);
 
+                // FIXME
+
+                // # Calculate the s value (s_i * s_j) + 1 (396)
             }
 
         }
