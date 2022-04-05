@@ -1,51 +1,18 @@
 from importlib.abc import Loader
 import yaml
+import torch
 from torch import nn
 import numpy as np
 import os
+from model import network
 
 
 # Parameters
 configFileName = "./networkParams.yml"
 dataDir = "../networkTrainData"
 numEpochs = 1000
-
-
-
-
-class network(nn.Module):
-    # Initialize the network
-    # Inputs:
-    #   inDim - The size of the dimension to encode
-    #   EncoderInfo - Info on the encoder network
-    #   DecoderInfo - Info on th decoder network
-    def __init__(self, inDim, EncoderInfo, DecoderInfo):
-        super(network, self).__init__()
-        
-        # Save the information
-        self.inDim = inDim
-        self.Encoder_layers = [inDim] + EncoderInfo["layerNodes"]
-        self.Encoder_activation = EncoderInfo["activation"]
-        self.Decoder_layers = DecoderInfo["layerNodes"] + [inDim]
-        self.Decoder_activation = DecoderInfo["activation"]
-        
-        # Create the Encoder
-        layers = []
-        for l in range(0, len(self.Encoder_layers)-1):
-            layers.append(nn.Linear(self.Encoder_layers[l], self.Encoder_layers[l+1]))
-        self.Encoder = nn.Sequential(*layers)
-        
-        # Create the Decoder
-        layers = []
-        for l in range(0, len(self.Decoder_layers)-1):
-            layers.append(nn.Linear(self.Decoder_layers[l], self.Decoder_layers[l+1]))
-        self.Decoder = nn.Sequential(*layers)
-    
-    
-    
-    # Get a prediction from the network
-    def forward():
-        print()
+trainPercent = 0.9
+saveFileName = "../models/model"
 
 
 
@@ -61,7 +28,7 @@ EncoderInfo = cfg["Encoder"]
 DecoderInfo = cfg["Decoder"]
 
 
-# Create the networks
+# Create the network
 Network = network(inDim, EncoderInfo, DecoderInfo)
 
 
@@ -78,7 +45,29 @@ for fileName in os.listdir(dataDir):
 data = np.array(data)
 
 
+# Create a test/train split of the data
+trainSize = int(len(data)*trainPercent)
+testSize = len(data) - trainSize
+np.random.shuffle(data)
+train = torch.tensor(data[0:trainSize], dtype=torch.float32, requires_grad=False)
+test = torch.tensor(data[trainSize:testSize], dtype=torch.float32, requires_grad=False)
+
 
 # Train the network for numEpochs number of epochs
 for epoch in range(1, numEpochs+1):
-    print()
+    # Get predictions from the model
+    H, M = Network(train)
+    
+    # Get the loss for the predictions
+    loss = -Network.loss(train, M)
+    
+    # Get the gradients
+    Network.optim.zero_grad()
+    loss.backward()
+    
+    # Update the model
+    Network.optim.step()
+    print(f"Step: {epoch} \t Loss: {loss.cpu().detach().numpy().item()}")
+
+# Save the model
+Network.saveModel(saveFileName)

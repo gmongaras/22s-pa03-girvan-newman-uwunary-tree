@@ -8,17 +8,28 @@ import math
 import random
 import matplotlib.pyplot as plt
 
+# Machine Learning
+from model import network
+from sklearn.cluster import KMeans
+import yaml
+import torch
+
 
 
 
 
 # Parameters
-inFile = "../data/dataset4.graphml"  # The datafile to load in
+inFile = "../data/dataset.graphml"  # The datafile to load in
 nodeSubsetPercent = 0.8             # Number of random nodes to pick in the betweeness algorithm
 betThreshold = 4                    # Threshold betweeness value to remove
 mode = "NN"                         # More to evaluate the Q value, use NN for neural network
                                     # and "Normal" (or anything else) for normal Q function.
 commName = "community"              # The name of the community label in the graphml file
+
+# Neural Network Parameters
+configFileName = "./networkParams.yml"  # The configuration file for the model
+modelFileName = "../models/model"       # The saved model to load in
+numClasses = 4                          # Number of classes to predict
     
     
     
@@ -398,111 +409,92 @@ def normalLoop(G):
 
 
 
-# Use a neural network to find the Q value to stop the loop when removing
-# edges from the graph
+# Use a neural network to get the communities from the graph
 # Inputs:
 #   G - The graph to remove edges from
 # Outputs:
-#   G - New graph with edges removed
-def normalLoop(G):
-    # Iterate until the Q value is no longer increasing
-    Q_prev = -np.inf
-    Q = -np.inf
-    maxBetweeness = [0]
-    iter = 1
-    while (Q+0.05 >= Q_prev):#len(G.edges) and len(maxBetweeness) > 0):
-        # Update the Q_prev value
-        Q_prev = Q
-        
-        # Calculate the betweeness of all edges in the graph
-        betweeness = calculateBetweeness(G)
-        
-        # If the betweeness is empty, break the loop
-        if len(betweeness.keys()) == 0:
-            break
-        
-        # Get the edges with the max betweeness
-        a = list(betweeness.values())[np.argmax(np.array(list(betweeness.values()), dtype=np.float16))]
-        maxBetweeness = np.argwhere(np.array(list(betweeness.values()), dtype=np.float16) >= a/2)
-        #maxBetweeness = np.argwhere(np.array(list(betweeness.values()), dtype=np.float16) == list(betweeness.values())[np.argmax(np.array(list(betweeness.values()), dtype=np.float16))])
-        #maxBetweeness = np.argwhere(np.array(list(betweeness.values()), dtype=np.float16) >= list(betweeness.values())[np.argmax(np.array(list(betweeness.values()), dtype=np.float16))]-(math.log2(len(list(G.edges)))))
-        #maxBetweeness = np.argwhere(np.array(list(betweeness.values()), dtype=np.float16) >= 3*math.log2(len(list(G.edges))))
-        
-        # Store the number of edges before removing any edges (m)
-        m = len(list(G.edges))
-        
-        # Store the old graph
-        oldG = G.copy()
-        
-        # Remove all max edges from the graph
-        for edge in maxBetweeness:
-            e = list(betweeness.keys())[edge.item()]
-            G.remove_edge(e[0], e[1])
-        
-        print(f"Iters: {iter},  Removes: {len(maxBetweeness)}")
-        
-        
-        
-        
-        
-        ### Compute the modularity (Q)
-        # https://www.pnas.org/doi/full/10.1073/pnas.0601602103#FD3
-        
-        # - B_ij = (A_ij - (k_i-k_j)/2m)
-        #    - A_ij = Number of edges between node i and j
-        #    - k_i = degree of node i
-        #    - k_j = degree of node j
-        #    - m = number of edges in the old graph
-        # - s_i * s_j = 1 if i and j are in the same group, -1 otherwise
-        # - sum1 = The first summation
-        #    - sum_ij[ B_ij*(s_i*s_j +1) ]
-        # - sum2 = The second summation
-        #    - sum_ij[ B_ij ]
-        
-        # Iterate over all nodes in the old graph (i)
-        sum1 = 0
-        sum2 = 0
-        for i in list(oldG.nodes):
-            neighbors_i = list(G.neighbors(i))
-            k_i = len(neighbors_i)
-            
-            comm = []
-            findCommunities(G, i, comm)
-            
-            # Iterate over all nodes in the new graph (j)
-            for j in list(G.nodes):
-                # Calculate the B value
-                neighbors_j = list(G.neighbors(j))
-                k_j = len(neighbors_j)
-                #A_ij = 1 if ((i, j) in G.edges or (j, i) in G.edges) else 0
-                A_ij = len(list(set(neighbors_i) & set(neighbors_j)))
-                
-                B = A_ij - (k_i*k_j)/(2*m)
-                
-                
-                # Calculate the s value (s_i * s_j) + 1
-                s = 1 if j in comm else -1
-                s += 1
-                
-                # Compute the B values to be summed
-                B_1 = B*s
-                B_2 = B
-                
-                # Store the B values
-                sum1 += B_1
-                sum2 += B_2
-        
-        # Compute the final Q value
-        Q = (1/(2*m))*(0.5*sum1 - sum2)
-        
-        print(f"Iter {iter} Modularity: {Q}")
-        iter += 1
+#   comm - The calssified nodes in the graph
+def neuralNetworkLoop(G):
+    # Load the configuration file
+    with open(configFileName) as ymlFile:
+        cfg = yaml.safe_load(ymlFile)
+
+    # Save the info from the file
+    inDim = cfg["inDim"]
+    EncoderInfo = cfg["Encoder"]
+    DecoderInfo = cfg["Decoder"]
+
+    # Create the network
+    model = network(inDim, EncoderInfo, DecoderInfo)
     
-    # We want the graph from the itertion before the last since the last
-    # iteration ended with a lower Q score
-    G = oldG
+    # Load in the model
+    model.loadModel(modelFileName)
     
-    return G
+    
+    
+    
+    
+    ### Compute the B value
+    # - B_ij = (A - (k_i-k_j)/2m)
+    #    - A_ij = Number of edges between node i and j
+    #    - k_i = degree of node i
+    #    - k_j = degree of node j
+    #    - m = number of edges in the old graph
+    
+    # The B matrix
+    B_ij = []
+    
+    # Calculate the m value
+    m = len(list(G.edges))
+    
+    # Get the list of nodes
+    nodes = list(G.nodes)
+    
+    # Iterate over all nodes in the old graph (i)
+    for i in nodes:
+        neighbors_i = list(G.neighbors(i))
+        k_i = len(neighbors_i)
+        
+        # B vector for node i
+        B_i = []
+        
+        # Iterate over all nodes in the new graph (j)
+        for j in nodes:
+            # Calculate the B value
+            neighbors_j = list(G.neighbors(j))
+            k_j = len(neighbors_j)
+            #A_ij = 1 if ((i, j) in G.edges or (j, i) in G.edges) else 0
+            A_ij = len(list(set(neighbors_i) & set(neighbors_j)))
+            
+            B = A_ij - (k_i*k_j)/(2*m)
+        
+            # Add the value to the B vector
+            B_i.append(B)
+        
+        # Add the vector to the B matrix
+        B_ij.append(B_i)
+    
+    
+    
+    
+    # Get the prediction from the model on the B value
+    H, M = model(torch.tensor(B_ij))
+    H = H.cpu().detach().numpy()
+    
+    # Classify the nodes
+    classes = KMeans(n_clusters=numClasses).fit(H).labels_
+    
+    # Classify each node
+    comm = {i:[] for i in range(0, numClasses)}
+    for i in range(0, len(classes)):
+        comm[classes[i]].append(nodes[i])
+        
+    # Create a list from the dictionary
+    comm = [i for i in comm.values()]
+    
+    
+    # Return the classified nodes
+    return comm
 
 
 
@@ -567,27 +559,30 @@ def main():
     orig = G.copy()
     
     # Remove edges from the graph to get the communities
-    G = normalLoop(G)
+    if mode == "NN":
+        comm = neuralNetworkLoop(G)
+    else:
+        G = normalLoop(G)
         
-    # Iterate over all nodes and find the communities
-    comm = []           # The communities found
-    totalVisited = []   # The total visited nodes
-    for node in list(G.nodes):
-        # If the node has been visited, skip this iteration
-        if node in totalVisited:
-            continue
-    
-        visited = []    # The nodes that were visited already
-        findCommunities(G, node, visited)
+        # Iterate over all nodes and find the communities
+        comm = []           # The communities found
+        totalVisited = []   # The total visited nodes
+        for node in list(G.nodes):
+            # If the node has been visited, skip this iteration
+            if node in totalVisited:
+                continue
         
-        # Add the visited nodes to the communities
-        if len(visited) != 0:
-            comm.append(visited)
-        else:
-            comm.append([node])
-        
-        # Add the visited nodes to the total visited nodes
-        totalVisited += visited
+            visited = []    # The nodes that were visited already
+            findCommunities(G, node, visited)
+            
+            # Add the visited nodes to the communities
+            if len(visited) != 0:
+                comm.append(visited)
+            else:
+                comm.append([node])
+            
+            # Add the visited nodes to the total visited nodes
+            totalVisited += visited
     
     ### Graphing
     
@@ -632,7 +627,7 @@ def main():
             print(v, end=", ")
         print(comm[c][-1])
         
-    # Get the communiteis fro each node
+    # Get the communities for each node
     y_communities = dict()
     for n in orig._node.keys():
         try:

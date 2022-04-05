@@ -50,9 +50,7 @@ for g in range(0, numGraphs):
     
     
     
-    ### Compute the modularity (Q)
-    # https://www.pnas.org/doi/full/10.1073/pnas.0601602103#FD3
-    
+    ### Compute the B value
     # - B_ij = (A - (k_i-k_j)/2m)
     #    - A_ij = Number of edges between node i and j
     #    - k_i = degree of node i
