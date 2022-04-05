@@ -12,7 +12,8 @@
 #include <map>
 
 // Adjacency List, Basic Node, Standard Edge Definitions
-typedef boost::adjacency_list<boost::vecS, boost::vecS, boost::undirectedS> Graph;
+struct VertexProperty { long value; }; // Vertex ID (Community Number)
+typedef boost::adjacency_list<boost::vecS, boost::vecS, boost::undirectedS, VertexProperty> Graph;
 typedef boost::property_map<Graph, boost::vertex_index_t>::type IndexMap;
 typedef std::map<std::tuple<unsigned long, unsigned long>, float> EdgeStd;
 
@@ -58,6 +59,7 @@ public:
 void PrintGraph(Graph& G) {
     std::cout << "Vertex Amount: " << num_vertices(G) << "\n";
     std::cout << "Edge Amount: " << num_edges(G) << "\n";
+    boost::print_graph(G, boost::get(&VertexProperty::value, G), std::cout);
     auto es = boost::edges(G);
     for (auto eit = es.first; eit != es.second; ++eit) {
         std::cout << boost::source(*eit, G) << ' ' << boost::target(*eit, G) << std::endl;
@@ -68,6 +70,7 @@ void PrintGraph(Graph& G) {
 Graph ReadGraph(std::ifstream& I) {
     Graph G; // Creates Return Variable
     boost::dynamic_properties D(boost::ignore_other_properties); // Dynamic Properties
+    D.property("value", boost::get(&VertexProperty::value, G)); // Vertex ID Getter
     boost::read_graphml(I, G, D); // Read In Program Argument Graphml
     return G; // Return Variable
 }
