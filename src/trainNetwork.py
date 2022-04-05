@@ -8,11 +8,11 @@ from model import network
 
 
 # Parameters
-configFileName = "./networkParams.yml"
-dataDir = "../networkTrainData"
-numEpochs = 1000
-trainPercent = 0.9
-saveFileName = "../models/model"
+configFileName = "./networkParams.yml"  # The configuration file for the network
+dataDir = "../networkTrainData"         # The directory that stores the data to train the mode
+numEpochs = 1000                        # Number of epochs to train the model for
+trainPercent = 0.9                      # Percent of data to trian model on
+saveFileName = "../models/model"        # The file to save the model to
 
 
 
