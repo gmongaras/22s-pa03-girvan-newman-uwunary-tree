@@ -378,6 +378,23 @@ Graph normalLoop(Graph& G) {
 
         std::cout << "Iters: " << i << ", Removes: " << maxBetweenness.size();
 
+        // Compute the modularity (Q)
+
+        // Iterate over Nodes in Old Graph (OG)
+        float sum1 = 0;
+        float sum2 = 0;
+
+        IndexMap index = get(boost::vertex_index, OG);
+        for (auto n = vertices(OG); n.first != n.second; ++n.first) {
+            auto nNeighbors = boost::adjacent_vertices(index[*n.first], OG);
+
+            // Number of Neighbors to N
+            int neighborAmount = 0;
+            for (auto nNode : make_iterator_range(nNeighbors)) { ++neighborAmount; }
+        }
+
+
+
     }
 
 
