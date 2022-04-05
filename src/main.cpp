@@ -299,6 +299,27 @@ EdgeStd calculateBetweenness(Graph const& G) {
 
 }
 
+// Input:
+// G = Our Graph
+// Node = Specified Node
+// Visited = Already Visited Nodes
+void findCommunities(Graph const& G, unsigned long node, std::vector<unsigned long> visited) {
+
+    // Iterate over all Adjacent Nodes and Add Them to Visited Nodes
+    auto neighbors = boost::adjacent_vertices(node, G);
+    for (auto nNode : make_iterator_range(neighbors)) {
+
+        // If Node hasn't been Visited, Add to Community and Visit Neighbors
+        bool isFound = false;
+        for (auto vNode : visited) {
+            if (node == vNode) { isFound = true; } }
+        if (!isFound) {
+            visited.push_back(nNode);
+            findCommunities(G, nNode, visited);
+        }
+    }
+}
+
 // Use the Normal Q value to
 // Stop Loop when Removing
 
@@ -311,8 +332,8 @@ Graph normalLoop(Graph const &G) {
     // Iterate Until Q Value isn't Increasing
     int Q_prev = INT_MIN;
     int Q = INT_MIN;
-    int* maxBetweenness = new int[0];
     int i = 1;
+    auto maxBetweenness = new int[0];
 
     while (Q + 0.05 >= Q_prev) { // Update Q_prev Value
 
@@ -322,13 +343,24 @@ Graph normalLoop(Graph const &G) {
         auto betweenness = calculateBetweenness(G);
 
         // If Betweenness Empty, Break Loop
-        if (betweenness.empty()) break;
+        if (betweenness.empty()) { break; }
+
+        // Get Edges with Max Betweenness
+//        auto a = std::list(betweenness.)
+        // Betweenness map, 2nd val is betweenness
 
         // FIXME
+
+        for (auto kvPair : betweenness) {
+            auto edge = kvPair.second;
+        }
+
 
     }
 
 
+
+    return G;
 
 }
 
@@ -336,10 +368,20 @@ Graph normalLoop(Graph const &G) {
 // Argument Example: data/football/football.graphml
 int main(int argc, char* argv[]) {
     if (argc >= 2) {
+
+        // Read in Graph
         std::ifstream I(argv[1]);
         Graph G = ReadGraph(I);
 
+        // Remove Edges from Graph to get Communities
         G = normalLoop(G);
+
+        // Iterate over Nodes and Find Communities
+//        std::vector<> communities;
+
+    }
+
+}
 
 //        boost::queue<vertex_descriptor> Q;
 //        boost::default_bfs_visitor V;
@@ -357,11 +399,11 @@ int main(int argc, char* argv[]) {
 //        for (auto vd : boost::make_iterator_range(vertices(G))) {
 //            boost::breadth_first_search(G, vd, Q, V, color_map); // Time Complexity: O(E + V)
 //        }
-    }
-    else {
-        Py_Initialize(); // Initialize Environment
+//    }
+//else {
+//Py_Initialize(); // Initialize Environment
 //        PyRun_SimpleString("import sys"); // Call Import
 //        PyRun_SimpleString("sys.path.append('/src/dataGenerator.py')"); // Can't Get it to work!
-        Py_Finalize(); // End Environment
-    }
-}
+//Py_Finalize(); // End Environment
+//}
+
