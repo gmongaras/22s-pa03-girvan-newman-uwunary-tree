@@ -11,7 +11,6 @@
 #include <boost/graph/graphml.hpp>
 #include <boost/property_map/dynamic_property_map.hpp>
 #include <boost/graph/copy.hpp>
-#include <boost/graph/subgraph.hpp>
 
 // Standard Includes
 #include <Python.h>
