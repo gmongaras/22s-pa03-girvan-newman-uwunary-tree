@@ -10,6 +10,8 @@
 #include <boost/graph/graph_utility.hpp>
 #include <boost/graph/graphml.hpp>
 #include <boost/property_map/dynamic_property_map.hpp>
+#include <boost/graph/copy.hpp>
+#include <boost/graph/subgraph.hpp>
 
 // Standard Includes
 #include <Python.h>
@@ -374,7 +376,12 @@ int main(int argc, char* argv[]) {
         Graph G = ReadGraph(I);
 
         // Remove Edges from Graph to get Communities
-        G = normalLoop(G);
+//        G = normalLoop(G);
+
+        // Copy Graph
+//        Graph OG;
+//        boost::copy_graph(G, OG);
+//        PrintGraph(OG);
 
         // Iterate over Nodes and Find Communities
 //        std::vector<> communities;
