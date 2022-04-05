@@ -1,9 +1,3 @@
-// Some Useful Links:
-// https://stackoverflow.com/questions/58974799/how-can-i-solve-this-error-in-printing-nodes-and-edges-boost-graph-library
-// https://stackoverflow.com/questions/49047897/boost-read-graphml-doesnt-read-xml-properly-it-gives-all-the-vertices-but-they
-// https://www.codeproject.com/Articles/820116/Embedding-Python-program-in-a-C-Cplusplus-code (Python Embedding)
-// https://stackoverflow.com/questions/16962430/calling-python-script-from-c-and-using-its-output (Python Embedding)
-
 // Boost Includes
 #include <boost/graph/adjacency_list.hpp>
 #include <boost/graph/graph_utility.hpp>
@@ -185,6 +179,8 @@ void SSSP(Graph& G, unsigned long n, EdgeStd& edges) {
 
     // Visited nodes, Tree Initialization
     std::vector<Node*> visited;
+    std::vector<Node*> deleteHelper;
+    std::vector<Node*> deleteHelperSmall;
     Node* tree = new Node(n, 1);
 
     // Step 1, 2 = BFS, Node Labelling
@@ -193,6 +189,7 @@ void SSSP(Graph& G, unsigned long n, EdgeStd& edges) {
     std::stack<Node*> s;
     s.push(tree);
     visited.push_back(tree);
+    deleteHelperSmall.push_back(tree);
 
     // Current Level of Tree
     int level;
@@ -211,6 +208,7 @@ void SSSP(Graph& G, unsigned long n, EdgeStd& edges) {
         auto neighbors = boost::adjacent_vertices((curr->value), G);
         for (auto nNode : make_iterator_range(neighbors)) {
             Node* node = new Node(nNode, level);
+            deleteHelper.push_back(node);
 
             int loc; // Iterator
             bool isFound = false;
@@ -276,12 +274,17 @@ void SSSP(Graph& G, unsigned long n, EdgeStd& edges) {
         else { edges[edge] = bet[edge] / 2; }
 
     }
+
+    // Delete All Nodes (Dynamic Memory)
+    for (auto dNode : deleteHelper) { delete dNode; }
+    for (auto dNode : deleteHelperSmall) { delete dNode; }
+
 }
 
 // Inputs:
 // G = Our Graph
 // Output
-// Edges - The Betweenness of all Edges
+// Edges = The Betweenness of all Edges
 EdgeStd calculateBetweenness(Graph& G) {
 
     // The Betweenness of Graph
@@ -309,9 +312,6 @@ void findCommunities(Graph& G, unsigned long node, std::vector<unsigned long>& v
     for (auto nNode : make_iterator_range(neighbors)) {
 
         // If Node hasn't been Visited, Add to Community and Visit Neighbors
-        //bool isFound = false;
-        //for (auto vNode : visited) {
-        //    if (node == vNode) { isFound = true; } }
         bool isFound = false;
         for (auto vNode : visited) {
             if (nNode == vNode) {
@@ -332,7 +332,7 @@ void findCommunities(Graph& G, unsigned long node, std::vector<unsigned long>& v
 // Inputs:
 // G = Our Graph
 // Outputs:
-// G = New Graph (Removed Edges
+// G = New Graph (Removed Edges)
 Graph normalLoop(Graph& G) {
 
     // Iterate Until Q Value isn't Increasing
@@ -344,7 +344,8 @@ Graph normalLoop(Graph& G) {
     // Graph copy
     Graph OG;
 
-    while (Q + 0.05 >= Q_prev) { // Update Q_prev Value
+    // Update Q_prev Value
+    while (Q + 0.05 >= Q_prev) {
 
         Q_prev = Q;
 
@@ -470,7 +471,6 @@ int main(int argc, char* argv[]) {
 
         // Remove Edges from Graph to get Communities
         G = normalLoop(G);
-
 
         // Iterate over Nodes and Find Communities
 //        std::vector<> communities;
