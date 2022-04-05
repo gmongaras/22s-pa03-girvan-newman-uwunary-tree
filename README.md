@@ -159,12 +159,70 @@ Decoder:
 
 ## Network Training
 
-trainNetwork.py
+To make predictions on the classes in the graph, first the model has to be trained.
+
+<b>Notes:</b>
+- The neural network has a set input size which is the number of nodes in the graph. So, the data it is trained on must also have the same number of nodes.
+- Our pretrained models were trained on 128 nodes, meaning the data also had 128 nodes. To use a graph with a different number of nodes, new data will have to be generated using that number of nodes. Instructions to generate new data can be found in the [Network Data Generation](https://github.com/smu-cs-3353/22s-pa03-girvan-newman-uwunary-tree/edit/main/README.md#network-data-generation) section.
+
+<b>configFileName</b> - The yaml configuration file name used to configue the neural network
+- Example: In this repo, the default file name is ```"./networkParams.yml"```
+- For more information on the configuration file, go to [the following section](https://github.com/smu-cs-3353/22s-pa03-girvan-newman-uwunary-tree/edit/main/README.md#network-configuration)
+
+<b>dataDir</b> - Directory in which the data to train the model can be found
+- In this repo, the default directory is `networkTrainData/`
+
+<b>numEpochs</b> - The number of epochs to train the model
+- The higher this value, the longer the model will train for, but that does not necessarly mean it will be better.
+  
+<b>trainPercent</b> - The percent of data to train the model on.
+- Values can between (0, 1]
+
+<b>saveFileName</b> - The file to save the model to when the model is finished training
 
 
-## GML To GraphML Conversion
+## Network Data Generation
 
-gml_to_graphml.py
+The network needs a significant amount of data in order to learn useful representations of the data. The data we need is a matrix which has the following dimesnions:
+
+  (NxN) where N is the number of nodes in the graph (numNodes)
+  
+The data is called a modularity matrix which is represented as B_ij and can be obtained from the following formula:
+
+<p align="center">
+<img src="https://render.githubusercontent.com/render/math?math=\color{white}\Large\B_{ij} = A_{ij} - \frac{k_i k_j}{2m}"></br>
+</p>
+- A_ij - Number of edges between node i and j (usually 0 or 1)</br>
+- k_i - Degree of node i</br>
+- k_j - Degree of node j</br>
+- m - Number of edges in the old graph</br>
+</br>
+Fotunately, the input and output to the network is the same, so we only need to worry about generating these matricies for both the input and output to the network.
+
+
+Parameters:
+- <b>dirName</b> - The name of the directory to save the data arrays to
+- <b>numNodes</b> - The number of nodes in the graph
+- <b>percentFunc</b> - Function to get a random number between the two numbers in random.uniform. These values should be between 0 and 1
+- <b>numGraphs</b> - Number of graphs to generate. This value is also the number of data arrays to generate.
+
+
+
+### Network Configuration
+
+The network configuration can be found in the `networkParams.yml` file. This file is written using the yaml style with the following parts:
+- inDim: The size of input into the neural network (this value is the same as the number of nodes in the graph)
+- Encoder: Information on the encoder network
+  - layerNodes: Array storing the size of each layer in the encoder network.
+    - Example: [1024,512,128]</br>
+      In this case, the encoder would have three layers with 1024 nodes in the first layer, 512 in the second, and 128 in the third.
+  - activation: The activation function for the encoder network (Can be one of the following: "ReLU", "Sigmoid", "Tanh")
+- Decoder: Information on the decoder network
+  - layerNodes: Array storing the size of each layer in the decoder network.
+    - Example: [128,512,1024]</br>
+      In this case, the decoder would have three layers with 128 nodes in the first layer, 512 in the second, and 1024 in the third.
+    - Note: This value should probably be the reverse of the encoder layerNodes value
+  - activation: The activation function for the decoder network (Can be one of the following: "ReLU", "Sigmoid", "Tanh")
 
 
 ## Data Generation
@@ -172,12 +230,8 @@ gml_to_graphml.py
 dataGeneration.py
 
 
-## Network Data Generation
+## GML To GraphML Conversion
 
-networkDataGeneration.py
-
-### Network Configuration
-
-;
+gml_to_graphml.py
 
 
