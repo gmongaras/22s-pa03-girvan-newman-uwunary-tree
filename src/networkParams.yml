@@ -1,7 +1,7 @@
 inDim: 128
 Encoder:
-    layerNodes: [128,64,32]
+    layerNodes: [128,64]
     activation: "ReLU"
 Decoder:
-    layerNodes: [32,64,128]
+    layerNodes: [64,128]
     activation: "ReLU"
