@@ -6,7 +6,6 @@
 
 // Boost Includes
 #include <boost/graph/adjacency_list.hpp>
-#include <boost/graph/subgraph.hpp>
 #include <boost/graph/graph_utility.hpp>
 #include <boost/graph/graphml.hpp>
 #include <boost/property_map/dynamic_property_map.hpp>
@@ -18,19 +17,18 @@
 #include <random>
 #include <string>
 #include <map>
-#include <list>
 
 // Adjacency List, Basic Node, Standard Edge Definitions
-typedef boost::adjacency_list<boost::setS, boost::vecS, boost::undirectedS> Graph;
+typedef boost::adjacency_list<boost::vecS, boost::vecS, boost::undirectedS> Graph;
 typedef boost::property_map<Graph, boost::vertex_index_t>::type IndexMap;
-typedef std::map<std::tuple<float, float>, float> EdgeStd;
+typedef std::map<std::tuple<unsigned long, unsigned long>, float> EdgeStd;
 
 // Nowode Class! OwO :)
 class Node {
 
 public:
     int level; // Level of Node
-    float value; // Value Stored Within Node
+    unsigned long value; // Value Stored Within Node
     float shortestPaths = 1; // Number of Shortest Paths that can Reach this Node from Root
     std::vector<Node> children; // Children of Node
     std::vector<Node> parents; // Parents of Node
@@ -38,7 +36,7 @@ public:
     bool labelled = false; // Has Node Been Visited in BFS?
 
     // Constructor, Must be Called
-    Node(float value, int level) {
+    Node(unsigned long value, int level) {
         this->value = value;
         this->level = level;
     }
@@ -64,7 +62,7 @@ public:
 };
 
 // Prints Important Information
-void PrintGraph(Graph const& G) {
+void PrintGraph(Graph& G) {
     std::cout << "Vertex Amount: " << num_vertices(G) << "\n";
     std::cout << "Edge Amount: " << num_edges(G) << "\n";
     auto es = boost::edges(G);
@@ -184,7 +182,7 @@ void edgeLabelling(Node& node, Node& parent, EdgeStd& edges) {
 // edges = Dictionary of Edges
 // Outputs:
 // None (Edges Changed Within Function)
-void SSSP(Graph const& G, unsigned long n, EdgeStd& edges) {
+void SSSP(Graph& G, unsigned long n, EdgeStd& edges) {
 
     // Visited nodes, Tree Initialization
     std::vector<Node> visited;
@@ -198,7 +196,7 @@ void SSSP(Graph const& G, unsigned long n, EdgeStd& edges) {
     visited.push_back(tree);
 
     // Current Level of Tree
-    int level = 1;
+    int level;
 
     // Iterate Until Empty Stack
     while (!s.empty()) {
@@ -285,7 +283,7 @@ void SSSP(Graph const& G, unsigned long n, EdgeStd& edges) {
 // G = Our Graph
 // Output
 // Edges - The Betweenness of all Edges
-EdgeStd calculateBetweenness(Graph const& G) {
+EdgeStd calculateBetweenness(Graph& G) {
 
     // The Betweenness of Graph
     EdgeStd betweenness;
@@ -304,7 +302,7 @@ EdgeStd calculateBetweenness(Graph const& G) {
 // G = Our Graph
 // Node = Specified Node
 // Visited = Already Visited Nodes
-void findCommunities(Graph const& G, unsigned long node, std::vector<unsigned long> visited) {
+void findCommunities(Graph& G, unsigned long node, std::vector<unsigned long> visited) {
 
     // Iterate over all Adjacent Nodes and Add Them to Visited Nodes
     auto neighbors = boost::adjacent_vertices(node, G);
@@ -328,13 +326,13 @@ void findCommunities(Graph const& G, unsigned long node, std::vector<unsigned lo
 // G = Our Graph
 // Outputs:
 // G = New Graph (Removed Edges
-Graph normalLoop(Graph const &G) {
+Graph normalLoop(Graph& G) {
 
     // Iterate Until Q Value isn't Increasing
     int Q_prev = INT_MIN;
     int Q = INT_MIN;
     int i = 1;
-    auto maxBetweenness = new int[0];
+    std::vector<std::tuple<unsigned long, unsigned long>> maxBetweenness;
 
     while (Q + 0.05 >= Q_prev) { // Update Q_prev Value
 
@@ -346,16 +344,39 @@ Graph normalLoop(Graph const &G) {
         // If Betweenness Empty, Break Loop
         if (betweenness.empty()) { break; }
 
-        // Get Edges with Max Betweenness
-//        auto a = std::list(betweenness.)
-        // Betweenness map, 2nd val is betweenness
-
-        // FIXME
-
+        // Get Max Betweenness
+        float maxBet = -1;
         for (auto kvPair : betweenness) {
-            auto edge = kvPair.second;
+            if (kvPair.second > maxBet) {
+                maxBet = kvPair.second;
+            }
         }
 
+        // Find Edges with Greater Betweenness
+        for (auto kvPair : betweenness) {
+            if (kvPair.second >= maxBet / 2) {
+                maxBetweenness.emplace_back(kvPair.first);
+            }
+        }
+
+        // Store Number of Edges Before Removing
+        auto numEdges = betweenness.size();
+
+        // Copy Graph
+        Graph OG;
+        boost::copy_graph(G, OG);
+
+        // Remove all Max Edges from Graph
+        auto es = boost::edges(G);
+        for (auto eit = es.first; eit != es.second; ++eit) {
+            for (auto edge : maxBetweenness) {
+                if (std::get<0>(edge) == boost::source(*eit, G) && std::get<1>(edge) == boost::target(*eit, G)) {
+                    boost::remove_edge(es, G);
+                }
+            }
+        }
+
+        std::cout << "Iters: " << i << ", Removes: " << maxBetweenness.size();
 
     }
 
@@ -374,13 +395,10 @@ int main(int argc, char* argv[]) {
         std::ifstream I(argv[1]);
         Graph G = ReadGraph(I);
 
-        // Remove Edges from Graph to get Communities
-//        G = normalLoop(G);
 
-        // Copy Graph
-//        Graph OG;
-//        boost::copy_graph(G, OG);
-//        PrintGraph(OG);
+        // Remove Edges from Graph to get Communities
+        G = normalLoop(G);
+
 
         // Iterate over Nodes and Find Communities
 //        std::vector<> communities;
