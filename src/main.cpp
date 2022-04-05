@@ -21,7 +21,7 @@
 
 // Adjacency List, Basic Node, Standard Edge Definitions
 typedef boost::adjacency_list<boost::setS, boost::vecS, boost::undirectedS> Graph;
-typedef boost::list_edge<unsigned long, boost::no_property> BasicNode;
+typedef boost::property_map<Graph, boost::vertex_index_t>::type IndexMap;
 typedef std::map<std::tuple<float, float>, float> EdgeStd;
 
 // Nowode Class! OwO :)
@@ -78,24 +78,6 @@ Graph ReadGraph(std::ifstream& I) {
     boost::dynamic_properties D(boost::ignore_other_properties); // Dynamic Properties
     boost::read_graphml(I, G, D); // Read In Program Argument Graphml
     return G; // Return Variable
-}
-
-// Shuffle List Contents
-template <typename T> void shuffle(std::list<T>& lst) {
-
-    // Create a vector of (wrapped) references to elements in the list
-    // http://en.cppreference.com/w/cpp/utility/functional/reference_wrapper
-    std::vector<std::reference_wrapper<const T>> vec(lst.begin(), lst.end());
-
-    // Shuffle (the references in) the vector
-    std::shuffle(vec.begin(), vec.end(), std::mt19937{std::random_device{}()});
-
-    // Copy the shuffled sequence into a new list
-    std::list<T> shuffled_list { vec.begin(), vec.end()};
-
-    // Swap the old list with the shuffled list
-    lst.swap(shuffled_list);
-
 }
 
 // Inputs:
@@ -197,15 +179,15 @@ void edgeLabelling(Node& node, Node& parent, EdgeStd& edges) {
 
 // Inputs:
 // G = Our Graph
-// n = Specific Node to find Paths
+// n = Index of Node to find Paths
 // edges = Dictionary of Edges
 // Outputs:
 // None (Edges Changed Within Function)
-void SSSP(Graph const& G, BasicNode& n, EdgeStd& edges) {
+void SSSP(Graph const& G, unsigned long n, EdgeStd& edges) {
 
     // Visited nodes, Tree Initialization
     std::vector<Node> visited;
-    auto tree = Node(n.m_source, 1);
+    auto tree = Node(n, 1);
 
     // Step 1, 2 = BFS, Node Labelling
 
@@ -298,16 +280,22 @@ void SSSP(Graph const& G, BasicNode& n, EdgeStd& edges) {
     }
 }
 
+// Inputs:
+// G = Our Graph
+// Output
+// Edges - The Betweenness of all Edges
 EdgeStd calculateBetweenness(Graph const& G) {
 
-     EdgeStd betweenness;
-     auto edges = G.m_edges;
-     shuffle(edges);
+    // The Betweenness of Graph
+    EdgeStd betweenness;
 
-     for (auto& n : edges) {
-         SSSP(G, n, betweenness); }
+    // Get Property Map for Vertices, Iterate, Pass Index to Function
+    // Calculate Betweenness for all Paths from that Node
+    IndexMap index = get(boost::vertex_index, G);
+    for (auto n = vertices(G); n.first != n.second; ++n.first) {
+        SSSP(G, index[*n.first], betweenness); }
 
-     return betweenness;
+    return betweenness;
 
 }
 
