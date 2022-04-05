@@ -19,7 +19,7 @@ import torch
 
 
 # Parameters
-inFile = "../data/dataset.graphml"  # The datafile to load in
+inFile = "../data/dataset3.graphml"  # The datafile to load in
 nodeSubsetPercent = 0.8             # Number of random nodes to pick in the betweeness algorithm
 betThreshold = 4                    # Threshold betweeness value to remove
 mode = "NN"                         # More to evaluate the Q value, use NN for neural network

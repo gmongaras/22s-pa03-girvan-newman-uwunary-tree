@@ -19,16 +19,39 @@ class network(nn.Module):
         self.Decoder_layers = DecoderInfo["layerNodes"] + [inDim]
         self.Decoder_activation = DecoderInfo["activation"]
         
+        # Get the activation functions
+        if self.Encoder_activation.lower() == "sigmoid":
+            enc_activation = nn.Sigmoid()
+        elif self.Encoder_activation.lower() == "tanh":
+            enc_activation = nn.Tanh
+        elif self.Encoder_activation.lower() == "relu":
+            enc_activation = nn.ReLU()
+        else:
+            raise RuntimeError("Activation must be ReLU, Tanh, or Sigmoid")
+        
+        if self.Decoder_activation.lower() == "sigmoid":
+            dec_activation = nn.Sigmoid()
+        elif self.Decoder_activation.lower() == "tanh":
+            dec_activation = nn.Tanh
+        elif self.Decoder_activation.lower() == "relu":
+            dec_activation = nn.ReLU()
+        else:
+            raise RuntimeError("Activation must be ReLU, Tanh, or Sigmoid")
+        
         # Create the Encoder
         layers = []
-        for l in range(0, len(self.Encoder_layers)-1):
+        for l in range(0, len(self.Encoder_layers)-2):
             layers.append(nn.Linear(self.Encoder_layers[l], self.Encoder_layers[l+1]))
+            layers.append(enc_activation)
+        layers.append(nn.Linear(self.Encoder_layers[l+1], self.Encoder_layers[l+2]))
         self.Encoder = nn.Sequential(*layers)
         
         # Create the Decoder
         layers = []
-        for l in range(0, len(self.Decoder_layers)-1):
+        for l in range(0, len(self.Decoder_layers)-2):
             layers.append(nn.Linear(self.Decoder_layers[l], self.Decoder_layers[l+1]))
+            layers.append(dec_activation)
+        layers.append(nn.Linear(self.Decoder_layers[l+1], self.Decoder_layers[l+2]))
         self.Decoder = nn.Sequential(*layers)
         
         # Optimizer for the model
