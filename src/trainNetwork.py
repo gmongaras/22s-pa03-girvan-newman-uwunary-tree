@@ -53,6 +53,11 @@ train = torch.tensor(data[0:trainSize], dtype=torch.float32, requires_grad=False
 test = torch.tensor(data[trainSize:testSize], dtype=torch.float32, requires_grad=False)
 
 
+# Make the sure train/test size is the same as the
+# model dimensions
+assert train.shape[-1] == inDim, f"The shape of the training data number be the same as the shape of the network input. Network input: {inDim}. Data shape: {train.shape[-1]}"
+
+
 # Train the network for numEpochs number of epochs
 for epoch in range(1, numEpochs+1):
     # Get predictions from the model

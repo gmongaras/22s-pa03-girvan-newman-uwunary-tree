@@ -424,6 +424,9 @@ def neuralNetworkLoop(G):
     inDim = cfg["inDim"]
     EncoderInfo = cfg["Encoder"]
     DecoderInfo = cfg["Decoder"]
+    
+    # Ensure the inDim has the same number of nodes as the graph
+    assert inDim == len(list(G.nodes)), f"Network needs to have an input dimension with the same size as the number of nodes in the graph. Network Dim = {inDim}. Graph Nodes = {len(list(G.nodes))}"
 
     # Create the network
     model = network(inDim, EncoderInfo, DecoderInfo)
