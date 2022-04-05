@@ -12,7 +12,6 @@
 #include <boost/graph/copy.hpp>
 
 // Standard Includes
-#include <Python.h>
 #include <fstream>
 #include <random>
 #include <string>
@@ -378,17 +377,9 @@ Graph normalLoop(Graph& G) {
         boost::copy_graph(G, OG);
 
         // Remove all Max Edges from Graph
-        //auto es = boost::edges(G);
         for (auto b : maxBetweenness) {
             boost::remove_edge(std::get<0>(b), std::get<1>(b), G);
         }
-//        for (auto eit = es.first; eit != es.second; ++eit) {
-//            for (auto edge : maxBetweenness) {
-//                if (std::get<0>(edge) == boost::source(*eit, G) && std::get<1>(edge) == boost::target(*eit, G)) {
-//                    boost::remove_edge(std::get<0>(edge), std::get<1>(edge), G);
-//                }
-//            }
-//        }
 
         std::cout << "Iters: " << i << ", Removes: " << maxBetweenness.size() << std::endl;
 
@@ -431,41 +422,39 @@ Graph normalLoop(Graph& G) {
                 // Getting B
                 float B = (float)amountBet - ((float)(oldNeighborAmount * newNeighborAmount) / (float)(numEdges * 2));
 
-
-                // # Calculate the s value (s_i * s_j) + 1 (396)
+                // Calculate s Value (s_i * s_j) + 1
                 int s = -1;
                 for (unsigned long c : communities) {
-                    // Is nNew in the same community as nOld?
+
+                    // Is nNew in Same Community as nOld?
                     if (c == indexNew[*nNew.first]) {
                         s = 1;
                         break;
                     }
                 }
+
                 s++;
 
-                // Compute the final B values for this iteration
-                float B_1 = B*s;
+                // Compute Final B values for Iteration
+                float B_1 = B * s;
                 float B_2 = B;
 
-                // Sum the B values
+                // Sum B values
                 sum1 += B_1;
                 sum2 += B_2;
-            }
 
+            }
         }
 
-        // Compute the final Q value
-        Q = (1/(2*(float)numEdges))*(0.5*sum1 - sum2);
+        // Compute the Final Q Value
+        Q = (1 / (2 * (float)numEdges)) * (0.5 * sum1 - sum2);
 
+        // Print Values, Increment
         std::cout << "Modularity: " << Q << std::endl << std::endl;
         i += 1;
 
-
-
     }
 
-
-    PrintGraph(OG);
     return OG;
 
 }
@@ -487,7 +476,7 @@ int main(int argc, char* argv[]) {
 //        std::vector<> communities;
 
     }
-
+    else { std::cout << "なに ですか？ Err: Provide Program Argument (Graphml Path)"; }
 }
 
 //        boost::queue<vertex_descriptor> Q;
