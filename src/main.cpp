@@ -303,16 +303,23 @@ EdgeStd calculateBetweenness(Graph& G) {
 // G = Our Graph
 // Node = Specified Node
 // Visited = Already Visited Nodes
-void findCommunities(Graph& G, unsigned long node, std::vector<unsigned long> visited) {
+void findCommunities(Graph& G, unsigned long node, std::vector<unsigned long>& visited) {
 
     // Iterate over all Adjacent Nodes and Add Them to Visited Nodes
     auto neighbors = boost::adjacent_vertices(node, G);
     for (auto nNode : make_iterator_range(neighbors)) {
 
         // If Node hasn't been Visited, Add to Community and Visit Neighbors
+        //bool isFound = false;
+        //for (auto vNode : visited) {
+        //    if (node == vNode) { isFound = true; } }
         bool isFound = false;
         for (auto vNode : visited) {
-            if (node == vNode) { isFound = true; } }
+            if (nNode == vNode) {
+                isFound = true;
+                break;
+            }
+        }
         if (!isFound) {
             visited.push_back(nNode);
             findCommunities(G, nNode, visited);
@@ -330,10 +337,13 @@ void findCommunities(Graph& G, unsigned long node, std::vector<unsigned long> vi
 Graph normalLoop(Graph& G) {
 
     // Iterate Until Q Value isn't Increasing
-    int Q_prev = INT_MIN;
-    int Q = INT_MIN;
+    float Q_prev = FLT_MIN;
+    float Q = FLT_MIN;
     int i = 1;
     std::vector<std::tuple<unsigned long, unsigned long>> maxBetweenness;
+
+    // Graph copy
+    Graph OG;
 
     while (Q + 0.05 >= Q_prev) { // Update Q_prev Value
 
@@ -364,23 +374,14 @@ Graph normalLoop(Graph& G) {
         auto numEdges = betweenness.size();
 
         // Copy Graph
-        Graph OG;
+        OG = Graph();
         boost::copy_graph(G, OG);
 
         // Remove all Max Edges from Graph
-        auto es = boost::edges(G);
-//        for (auto eit : make_iterator_range(es)) {
-////            auto source = eit.m_source;
-////            auto target = eit.m_target;
-////
-////            // Save the edge if the
-//            boost::remove_edge(eit.m_source, eit.m_target, G);
-//        }
-
+        //auto es = boost::edges(G);
         for (auto b : maxBetweenness) {
             boost::remove_edge(std::get<0>(b), std::get<1>(b), G);
         }
-
 //        for (auto eit = es.first; eit != es.second; ++eit) {
 //            for (auto edge : maxBetweenness) {
 //                if (std::get<0>(edge) == boost::source(*eit, G) && std::get<1>(edge) == boost::target(*eit, G)) {
@@ -389,8 +390,7 @@ Graph normalLoop(Graph& G) {
 //            }
 //        }
 
-        std::cout << "Iters: " << i << ", Removes: " << maxBetweenness.size();
-        PrintGraph(G);
+        std::cout << "Iters: " << i << ", Removes: " << maxBetweenness.size() << std::endl;
 
         // Compute the modularity (Q)
 
@@ -400,7 +400,7 @@ Graph normalLoop(Graph& G) {
         // Iterate over Nodes in Old Graph (OG)
         IndexMap indexOld = get(boost::vertex_index, OG);
         for (auto nOld = vertices(OG); nOld.first != nOld.second; ++nOld.first) {
-            auto nOldNeighbors = boost::adjacent_vertices(indexOld[*nOld.first], OG);
+            auto nOldNeighbors = boost::adjacent_vertices(indexOld[*nOld.first], G);
 
             // Number of Neighbors to nOld
             int oldNeighborAmount = 0;
@@ -424,26 +424,49 @@ Graph normalLoop(Graph& G) {
                 for (auto adjNeighbor : make_iterator_range(nOldNeighbors)) {
                     if (adjNeighbor == indexNew[*nNew.first]) {
                         amountBet = 1;
+                        break;
                     }
                 }
 
                 // Getting B
-                auto B = amountBet - (oldNeighborAmount * newNeighborAmount) / (numEdges * 2);
+                float B = (float)amountBet - ((float)(oldNeighborAmount * newNeighborAmount) / (float)(numEdges * 2));
 
-                // FIXME
 
                 // # Calculate the s value (s_i * s_j) + 1 (396)
+                int s = -1;
+                for (unsigned long c : communities) {
+                    // Is nNew in the same community as nOld?
+                    if (c == indexNew[*nNew.first]) {
+                        s = 1;
+                        break;
+                    }
+                }
+                s++;
+
+                // Compute the final B values for this iteration
+                float B_1 = B*s;
+                float B_2 = B;
+
+                // Sum the B values
+                sum1 += B_1;
+                sum2 += B_2;
             }
 
         }
+
+        // Compute the final Q value
+        Q = (1/(2*(float)numEdges))*(0.5*sum1 - sum2);
+
+        std::cout << "Modularity: " << Q << std::endl << std::endl;
+        i += 1;
 
 
 
     }
 
 
-
-    return G;
+    PrintGraph(OG);
+    return OG;
 
 }
 
