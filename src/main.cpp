@@ -28,9 +28,9 @@ typedef std::map<std::tuple<float, float>, float> EdgeStd;
 class Node {
 
 public:
-    float value; // Value Stored Within Node
     int level; // Level of Node
-    int shortestPaths = 1; // Number of Shortest Paths that can Reach this Node from Root
+    float value; // Value Stored Within Node
+    float shortestPaths = 1; // Number of Shortest Paths that can Reach this Node from Root
     std::vector<Node> children; // Children of Node
     std::vector<Node> parents; // Parents of Node
     std::vector<Node> sameLevel; // Nodes on Same Level
@@ -227,7 +227,7 @@ void SSSP(Graph const& G, BasicNode& n, EdgeStd& edges) {
         // Current Level = Level + 1
         level = curr.level + 1;
 
-        // FIXME
+        // Iterate over all Adjacent Nodes
         auto neighbors = boost::adjacent_vertices((curr.value), G);
         for (auto nNode : make_iterator_range(neighbors)) {
             auto node = Node(nNode, level);
@@ -235,7 +235,7 @@ void SSSP(Graph const& G, BasicNode& n, EdgeStd& edges) {
             int loc; // Iterator
             bool isFound = false;
 
-            // Try (No ValueError)
+            // Try (No ValueError): Get Index of Node in Visited List
             for (loc = 0; loc < visited.size(); loc++) {
                 if (visited[loc] == node) {
                     isFound = true;
@@ -251,21 +251,25 @@ void SSSP(Graph const& G, BasicNode& n, EdgeStd& edges) {
                 continue;
             }
 
-            isFound = false; // Reusing isFound
+            // Reusing isFound, Set Node
+            isFound = false;
             node = visited[loc];
+
+            // If Node is Equal to Curr Level, Set Equal Level
             if (node.level == curr.level) {
                 for (auto sNode : node.sameLevel) {
-                    if (curr == sNode) isFound = true; }
+                    if (curr == sNode) { isFound = true; } }
                 if (!isFound) {
                     node.sameLevel.push_back(curr);
                     curr.sameLevel.push_back(node); }
-                isFound = false; // Reusing isFound
             }
 
+            // If Node has Smaller Level than Current Node,
+            // Set this Node as the Parent of the Current Node
             else if (node.level < curr.level) {
                 for (auto pNode : curr.parents) {
-                    if (node == pNode) isFound = true; }
-                if (!isFound) curr.addParent(node);
+                    if (node == pNode) { isFound = true; } }
+                if (!isFound) { curr.addParent(node); }
             }
         }
     }
@@ -281,29 +285,17 @@ void SSSP(Graph const& G, BasicNode& n, EdgeStd& edges) {
     // Add Betweenness to Total Edges Dictionary
     for (auto kvPair : bet) {
         auto edge = kvPair.first;
-        // FIXME
+
+        // Does the Edge Exist?
+        // Does the Reverse Exist?
+        // Add Edge if not Existing
+        if (edges.find(edge) != edges.end()) {
+            edges[edge] += bet[edge] / 2; }
+        else if (edges.find(std::make_tuple(std::get<1>(edge), std::get<0>(edge))) != edges.end()) {
+            edges[std::make_tuple(std::get<1>(edge), std::get<0>(edge))] += bet[edge] / 2; }
+        else { edges[edge] = bet[edge] / 2; }
+
     }
-
-    // // Does Key (parent, child) Exist?
-    //        // Does Key (child, parent) Exist?
-    //        // Add Key (parent, child)
-    //        if (edges.find(std::make_tuple(parent.value, node.value)) != edges.end()) {
-    //            edges[std::make_tuple(parent.value, node.value)] += betweenness; }
-    //        else if (edges.find(std::make_tuple(node.value, parent.value)) != edges.end()) {
-    //            edges[std::make_tuple(node.value, parent.value)] += betweenness; }
-    //        else { edges[std::make_tuple(parent.value, node.value)] = betweenness; }
-
-    //    # Add the betweenness to the total edges dictionary
-    //    for edge in bet.keys():
-    //        try: # Does the edge exist?
-    //            edges[edge] += bet[edge]/2
-    //        except KeyError:
-    //            try: # Does the reverse of the edge exist?
-    //                edges[(edge[1], edge[0])] += bet[edge]/2
-    //            except KeyError:
-    //                # If the edge does not exist, add it
-    //                edges[edge] = bet[edge]/2
-
 }
 
 EdgeStd calculateBetweenness(Graph const& G) {
