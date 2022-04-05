@@ -30,9 +30,9 @@ public:
     int level; // Level of Node
     unsigned long value; // Value Stored Within Node
     float shortestPaths = 1; // Number of Shortest Paths that can Reach this Node from Root
-    std::vector<Node> children; // Children of Node
-    std::vector<Node> parents; // Parents of Node
-    std::vector<Node> sameLevel; // Nodes on Same Level
+    std::vector<Node*> children; // Children of Node
+    std::vector<Node*> parents; // Parents of Node
+    std::vector<Node*> sameLevel; // Nodes on Same Level
     bool labelled = false; // Has Node Been Visited in BFS?
 
     // Constructor, Must be Called
@@ -42,20 +42,20 @@ public:
     }
 
     // Add Child to Node
-    void addChild(Node& c) {
+    void addChild(Node* c) {
         children.push_back(c);
-        c.parents.push_back(*this);
+        c->parents.push_back(this);
     }
 
     // Add Parent to Node
-    void addParent(Node& p) {
+    void addParent(Node* p) {
         parents.push_back(p);
-        p.children.push_back(*this);
+        p->children.push_back(this);
         shortestPaths += 1;
     }
 
     // Tests if two Nodes are Equal
-    bool operator==(Node& n) const {
+    bool operator==(Node n) const {
         return value == n.value;
     }
 
@@ -85,48 +85,48 @@ Graph ReadGraph(std::ifstream& I) {
 // edges = Dictionary of Edges
 // Outputs:
 // None (Edges Changed Within Function)
-void edgeLabelling(Node& node, Node& parent, EdgeStd& edges) {
+void edgeLabelling(Node*& node, Node*& parent, EdgeStd& edges) {
 
     // Used Throughout, Starts at
     // 1 For Less Hassle Later
     float betweenness = 1;
 
-    if (node.labelled) {
+    if (node->labelled) {
 
         // Divide Betweenness of Parent Nodes
         // If Root Node, Iterate to the Child Nodes and Calculate Their Betweenness
         // If Leaf Node, Calculate Betweenness of the Edges Between it and Parent
-        if (node.children.empty()) { betweenness /= float(node.parents.size()); }
-        else { betweenness = node.shortestPaths / float(node.parents.size()); }
+        if (node->children.empty()) { betweenness /= float(node->parents.size()); }
+        else { betweenness = node->shortestPaths / float(node->parents.size()); }
 
         // Store Betweenness of Node and Parent
         // Does Key (parent, child) Exist?
         // Does Key (child, parent) Exist?
         // Add Key (parent, child)
-        if (edges.find(std::make_tuple(parent.value, node.value)) != edges.end()) {
-            edges[std::make_tuple(parent.value, node.value)] += betweenness; }
-        else if (edges.find(std::make_tuple(node.value, parent.value)) != edges.end()) {
-            edges[std::make_tuple(node.value, parent.value)] += betweenness; }
-        else { edges[std::make_tuple(parent.value, node.value)] = betweenness; }
+        if (edges.find(std::make_tuple(parent->value, node->value)) != edges.end()) {
+            edges[std::make_tuple(parent->value, node->value)] += betweenness; }
+        else if (edges.find(std::make_tuple(node->value, parent->value)) != edges.end()) {
+            edges[std::make_tuple(node->value, parent->value)] += betweenness; }
+        else { edges[std::make_tuple(parent->value, node->value)] = betweenness; }
 
         return;
 
     }
 
     // If Node is a Leaf Node, Not Labelled
-    if (node.children.empty()) {
+    if (node->children.empty()) {
 
-        betweenness /= float(node.parents.size());
+        betweenness /= float(node->parents.size());
 
         // Store Betweenness of Node and Parent
         // Does Key (parent, child) Exist?
         // Does Key (child, parent) Exist?
         // Add Key (parent, child)
-        if (edges.find(std::make_tuple(parent.value, node.value)) != edges.end()) {
-            edges[std::make_tuple(parent.value, node.value)] += betweenness; }
-        else if (edges.find(std::make_tuple(node.value, parent.value)) != edges.end()) {
-            edges[std::make_tuple(node.value, parent.value)] += betweenness; }
-        else { edges[std::make_tuple(parent.value, node.value)] = betweenness; }
+        if (edges.find(std::make_tuple(parent->value, node->value)) != edges.end()) {
+            edges[std::make_tuple(parent->value, node->value)] += betweenness; }
+        else if (edges.find(std::make_tuple(node->value, parent->value)) != edges.end()) {
+            edges[std::make_tuple(node->value, parent->value)] += betweenness; }
+        else { edges[std::make_tuple(parent->value, node->value)] = betweenness; }
 
     }
 
@@ -134,20 +134,20 @@ void edgeLabelling(Node& node, Node& parent, EdgeStd& edges) {
     else {
 
         // Calculate Betweenness of all Children
-        for (auto cNode : node.children) {
+        for (Node* cNode : node->children) {
             edgeLabelling(cNode, node, edges); }
 
-        for (auto cNode : node.children) {
+        for (auto cNode : node->children) {
 
             try { // If No Key Exists, Stop Program
 
                 // Does Key (node, child) Exist?
                 // Does Key (child, node) Exist?
                 // Throw Exception, Stop Program
-                if (edges.find(std::make_tuple(node.value, cNode.value)) != edges.end()) {
-                    betweenness += edges[std::make_tuple(node.value, cNode.value)]; }
-                else if (edges.find(std::make_tuple(cNode.value, node.value)) != edges.end()) {
-                    betweenness += edges[std::make_tuple(cNode.value, node.value)]; }
+                if (edges.find(std::make_tuple(node->value, cNode->value)) != edges.end()) {
+                    betweenness += edges[std::make_tuple(node->value, cNode->value)]; }
+                else if (edges.find(std::make_tuple(cNode->value, node->value)) != edges.end()) {
+                    betweenness += edges[std::make_tuple(cNode->value, node->value)]; }
                 else { throw std::invalid_argument("Key Must Exist"); }
 
             } catch (std::invalid_argument& e) { std::cerr << e.what() << std::endl; }
@@ -155,24 +155,24 @@ void edgeLabelling(Node& node, Node& parent, EdgeStd& edges) {
         }
 
         // Update shortestPaths Value of Node
-        node.shortestPaths = betweenness;
+        node->shortestPaths = betweenness;
 
         // Divide Betweenness Between Parent Nodes
-        betweenness /= float(node.parents.size());
+        betweenness /= float(node->parents.size());
 
         // Does Key (parent, child) Exist?
         // Does Key (child, parent) Exist?
         // Add Key (parent, child)
-        if (edges.find(std::make_tuple(parent.value, node.value)) != edges.end()) {
-            edges[std::make_tuple(parent.value, node.value)] += betweenness; }
-        else if (edges.find(std::make_tuple(node.value, parent.value)) != edges.end()) {
-            edges[std::make_tuple(node.value, parent.value)] += betweenness; }
-        else { edges[std::make_tuple(parent.value, node.value)] = betweenness; }
+        if (edges.find(std::make_tuple(parent->value, node->value)) != edges.end()) {
+            edges[std::make_tuple(parent->value, node->value)] += betweenness; }
+        else if (edges.find(std::make_tuple(node->value, parent->value)) != edges.end()) {
+            edges[std::make_tuple(node->value, parent->value)] += betweenness; }
+        else { edges[std::make_tuple(parent->value, node->value)] = betweenness; }
 
     }
 
     // Label Node Visited
-    node.labelled = true;
+    node->labelled = true;
 
 }
 
@@ -185,13 +185,13 @@ void edgeLabelling(Node& node, Node& parent, EdgeStd& edges) {
 void SSSP(Graph& G, unsigned long n, EdgeStd& edges) {
 
     // Visited nodes, Tree Initialization
-    std::vector<Node> visited;
-    auto tree = Node(n, 1);
+    std::vector<Node*> visited;
+    Node* tree = new Node(n, 1);
 
     // Step 1, 2 = BFS, Node Labelling
 
     // Stack Used for BFS, Push Root Node
-    std::stack<Node> s;
+    std::stack<Node*> s;
     s.push(tree);
     visited.push_back(tree);
 
@@ -202,23 +202,23 @@ void SSSP(Graph& G, unsigned long n, EdgeStd& edges) {
     while (!s.empty()) {
 
         // Get Top, Pop Stack
-        auto curr = s.top();
+        Node* curr = s.top();
         s.pop();
 
         // Current Level = Level + 1
-        level = curr.level + 1;
+        level = curr->level + 1;
 
         // Iterate over all Adjacent Nodes
-        auto neighbors = boost::adjacent_vertices((curr.value), G);
+        auto neighbors = boost::adjacent_vertices((curr->value), G);
         for (auto nNode : make_iterator_range(neighbors)) {
-            auto node = Node(nNode, level);
+            Node* node = new Node(nNode, level);
 
             int loc; // Iterator
             bool isFound = false;
 
             // Try (No ValueError): Get Index of Node in Visited List
             for (loc = 0; loc < visited.size(); loc++) {
-                if (visited[loc] == node) {
+                if (*visited[loc] == *node) {
                     isFound = true;
                     break;
                 }
@@ -228,7 +228,7 @@ void SSSP(Graph& G, unsigned long n, EdgeStd& edges) {
             if (!isFound) {
                 s.push(node);
                 visited.push_back(node);
-                curr.addChild(node);
+                curr->addChild(node);
                 continue;
             }
 
@@ -237,20 +237,20 @@ void SSSP(Graph& G, unsigned long n, EdgeStd& edges) {
             node = visited[loc];
 
             // If Node is Equal to Curr Level, Set Equal Level
-            if (node.level == curr.level) {
-                for (auto sNode : node.sameLevel) {
+            if (node->level == curr->level) {
+                for (auto sNode : node->sameLevel) {
                     if (curr == sNode) { isFound = true; } }
                 if (!isFound) {
-                    node.sameLevel.push_back(curr);
-                    curr.sameLevel.push_back(node); }
+                    node->sameLevel.push_back(curr);
+                    curr->sameLevel.push_back(node); }
             }
 
             // If Node has Smaller Level than Current Node,
             // Set this Node as the Parent of the Current Node
-            else if (node.level < curr.level) {
-                for (auto pNode : curr.parents) {
+            else if (node->level < curr->level) {
+                for (auto pNode : curr->parents) {
                     if (node == pNode) { isFound = true; } }
-                if (!isFound) { curr.addParent(node); }
+                if (!isFound) { curr->addParent(node); }
             }
         }
     }
@@ -259,7 +259,7 @@ void SSSP(Graph& G, unsigned long n, EdgeStd& edges) {
 
     // Iterate Over All Root Node Children
     EdgeStd bet;
-    for (auto cNode : tree.children) {
+    for (auto cNode : tree->children) {
         edgeLabelling(cNode, tree, bet);
     }
 
@@ -292,7 +292,8 @@ EdgeStd calculateBetweenness(Graph& G) {
     // Calculate Betweenness for all Paths from that Node
     IndexMap index = get(boost::vertex_index, G);
     for (auto n = vertices(G); n.first != n.second; ++n.first) {
-        SSSP(G, index[*n.first], betweenness); }
+        SSSP(G, index[*n.first], betweenness);
+    }
 
     return betweenness;
 
@@ -371,7 +372,7 @@ Graph normalLoop(Graph& G) {
         for (auto eit = es.first; eit != es.second; ++eit) {
             for (auto edge : maxBetweenness) {
                 if (std::get<0>(edge) == boost::source(*eit, G) && std::get<1>(edge) == boost::target(*eit, G)) {
-                    boost::remove_edge(es, G);
+                    boost::remove_edge(std::get<0>(edge), std::get<1>(edge), G);
                 }
             }
         }
