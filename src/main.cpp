@@ -384,13 +384,42 @@ Graph normalLoop(Graph& G) {
         float sum1 = 0;
         float sum2 = 0;
 
-        IndexMap index = get(boost::vertex_index, OG);
-        for (auto n = vertices(OG); n.first != n.second; ++n.first) {
-            auto nNeighbors = boost::adjacent_vertices(index[*n.first], OG);
+        IndexMap indexOld = get(boost::vertex_index, OG);
+        for (auto nOld = vertices(OG); nOld.first != nOld.second; ++nOld.first) {
+            auto nOldNeighbors = boost::adjacent_vertices(indexOld[*nOld.first], OG);
 
             // Number of Neighbors to N
-            int neighborAmount = 0;
-            for (auto nNode : make_iterator_range(nNeighbors)) { ++neighborAmount; }
+            int oldNeighborAmount = 0;
+            for (auto noVal : make_iterator_range(nOldNeighbors)) { ++oldNeighborAmount; }
+
+            // Find the Communities Associated with Node
+            std::vector<unsigned long> communities;
+            findCommunities(G, indexOld[*nOld.first], communities);
+
+            // Iterate over Nodes in New Graph (G)
+            IndexMap indexNew = get(boost::vertex_index, G);
+            for (auto nNew = vertices(G); nNew.first != nNew.second; ++nNew.first) {
+                auto nNewNeighbors = boost::adjacent_vertices(indexOld[*nNew.first], G);
+
+                // Calculate B Value
+                int newNeighborAmount = 0;
+                for (auto noVal : make_iterator_range(nNewNeighbors)) { ++newNeighborAmount; }
+
+                // Find Number of Edges Between Old and New
+                int amountCross = 0;
+                for (auto oldNode : make_iterator_range(nOldNeighbors)) {
+                    for (auto newNode : make_iterator_range(nNewNeighbors)) {
+                        if (oldNode == newNode) {
+                            amountCross++;
+                        }
+                    }
+                }
+
+                // Getting B
+                auto B = amountCross - (oldNeighborAmount * newNeighborAmount) / (numEdges * 2);
+
+            }
+
         }
 
 
@@ -411,7 +440,6 @@ int main(int argc, char* argv[]) {
         // Read in Graph
         std::ifstream I(argv[1]);
         Graph G = ReadGraph(I);
-
 
         // Remove Edges from Graph to get Communities
         G = normalLoop(G);
