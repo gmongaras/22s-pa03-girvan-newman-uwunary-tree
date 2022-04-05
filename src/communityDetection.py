@@ -366,21 +366,30 @@ def normalLoop(G):
         # Iterate over all nodes in the old graph (i)
         sum1 = 0
         sum2 = 0
+        
+        # Iterate over all nodes in the old graph
         for i in list(oldG.nodes):
+            
+            # Get the neightbors for node i in the old graph
             neighbors_i = list(G.neighbors(i))
             k_i = len(neighbors_i)
             
+            # Get the communities in the current graph for node i
             comm = []
             findCommunities(G, i, comm)
             
             # Iterate over all nodes in the new graph (j)
             for j in list(G.nodes):
-                # Calculate the B value
+                ## Calculate the B value
+                
+                # Get the neightbors for node j
                 neighbors_j = list(G.neighbors(j))
                 k_j = len(neighbors_j)
-                #A_ij = 1 if ((i, j) in G.edges or (j, i) in G.edges) else 0
-                A_ij = len(list(set(neighbors_i) & set(neighbors_j)))
                 
+                # Get the number of edges between node i and node j
+                A_ij = 1 if ((i, j) in G.edges or (j, i) in G.edges) else 0
+                
+                # Calculate the final B value
                 B = A_ij - (k_i*k_j)/(2*m)
                 
                 
