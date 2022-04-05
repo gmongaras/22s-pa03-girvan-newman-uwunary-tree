@@ -18,18 +18,19 @@ import torch
 
 
 
-# Parameters
-inFile = "../data/dataset3.graphml"  # The datafile to load in
-nodeSubsetPercent = 0.8             # Number of random nodes to pick in the betweeness algorithm
-betThreshold = 4                    # Threshold betweeness value to remove
+# All Script Parameters
 mode = "NN"                         # More to evaluate the Q value, use NN for neural network
-                                    # and "Normal" (or anything else) for normal Q function.
+                                    # and "GN" (or anything else) for normal Q function.
 commName = "community"              # The name of the community label in the graphml file
+inFile = "../data/dataset.graphml"  # The datafile to load in
 
 # Neural Network Parameters
 configFileName = "./networkParams.yml"  # The configuration file for the model
 modelFileName = "../models/model"       # The saved model to load in
 numClasses = 4                          # Number of classes to predict
+
+# Girvan Newman Parameters
+nodeSubsetPercent = 0.8             # Percent of random nodes to pick in the betweeness algorithm
     
     
     
@@ -365,21 +366,30 @@ def normalLoop(G):
         # Iterate over all nodes in the old graph (i)
         sum1 = 0
         sum2 = 0
+        
+        # Iterate over all nodes in the old graph
         for i in list(oldG.nodes):
+            
+            # Get the neightbors for node i in the old graph
             neighbors_i = list(G.neighbors(i))
             k_i = len(neighbors_i)
             
+            # Get the communities in the current graph for node i
             comm = []
             findCommunities(G, i, comm)
             
             # Iterate over all nodes in the new graph (j)
             for j in list(G.nodes):
-                # Calculate the B value
+                ## Calculate the B value
+                
+                # Get the neightbors for node j
                 neighbors_j = list(G.neighbors(j))
                 k_j = len(neighbors_j)
-                #A_ij = 1 if ((i, j) in G.edges or (j, i) in G.edges) else 0
-                A_ij = len(list(set(neighbors_i) & set(neighbors_j)))
                 
+                # Get the number of edges between node i and node j
+                A_ij = 1 if ((i, j) in G.edges or (j, i) in G.edges) else 0
+                
+                # Calculate the final B value
                 B = A_ij - (k_i*k_j)/(2*m)
                 
                 
@@ -423,6 +433,9 @@ def neuralNetworkLoop(G):
     inDim = cfg["inDim"]
     EncoderInfo = cfg["Encoder"]
     DecoderInfo = cfg["Decoder"]
+    
+    # Ensure the inDim has the same number of nodes as the graph
+    assert inDim == len(list(G.nodes)), f"Network needs to have an input dimension with the same size as the number of nodes in the graph. Network Dim = {inDim}. Graph Nodes = {len(list(G.nodes))}"
 
     # Create the network
     model = network(inDim, EncoderInfo, DecoderInfo)

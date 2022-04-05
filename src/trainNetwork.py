@@ -8,11 +8,11 @@ from model import network
 
 
 # Parameters
-configFileName = "./networkParams.yml"
-dataDir = "../networkTrainData"
-numEpochs = 1000
-trainPercent = 0.9
-saveFileName = "../models/model"
+configFileName = "./networkParams.yml"  # The configuration file for the network
+dataDir = "../networkTrainData"         # The directory that stores the data to train the mode
+numEpochs = 1000                        # Number of epochs to train the model for
+trainPercent = 0.9                      # Percent of data to trian model on
+saveFileName = "../models/model"        # The file to save the model to
 
 
 
@@ -51,6 +51,11 @@ testSize = len(data) - trainSize
 np.random.shuffle(data)
 train = torch.tensor(data[0:trainSize], dtype=torch.float32, requires_grad=False)
 test = torch.tensor(data[trainSize:testSize], dtype=torch.float32, requires_grad=False)
+
+
+# Make the sure train/test size is the same as the
+# model dimensions
+assert train.shape[-1] == inDim, f"The shape of the training data number be the same as the shape of the network input. Network input: {inDim}. Data shape: {train.shape[-1]}"
 
 
 # Train the network for numEpochs number of epochs
