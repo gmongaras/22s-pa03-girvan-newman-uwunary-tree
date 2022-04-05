@@ -22,13 +22,13 @@
 // Adjacency List, Basic Node, Standard Edge Definitions
 typedef boost::adjacency_list<boost::setS, boost::vecS, boost::undirectedS> Graph;
 typedef boost::list_edge<unsigned long, boost::no_property> BasicNode;
-typedef std::map<std::tuple<int, int>, float> EdgeStd;
+typedef std::map<std::tuple<float, float>, float> EdgeStd;
 
 // Nowode Class! OwO :)
 class Node {
 
 public:
-    int value; // Value Stored Within Node
+    float value; // Value Stored Within Node
     int level; // Level of Node
     int shortestPaths = 1; // Number of Shortest Paths that can Reach this Node from Root
     std::vector<Node> children; // Children of Node
@@ -37,7 +37,7 @@ public:
     bool labelled = false; // Has Node Been Visited in BFS?
 
     // Constructor, Must be Called
-    Node(int value, int level) {
+    Node(float value, int level) {
         this->value = value;
         this->level = level;
     }
@@ -63,7 +63,7 @@ public:
 };
 
 // Prints Important Information
-void PrintGraph(Graph const &G) {
+void PrintGraph(Graph const& G) {
     std::cout << "Vertex Amount: " << num_vertices(G) << "\n";
     std::cout << "Edge Amount: " << num_edges(G) << "\n";
     auto es = boost::edges(G);
@@ -115,7 +115,7 @@ void edgeLabelling(Node& node, Node& parent, EdgeStd& edges) {
         // Divide Betweenness of Parent Nodes
         // If Root Node, Iterate to the Child Nodes and Calculate Their Betweenness
         // If Leaf Node, Calculate Betweenness of the Edges Between it and Parent
-        if (node.children.empty()) { betweenness = 1 / float(node.parents.size()); }
+        if (node.children.empty()) { betweenness /= float(node.parents.size()); }
         else { betweenness = node.shortestPaths / float(node.parents.size()); }
 
         // Store Betweenness of Node and Parent
@@ -132,10 +132,10 @@ void edgeLabelling(Node& node, Node& parent, EdgeStd& edges) {
 
     }
 
-    // If Node is a Leaf Node
+    // If Node is a Leaf Node, Not Labelled
     if (node.children.empty()) {
 
-        betweenness = 1 / float(node.parents.size());
+        betweenness /= float(node.parents.size());
 
         // Store Betweenness of Node and Parent
         // Does Key (parent, child) Exist?
@@ -203,20 +203,31 @@ void edgeLabelling(Node& node, Node& parent, EdgeStd& edges) {
 // None (Edges Changed Within Function)
 void SSSP(Graph const& G, BasicNode& n, EdgeStd& edges) {
 
+    // Visited nodes, Tree Initialization
     std::vector<Node> visited;
     auto tree = Node(n.m_source, 1);
 
+    // Step 1, 2 = BFS, Node Labelling
+
+    // Stack Used for BFS, Push Root Node
     std::stack<Node> s;
     s.push(tree);
     visited.push_back(tree);
 
+    // Current Level of Tree
     int level = 1;
+
+    // Iterate Until Empty Stack
     while (!s.empty()) {
+
+        // Get Top, Pop Stack
         auto curr = s.top();
         s.pop();
 
+        // Current Level = Level + 1
         level = curr.level + 1;
 
+        // FIXME
         auto neighbors = boost::adjacent_vertices((curr.value), G);
         for (auto nNode : make_iterator_range(neighbors)) {
             auto node = Node(nNode, level);
