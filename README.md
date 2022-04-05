@@ -4,6 +4,8 @@ BFS: http://infolab.stanford.edu/~ullman/mmds/book0n.pdf (10.2 - page 361 (page 
 
 GN Algo: https://www.pnas.org/doi/epdf/10.1073/pnas.122653799
 
+NN Algo: https://www.ijcai.org/Proceedings/16/Papers/321.pdf
+
 
 
 # General Project Information
@@ -83,7 +85,7 @@ cmake --build cmake-build-debug
 
 Once finished with this process, the cmake-build-debug folder should have the executable in it. Check to make sure the data folder and output folder have been pushed into the folder. If they haven't copy and paste them into the cmake-build-debug directory.
 
-## Project Execution
+## Main Project Execution - C++
 
 The following command can be used to run the project: </br>
 
@@ -91,30 +93,91 @@ The following command can be used to run the project: </br>
 ./22s-pa02-amogus
 ```
 
-### Sample Input
 
-...
+## Main Project Execution - Python
+
+The following command can be used to run the project: </br>
+
+```python communityDetection.py```
+
+### All Script Parameters
+These parameters can be changed and will effect both the Girvan Newman algorithm and the Neural Network algorithm
+
+<b>mode</b> - Options: "NN" or "GN"
+- Use "NN" to evaluate the graph using the Neural Network model.
+- Use "GN" (or any other string) to evaluate the graph using the Girvan Newman algorithm.
+
+<b>Note: </b>
+- If "NN" is used, make sure to change the parameters in [Neural Network Parameters](https://github.com/smu-cs-3353/22s-pa03-girvan-newman-uwunary-tree/edit/main/README.md#neural-network-parameters)
+- If "GN" is used, make sure to change the paramters in [Girvan Newman Parameters](https://github.com/smu-cs-3353/22s-pa03-girvan-newman-uwunary-tree/edit/main/README.md#girvan-newman-parameters)
+
+<b>commName</b> - A string defining the name of the community in the graphML file.
+- The commName can be found at the top of the .graphml file.
+- Example:
+
+  <img width="455" alt="commName example" src="https://user-images.githubusercontent.com/43501738/161797078-eda078fa-ea8f-428c-98a4-f79580ab0710.png">
+  
+  In this case the commName would be "community"
+ 
+<b>inFile</b> - The graphml data file to load in to test the algorithm
+- This file is a .graphml file and stores a graph we want the model to analyze
 
 
-### Sample Output
+### Neural Network Parameters
 
-The project has one output file which is formatted as such:. </br>
+<b>configFileName</b> - The yaml configuration file name used to configue the neural network
+- Example: In this repo, the default file name is ```"./networkParams.yml"```
+- For more information on the configuration file, go to [the following section](https://github.com/smu-cs-3353/22s-pa03-girvan-newman-uwunary-tree/edit/main/README.md#network-configuration)
 
+<b>modelFileName</b> - The file name to the model to load in.
+- In this repo, we have pretrained models which can be found in the ```models/``` directory. For example, to load in the ```64,32,16,8``` file, the modelFileName would be ```"64,32,16,8"```.
+
+<b>NOTE:</b> The configuration file should have the same configuration as the model being loaded in.
+- For example, if the `modelFileName` is ```"64,32,16,8"```, then the configuartion file would look like the following:
 ```
-File Name,Size,Integer/String,Insertion,Random Quicksort,Merge,Shell,Intro,Tim
-./data/integer/1000/1000_0D_0S.txt,1000,integer,97,1707,93,7,16,21
-./data/integer/1000/1000_0D_100S.txt,1000,integer,1,2058,108,9,11,19
-Contd...
+inDim: 128
+Encoder:
+    layerNodes: [64,32,16,8]
+    activation: "ReLU"
+Decoder:
+    layerNodes: [8,16,32,64]
+    activation: "ReLU"
 ```
 
-An output file should already be located in the repository.
+<b>numClasses</b> - The number of classes for the model to classify nodes into.
+- By default, this value is set to 4 since the test data found in `data/` has 4 classes.
+- If numClasses is changed to a value that is not 4, new test data will have to be created using the [Data Generation Script](https://github.com/smu-cs-3353/22s-pa03-girvan-newman-uwunary-tree/edit/main/README.md#data-generation)
 
-### Data Generation
 
-For our data generation script, we decided to use python. In our python code, we create a function that generates a random array with the following parameters:
-- <b>low</b> - The lowest integer to put into the array (Min Val).
-- <b>high</b> - The highest integer to put into the array (Max Val).
+### Girvan Newman Parameters
 
-...
+<b>nodeSubsetPercent</b> - The percent of random nodes to pick in the betweeness algorithm
+- Values can between (0, 1]
+- When the GN algorithm runs, it calculates the betweeness for a set percentage of nodes as opposed to doing all the nodes
+- A higher percetage makes the algorithm more accurate, but also makes the algorithm take longer
+
+
+## Network Training
+
+trainNetwork.py
+
+
+## GML To GraphML Conversion
+
+gml_to_graphml.py
+
+
+## Data Generation
+
+dataGeneration.py
+
+
+## Network Data Generation
+
+networkDataGeneration.py
+
+### Network Configuration
+
+;
 
 
