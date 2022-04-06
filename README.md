@@ -92,7 +92,7 @@ cmake --build cmake-build-debug
 
 Once finished with this process, the cmake-build-debug folder should have the executable in it. Check to make sure the data folder and output folder have been pushed into the folder. If they haven't copy and paste them into the cmake-build-debug directory.
 
-## Main Project Execution - C++
+## Main Project Execution - C++ (main.cpp)
 
 The following command can be used to run the project: </br>
 
@@ -101,7 +101,7 @@ The following command can be used to run the project: </br>
 ```
 
 
-## Main Project Execution - Python
+## Main Project Execution - Python - (communityDetection.py)
 
 The following command can be used to run the project: </br>
 
@@ -164,7 +164,7 @@ Decoder:
 - A higher percetage makes the algorithm more accurate, but also makes the algorithm take longer
 
 
-## Network Training
+## Network Training (trainNetwork.py)
 
 To make predictions on the classes in the graph, first the model has to be trained.
 
@@ -188,7 +188,7 @@ To make predictions on the classes in the graph, first the model has to be train
 <b>saveFileName</b> - The file to save the model to when the model is finished training
 
 
-## Network Data Generation
+## Network Data Generation (networkDataGeneration.py)
 
 The network needs a significant amount of data in order to learn useful representations of the data. The data we need is a matrix which has the following dimesnions:
 
@@ -215,7 +215,7 @@ Parameters:
 
 
 
-### Network Configuration
+### Network Configuration (networkParams.yml)
 
 The network configuration can be found in the `networkParams.yml` file. This file is written using the yaml style with the following parts:
 - inDim: The size of input into the neural network (this value is the same as the number of nodes in the graph)
@@ -232,13 +232,25 @@ The network configuration can be found in the `networkParams.yml` file. This fil
   - activation: The activation function for the decoder network (Can be one of the following: "ReLU", "Sigmoid", "Tanh")
 
 
-## Data Generation
+## Data Generation (dataGenerator.py)
 
-dataGeneration.py
+To test the algorithms, this script can be used to generate datasets. This script will generate a GraphML file that stores a graph with a class for each node. The scipt has the following parameters:
+- <b>outFile</b> - File name to save the generated graph to
+- <b>vertices</b> - The number of vertices in the generated graph
+- <b>communities</b> - Number of communities to classify nodes into
+- <b>communitySize</b> - (Automatically calculated) The size of each community
+- <b>rand</b> - If True, random numerical values will be used to name each node. If False, sequential values will be used to name each node.
+- <b>names</b> - If True, <b>rand</b> is ignored and random names will be generated to name each node. If False, <b>rand</b> will be used and numbers will be used to name the nodes.
+- <b>P_out</b> - Probability of an edge to be generated which connects nodes between communities
+  - Note: This value should be between 0 and 0.06 due to the range of P_in forcing the average number of edges to be 16
+- <b>P_in</b> - (Autmoatically calculated) Probability of an edge to be generated which connects nodes within communities
+- <b>stats</b> - True to show stats on the graph after generation. False to not show stats on the graph after generation
+
+Example of the output can be found in the `data/` directory.
 
 
-## GML To GraphML Conversion
+## GML To GraphML Conversion (gml_to_graphml.py)
 
-gml_to_graphml.py
-
-
+This script converts a GML graph file to a GraphML graph file. The input is a .gml file and the output is the corresponding .graphml file. The parameters are as follows:
+- <b>inFile</b> - The .gml graph file to convert to a .graphml graph file
+- <b>outFile</b> - The name of the .graphml output file to write to
