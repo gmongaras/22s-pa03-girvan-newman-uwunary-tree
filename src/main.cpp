@@ -476,62 +476,96 @@ int main(int argc, char* argv[]) {
 
         // Remove Edges from Graph to get Communities
         G = normalLoop(G);
-        PrintGraph(G);
 
         // Iterate over Nodes and Find Communities
-//        std::vector<std::vector<unsigned long>> communities;
-//        std::vector<unsigned long> totalVisited;
-//
-//        IndexMap index = get(boost::vertex_index, G);
-//        for (auto node = vertices(G); node.first != node.second; node.first) {
-//            auto itrNode = index[*node.first];
-//
-//            // If Node has been Visited, Skip Iteration
-//            for (auto testNode : totalVisited) {
-//                if (itrNode == testNode) { continue; }
-//            }
-//
-//            // Add Visited Nodes to Communities
-//            std::vector<unsigned long> visited;
-//            findCommunities(G, itrNode, visited);
-//
-//            std::vector<unsigned long> pushTemp{itrNode};
-//            if (!visited.empty()) { communities.push_back(visited); }
-//            else { communities.push_back(pushTemp); }
-//
-//            // Add Visited Nodes to Total Visited Nodes
-//            for (auto aNode : visited) {
-//                totalVisited.push_back(aNode);
-//            }
-//        }
-//
-//        // Graphing
-//
-//        std::vector<unsigned long> leftovers;
-//
-//        // Put all Leftover Nodes (Nodes Without Class) Into Same Class
-//
-//        for (auto community : communities) {
-//            if (community.size() == 1) {
-//                leftovers.push_back(community[0]);
-//            }
-//        }
-//
-//        // Store Leftovers in Main List
-//        for (auto leftover : leftovers) {
-//            for (int i = 0; i < communities.size(); ++i) {
-//                if (communities[i][0] == leftover) {
-//                    communities.erase(communities.begin() + i);
-//                }
-//            }
-//        }
-//
-//        if (!leftovers.empty()) { communities.push_back(leftovers); }
+        std::vector<std::vector<unsigned long>> communities;
+        std::vector<unsigned long> totalVisited;
+
+        IndexMap index = get(boost::vertex_index, G);
+        for (auto node = vertices(G); node.first != node.second; ++node.first) {
+            auto itrNode = index[*node.first];
+
+            // If Node has been Visited, Skip Iteration
+            for (auto testNode : totalVisited) {
+                if (itrNode == testNode) { continue; }
+            }
+
+            // Add Visited Nodes to Communities
+            std::vector<unsigned long> visited;
+            findCommunities(G, itrNode, visited);
+
+            std::vector<unsigned long> pushTemp;
+            pushTemp.push_back(itrNode);
+            if (!visited.empty()) { communities.push_back(visited); }
+            else { communities.push_back(pushTemp); }
+
+            // Add Visited Nodes to Total Visited Nodes
+            for (auto aNode : visited) {
+                totalVisited.push_back(aNode);
+            }
+        }
+
+        // Graphing
+
+        std::vector<unsigned long> leftovers;
+
+        // Put all Leftover Nodes (Nodes Without Class) Into Same Class
+        for (auto community : communities) {
+            if (community.size() == 1) {
+                leftovers.push_back(community[0]);
+            }
+        }
+
+        // Store Leftovers in Main List
+        for (auto leftover : leftovers) {
+            for (int i = 0; i < communities.size(); ++i) {
+                if (communities[i][0] == leftover) {
+                    communities.erase(communities.begin() + i);
+                }
+            }
+        }
+
+        if (!leftovers.empty()) { communities.push_back(leftovers); }
+
+
+
+        for (auto community : communities) {
+            for (auto comm : community) {
+                std::cout << comm << " - ";
+            }
+            std::cout << std::endl;
+        }
 
         // Write Graph to File
 //        std::ofstream O("output/output.graphml");
 //        boost::dynamic_properties D(boost::ignore_other_properties); // Dynamic Properties
 //        boost::write_graphml(std::cout, G, D);
+
+        // Implement This:
+        // # Print the classes
+        //    print("\n\n")
+        //    for c in range(0, len(comm)):
+        //        print(f"Class {c}: ", end="")
+        //        for v in comm[c][:-1]:
+        //            print(v, end=", ")
+        //        print(comm[c][-1])
+        //
+        //    # Get the communities for each node
+        //    y_communities = dict()
+        //    for n in orig._node.keys():
+        //        try:
+        //            y_communities[orig._node[n][commName]].append(n)
+        //        except KeyError:
+        //            y_communities[orig._node[n][commName]] = [n]
+        //
+        //    # Convert the dictionary to a list
+        //    y = [i for i in y_communities.values()]
+        //
+        //    # Calculate the accuracy
+        //    acc = calculateAccuracy(comm, y) = FIXME Need to Code
+        //
+        //    # Display the accuracy
+        //    print(f"Accuracy: {acc}")
 
     } else { std::cout << "なに ですか？ Err: Provide Program Argument (Graphml Path)"; }
 }
@@ -542,7 +576,7 @@ int main(int argc, char* argv[]) {
 // PyRun_SimpleString("sys.path.append('/src/dataGenerator.py')");
 // Py_Finalize(); // End Environment
 
-// Get Random Colors to Classify Every Node
+// Get Random Colors to Classify Every Node (Abandoned)
 // char hex[6];
 // char hex_char[]={'0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F'};
 // srand(time(nullptr));
