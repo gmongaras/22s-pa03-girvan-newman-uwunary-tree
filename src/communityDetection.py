@@ -3,7 +3,6 @@ import networkx as nx
 from collections import deque
 import numpy as np
 import random
-from collections import deque
 import math
 import random
 import matplotlib.pyplot as plt
@@ -22,11 +21,11 @@ import torch
 mode = "NN"                         # More to evaluate the Q value, use NN for neural network
                                     # and "GN" (or anything else) for normal Q function.
 commName = "community"              # The name of the community label in the graphml file
-inFile = "../data/dataset.graphml"  # The datafile to load in
+inFile = "../data/dataset1.graphml"  # The datafile to load in
 
 # Neural Network Parameters
 configFileName = "./networkParams.yml"  # The configuration file for the model
-modelFileName = "../models/model"       # The saved model to load in
+modelFileName = "../models/1024,512,256,128"       # The saved model to load in
 numClasses = 4                          # Number of classes to predict
 
 # Girvan Newman Parameters

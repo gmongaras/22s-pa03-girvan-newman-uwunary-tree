@@ -1,4 +1,3 @@
-from tkinter import E
 from networkx import graphml
 import networkx as nx
 from names import get_full_name
