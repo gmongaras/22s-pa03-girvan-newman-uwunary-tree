@@ -6,6 +6,7 @@
 #include <boost/graph/copy.hpp>
 
 // Standard Includes
+#include <time.h>
 #include <fstream>
 #include <random>
 #include <string>
@@ -526,10 +527,19 @@ int main(int argc, char* argv[]) {
         if (!leftovers.empty()) { communities.push_back(leftovers); }
 
         // Get Random Colors to Classify Every Node
-        std::string values = "123456789ABCDEF";
 
-        // if len(leftovers) > 0:
-        //        comm.append(leftovers)
+        char hex[7];
+        char hex_char[]={'0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F'};
+        srand(time(nullptr));
+
+        hex[0] = '#';
+        for (int i = 1; i < 7; ++i) {
+            hex[i] = hex_char[rand() % 16]; }
+        for(int i=0;i<6;i++)
+        {
+            std::cout<<hex[i];
+        }
+
 
 
     } else { std::cout << "なに ですか？ Err: Provide Program Argument (Graphml Path)"; }
