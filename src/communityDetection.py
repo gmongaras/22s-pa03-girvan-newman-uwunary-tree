@@ -369,7 +369,7 @@ def normalLoop(G):
         # Iterate over all nodes in the old graph
         for i in list(oldG.nodes):
             
-            # Get the neightbors for node i in the old graph
+            # Get the neightbors for node i in the graph
             neighbors_i = list(G.neighbors(i))
             k_i = len(neighbors_i)
             
@@ -381,7 +381,7 @@ def normalLoop(G):
             for j in list(G.nodes):
                 ## Calculate the B value
                 
-                # Get the neightbors for node j
+                # Get the neighbors for node j
                 neighbors_j = list(G.neighbors(j))
                 k_j = len(neighbors_j)
                 
