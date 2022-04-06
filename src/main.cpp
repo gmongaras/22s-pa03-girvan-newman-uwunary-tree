@@ -12,7 +12,8 @@
 #include <map>
 
 // Adjacency List, Basic Node, Standard Edge Definitions
-typedef boost::adjacency_list<boost::vecS, boost::vecS, boost::undirectedS> Graph;
+struct VertexProperty { long value; }; // Vertex ID
+typedef boost::adjacency_list<boost::vecS, boost::vecS, boost::undirectedS, VertexProperty> Graph;
 typedef boost::property_map<Graph, boost::vertex_index_t>::type IndexMap;
 typedef std::map<std::tuple<unsigned long, unsigned long>, float> EdgeStd;
 
@@ -58,6 +59,7 @@ public:
 void PrintGraph(Graph& G) {
     std::cout << "Vertex Amount: " << num_vertices(G) << "\n";
     std::cout << "Edge Amount: " << num_edges(G) << "\n";
+    boost::print_graph(G, boost::get(&VertexProperty::value, G), std::cout);
     auto es = boost::edges(G);
     for (auto eit = es.first; eit != es.second; ++eit) {
         std::cout << boost::source(*eit, G) << ' ' << boost::target(*eit, G) << std::endl;
@@ -65,9 +67,10 @@ void PrintGraph(Graph& G) {
 }
 
 // Reads In Graph
-Graph ReadGraph(std::ifstream& I) {
+Graph ReadGraph(std::ifstream& I, char* attName) {
     Graph G; // Creates Return Variable
     boost::dynamic_properties D(boost::ignore_other_properties); // Dynamic Properties
+    D.property(attName, boost::get(&VertexProperty::value, G)); // Vertex ID Getter
     boost::read_graphml(I, G, D); // Read In Program Argument Graphml
     return G; // Return Variable
 }
@@ -461,13 +464,15 @@ Graph normalLoop(Graph& G) {
 }
 
 // Handles Main Graph ( PrintGraph(G); )
-// Argument Example: data/football/football.graphml
+// Argument: [File Path] [Name String]
+// Example: data/football/football.graphml value
+// Example: data/dataset.graphml community
 int main(int argc, char* argv[]) {
-    if (argc >= 2) {
+    if (argc >= 3) {
 
         // Read in Graph
         std::ifstream I(argv[1]);
-        Graph G = ReadGraph(I);
+        Graph G = ReadGraph(I, argv[2]);
 
         // Copy Graph
         Graph OrigGraph;
@@ -529,12 +534,7 @@ int main(int argc, char* argv[]) {
 
 
 
-        for (auto community : communities) {
-            for (auto comm : community) {
-                std::cout << comm << " - ";
-            }
-            std::cout << std::endl;
-        }
+
 
         // Write Graph to File
 //        std::ofstream O("output/output.graphml");
