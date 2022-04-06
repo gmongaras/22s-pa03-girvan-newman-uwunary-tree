@@ -118,5 +118,8 @@ class network(nn.Module):
             raise Exception("Specified model file does no exist")
         
         # Load the model
-        self.load_state_dict(torch.load(fileName))
+        try:
+            self.load_state_dict(torch.load(fileName))
+        except:
+            raise RuntimeError("The network has different paramters than the model that's being loaded in.")
         self.eval()

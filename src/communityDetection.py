@@ -21,7 +21,7 @@ import torch
 mode = "NN"                         # More to evaluate the Q value, use NN for neural network
                                     # and "GN" (or anything else) for normal Q function.
 commName = "community"              # The name of the community label in the graphml file
-inFile = "../data/dataset1.graphml"  # The datafile to load in
+inFile = "../data/dataset3.graphml"  # The datafile to load in
 
 # Neural Network Parameters
 configFileName = "./networkParams.yml"  # The configuration file for the model
