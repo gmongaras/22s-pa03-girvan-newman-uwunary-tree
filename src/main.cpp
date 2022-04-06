@@ -532,8 +532,15 @@ int main(int argc, char* argv[]) {
 
         if (!leftovers.empty()) { communities.push_back(leftovers); }
 
-
-
+        // Print the Classes
+        std::cout << "\n\n";
+        for (int i = 0; i < communities.size(); ++i) {
+            std::cout << "Class " << i ;
+            for (int j = 0; j < communities[i].size() - 1; ++j) {
+                std::cout << j << ", ";
+            }
+            std::cout << communities[i][-1] << std::endl;
+        }
 
 
         // Write Graph to File
