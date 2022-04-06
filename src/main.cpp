@@ -528,17 +528,18 @@ int main(int argc, char* argv[]) {
 
         // Get Random Colors to Classify Every Node
 
-        char hex[7];
-        char hex_char[]={'0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F'};
-        srand(time(nullptr));
-
-        hex[0] = '#';
-        for (int i = 1; i < 7; ++i) {
-            hex[i] = hex_char[rand() % 16]; }
-        for(int i=0;i<6;i++)
-        {
-            std::cout<<hex[i];
-        }
+//        char hex[6];
+//        char hex_char[]={'0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F'};
+//        srand(time(nullptr));
+//
+//        hex[0] = '#';
+//        for (int i = 1; i <= 6; ++i) {
+//            hex[i] = hex_char[rand() % 16]; }
+//
+//        std::vector<char*> colormap;
+//        for (auto node : G) {
+//
+//        }
 
 
 
