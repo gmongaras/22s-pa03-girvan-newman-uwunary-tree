@@ -31,12 +31,12 @@ NN Algo: https://www.ijcai.org/Proceedings/16/Papers/321.pdf
 
 ### Girvan Newman
 
-;;;
+The first method used to solve the community detection problem is the Girvan Newman algorithm
 
 
 ### Neural Network
 
-;;;
+The first method used to solve the community detection problem is through the use of a nueral network. In this section, we explain how a neural network can be used to classify nodes into a set predicted number of communities.
 
 
 # Installation, Configuration, Execution
