@@ -476,33 +476,67 @@ int main(int argc, char* argv[]) {
         G = normalLoop(G);
 
         // Iterate over Nodes and Find Communities
-//        std::vector<> communities;
+        std::vector<std::vector<unsigned long>> communities;
+        std::vector<unsigned long> totalVisited;
 
-    }
-    else { std::cout << "なに ですか？ Err: Provide Program Argument (Graphml Path)"; }
+        IndexMap index = get(boost::vertex_index, G);
+        for (auto node = vertices(G); node.first != node.second; node.first) {
+            auto itrNode = index[*node.first];
+
+            // If Node has been Visited, Skip Iteration
+            for (auto testNode : totalVisited) {
+                if (itrNode == testNode) { continue; }
+            }
+
+            // Add Visited Nodes to Communities
+            std::vector<unsigned long> visited;
+            findCommunities(G, itrNode, visited);
+
+            std::vector<unsigned long> pushTemp{itrNode};
+            if (!visited.empty()) { communities.push_back(visited); }
+            else { communities.push_back(pushTemp); }
+
+            // Add Visited Nodes to Total Visited Nodes
+            for (auto aNode : visited) {
+                totalVisited.push_back(aNode);
+            }
+        }
+
+        // Graphing
+
+        std::vector<unsigned long> leftovers;
+
+        // Put all Leftover Nodes (Nodes Without Class) Into Same Class
+
+        for (auto community : communities) {
+            if (community.size() == 1) {
+                leftovers.push_back(community[0]);
+            }
+        }
+
+        // Store Leftovers in Main List
+        for (auto leftover : leftovers) {
+            for (int i = 0; i < communities.size(); ++i) {
+                if (communities[i][0] == leftover) {
+                    communities.erase(communities.begin() + i);
+                }
+            }
+        }
+
+        if (!leftovers.empty()) { communities.push_back(leftovers); }
+
+        // Get Random Colors to Classify Every Node
+        std::string values = "123456789ABCDEF";
+
+        // if len(leftovers) > 0:
+        //        comm.append(leftovers)
+
+
+    } else { std::cout << "なに ですか？ Err: Provide Program Argument (Graphml Path)"; }
 }
 
-//        boost::queue<vertex_descriptor> Q;
-//        boost::default_bfs_visitor V;
-//
-//        auto index_map = boost::get(boost::vertex_index, G);
-//        auto color_map = boost::make_vector_property_map<boost::default_color_type>(index_map);
-//
-////        for (auto vd : boost::make_iterator_range(vertices(G))) {
-////            std::cout << "vertex descriptor #" << vd
-////                      << " degree:" << degree(vd, G)
-////                      << " community:"     << G[vd].value
-////                      << "\n";
-////        }
-//
-//        for (auto vd : boost::make_iterator_range(vertices(G))) {
-//            boost::breadth_first_search(G, vd, Q, V, color_map); // Time Complexity: O(E + V)
-//        }
-//    }
-//else {
-//Py_Initialize(); // Initialize Environment
-//        PyRun_SimpleString("import sys"); // Call Import
-//        PyRun_SimpleString("sys.path.append('/src/dataGenerator.py')"); // Can't Get it to work!
-//Py_Finalize(); // End Environment
-//}
-
+// Python Cross-Functionality (Abandoned)
+// Py_Initialize(); // Initialize Environment
+// PyRun_SimpleString("import sys"); // Call Import
+// PyRun_SimpleString("sys.path.append('/src/dataGenerator.py')");
+// Py_Finalize(); // End Environment
