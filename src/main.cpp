@@ -6,15 +6,13 @@
 #include <boost/graph/copy.hpp>
 
 // Standard Includes
-#include <time.h>
 #include <fstream>
 #include <random>
 #include <string>
 #include <map>
 
 // Adjacency List, Basic Node, Standard Edge Definitions
-struct VertexProperty { long value; }; // Vertex ID (Community Number)
-typedef boost::adjacency_list<boost::vecS, boost::vecS, boost::undirectedS, VertexProperty> Graph;
+typedef boost::adjacency_list<boost::vecS, boost::vecS, boost::undirectedS> Graph;
 typedef boost::property_map<Graph, boost::vertex_index_t>::type IndexMap;
 typedef std::map<std::tuple<unsigned long, unsigned long>, float> EdgeStd;
 
@@ -60,7 +58,6 @@ public:
 void PrintGraph(Graph& G) {
     std::cout << "Vertex Amount: " << num_vertices(G) << "\n";
     std::cout << "Edge Amount: " << num_edges(G) << "\n";
-    boost::print_graph(G, boost::get(&VertexProperty::value, G), std::cout);
     auto es = boost::edges(G);
     for (auto eit = es.first; eit != es.second; ++eit) {
         std::cout << boost::source(*eit, G) << ' ' << boost::target(*eit, G) << std::endl;
@@ -71,7 +68,6 @@ void PrintGraph(Graph& G) {
 Graph ReadGraph(std::ifstream& I) {
     Graph G; // Creates Return Variable
     boost::dynamic_properties D(boost::ignore_other_properties); // Dynamic Properties
-    D.property("value", boost::get(&VertexProperty::value, G)); // Vertex ID Getter
     boost::read_graphml(I, G, D); // Read In Program Argument Graphml
     return G; // Return Variable
 }
@@ -473,75 +469,69 @@ int main(int argc, char* argv[]) {
         std::ifstream I(argv[1]);
         Graph G = ReadGraph(I);
 
+        // Copy Graph
+        Graph OrigGraph;
+        OrigGraph = Graph();
+        boost::copy_graph(G, OrigGraph);
+
         // Remove Edges from Graph to get Communities
         G = normalLoop(G);
+        PrintGraph(G);
 
         // Iterate over Nodes and Find Communities
-        std::vector<std::vector<unsigned long>> communities;
-        std::vector<unsigned long> totalVisited;
-
-        IndexMap index = get(boost::vertex_index, G);
-        for (auto node = vertices(G); node.first != node.second; node.first) {
-            auto itrNode = index[*node.first];
-
-            // If Node has been Visited, Skip Iteration
-            for (auto testNode : totalVisited) {
-                if (itrNode == testNode) { continue; }
-            }
-
-            // Add Visited Nodes to Communities
-            std::vector<unsigned long> visited;
-            findCommunities(G, itrNode, visited);
-
-            std::vector<unsigned long> pushTemp{itrNode};
-            if (!visited.empty()) { communities.push_back(visited); }
-            else { communities.push_back(pushTemp); }
-
-            // Add Visited Nodes to Total Visited Nodes
-            for (auto aNode : visited) {
-                totalVisited.push_back(aNode);
-            }
-        }
-
-        // Graphing
-
-        std::vector<unsigned long> leftovers;
-
-        // Put all Leftover Nodes (Nodes Without Class) Into Same Class
-
-        for (auto community : communities) {
-            if (community.size() == 1) {
-                leftovers.push_back(community[0]);
-            }
-        }
-
-        // Store Leftovers in Main List
-        for (auto leftover : leftovers) {
-            for (int i = 0; i < communities.size(); ++i) {
-                if (communities[i][0] == leftover) {
-                    communities.erase(communities.begin() + i);
-                }
-            }
-        }
-
-        if (!leftovers.empty()) { communities.push_back(leftovers); }
-
-        // Get Random Colors to Classify Every Node
-
-//        char hex[6];
-//        char hex_char[]={'0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F'};
-//        srand(time(nullptr));
+//        std::vector<std::vector<unsigned long>> communities;
+//        std::vector<unsigned long> totalVisited;
 //
-//        hex[0] = '#';
-//        for (int i = 1; i <= 6; ++i) {
-//            hex[i] = hex_char[rand() % 16]; }
+//        IndexMap index = get(boost::vertex_index, G);
+//        for (auto node = vertices(G); node.first != node.second; node.first) {
+//            auto itrNode = index[*node.first];
 //
-//        std::vector<char*> colormap;
-//        for (auto node : G) {
+//            // If Node has been Visited, Skip Iteration
+//            for (auto testNode : totalVisited) {
+//                if (itrNode == testNode) { continue; }
+//            }
 //
+//            // Add Visited Nodes to Communities
+//            std::vector<unsigned long> visited;
+//            findCommunities(G, itrNode, visited);
+//
+//            std::vector<unsigned long> pushTemp{itrNode};
+//            if (!visited.empty()) { communities.push_back(visited); }
+//            else { communities.push_back(pushTemp); }
+//
+//            // Add Visited Nodes to Total Visited Nodes
+//            for (auto aNode : visited) {
+//                totalVisited.push_back(aNode);
+//            }
 //        }
+//
+//        // Graphing
+//
+//        std::vector<unsigned long> leftovers;
+//
+//        // Put all Leftover Nodes (Nodes Without Class) Into Same Class
+//
+//        for (auto community : communities) {
+//            if (community.size() == 1) {
+//                leftovers.push_back(community[0]);
+//            }
+//        }
+//
+//        // Store Leftovers in Main List
+//        for (auto leftover : leftovers) {
+//            for (int i = 0; i < communities.size(); ++i) {
+//                if (communities[i][0] == leftover) {
+//                    communities.erase(communities.begin() + i);
+//                }
+//            }
+//        }
+//
+//        if (!leftovers.empty()) { communities.push_back(leftovers); }
 
-
+        // Write Graph to File
+//        std::ofstream O("output/output.graphml");
+//        boost::dynamic_properties D(boost::ignore_other_properties); // Dynamic Properties
+//        boost::write_graphml(std::cout, G, D);
 
     } else { std::cout << "なに ですか？ Err: Provide Program Argument (Graphml Path)"; }
 }
@@ -551,3 +541,13 @@ int main(int argc, char* argv[]) {
 // PyRun_SimpleString("import sys"); // Call Import
 // PyRun_SimpleString("sys.path.append('/src/dataGenerator.py')");
 // Py_Finalize(); // End Environment
+
+// Get Random Colors to Classify Every Node
+// char hex[6];
+// char hex_char[]={'0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F'};
+// srand(time(nullptr));
+// hex[0] = '#';
+// for (int i = 1; i <= 6; ++i) {
+//      hex[i] = hex_char[rand() % 16]; }
+// std::vector<char*> colormap;
+// for (auto node : G) {
