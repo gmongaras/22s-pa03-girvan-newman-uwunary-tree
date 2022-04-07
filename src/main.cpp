@@ -561,7 +561,7 @@ int main(int argc, char* argv[]) {
         boost::write_graphml(O, G, D);
         std::cout << "New Graph Written (To: data/output/output.graphml)";
 
-    } else { std::cout << "なに ですか？ Err: Provide Program Argument (Graphml Path)"; }
+    } else { std::cout << "なに ですか？ Err: Provide Program Argument (Graphml Path, Type)"; }
 }
 
 // Python Cross-Functionality (Abandoned)
