@@ -180,7 +180,7 @@ void edgeLabelling(Node*& node, Node*& parent, EdgeStd& edges) {
 // None (Edges Changed Within Function)
 void SSSP(Graph& G, unsigned long n, EdgeStd& edges) {
 
-    // Visited nodes, Tree Initialization
+    // Visited Nodes, Tree Initialization
     std::vector<Node*> visited;
     std::vector<Node*> deleteHelper;
     std::vector<Node*> deleteHelperSmall;
@@ -329,13 +329,12 @@ void findCommunities(Graph& G, unsigned long node, std::vector<unsigned long>& v
     }
 }
 
-// Use the Normal Q value to
-// Stop Loop when Removing
-
 // Inputs:
 // G = Our Graph
 // Outputs:
 // G = New Graph (Removed Edges)
+// Use the Normal Q value to
+// Stop Loop when Removing
 Graph normalLoop(Graph& G) {
 
     // Iterate Until Q Value isn't Increasing
@@ -463,6 +462,14 @@ Graph normalLoop(Graph& G) {
 
 }
 
+// Inputs:
+// X = The Predicted Labels of Nodes in Graph
+// Y = The Actual Labels of Nodes in Graph
+// Calculate Accuracy of Graph Given Labelled Nodes and Actual Labels
+float calculateAccuracy(std::vector<std::vector<unsigned long>>& X, std::vector<unsigned long>& Y) {
+
+}
+
 // Handles Main Graph ( PrintGraph(G); )
 // Argument: [File Path] [Name String]
 // Example: data/football/football.graphml value
@@ -551,8 +558,8 @@ int main(int argc, char* argv[]) {
             nCommunities.push_back(commIndex[*node.first]); }
 
         // Calculate Accuracy
-//        float acc = calculateAccuracy(communities, nCommunities);
-//        std::cout << "Accuracy:" << acc << std::endl;
+        float acc = calculateAccuracy(communities, nCommunities);
+        std::cout << "Accuracy:" << acc << std::endl;
 
         // Write Graph to File
         std::cout << "\n\n\nWriting New Graph (Original: " << argv[1] << ")" << std::endl;
