@@ -58,10 +58,10 @@ for g in range(0, numGraphs):
     #    - m = number of edges in the old graph
     
     # The B matrix
-    B_ij = []
+    B = []
     
     # Calculate the m value
-    m = numEdges_sample
+    m = len(list(Gcp.edges()))
     
     # Iterate over all nodes in the old graph (i)
     for i in list(Gcp.nodes):
@@ -76,16 +76,15 @@ for g in range(0, numGraphs):
             # Calculate the B value
             neighbors_j = list(Gcp.neighbors(j))
             k_j = len(neighbors_j)
-            #A_ij = 1 if ((i, j) in G.edges or (j, i) in G.edges) else 0
-            A_ij = len(list(set(neighbors_i) & set(neighbors_j)))
+            A_ij = 1 if ((i, j) in Gcp.edges or (j, i) in Gcp.edges) else 0
             
-            B = A_ij - (k_i*k_j)/(2*m)
+            B_ij = A_ij - (k_i*k_j)/(2*m)
         
             # Add the value to the B vector
-            B_i.append(B)
+            B_i.append(B_ij)
         
         # Add the vector to the B matrix
-        B_ij.append(B_i)
+        B.append(B_i)
     
     # Save the B matrix to the file
-    np.save(file, B_ij, allow_pickle=False)
+    np.save(file, B, allow_pickle=False)
