@@ -491,16 +491,16 @@ int main(int argc, char* argv[]) {
             auto itrNode = index[*node.first];
 
             // If Node has been Visited, Skip Iteration
+            bool inTotalVisited = false;
             for (auto testNode : totalVisited) {
-                if (itrNode == testNode) { continue; }
-            }
+                if (itrNode == testNode) { inTotalVisited = true; } }
+            if (inTotalVisited) { continue; }
 
             // Add Visited Nodes to Communities
             std::vector<unsigned long> visited;
             findCommunities(G, itrNode, visited);
 
-            std::vector<unsigned long> pushTemp;
-            pushTemp.push_back(itrNode);
+            std::vector<unsigned long> pushTemp{itrNode};
             if (!visited.empty()) { communities.push_back(visited); }
             else { communities.push_back(pushTemp); }
 
@@ -535,11 +535,11 @@ int main(int argc, char* argv[]) {
         // Print the Classes
         std::cout << "\n\n";
         for (int i = 0; i < communities.size(); ++i) {
-            std::cout << "Class " << i ;
-            for (int j = 0; j < communities[i].size() - 1; ++j) {
-                std::cout << j << ", ";
-            }
-            std::cout << communities[i][-1] << std::endl;
+            std::cout << "Class " << i << ": ";
+            for (auto j : communities[i]) {
+                if (j == communities[i][communities[i].size() - 1]) { break; }
+                std::cout << j << ", "; }
+            std::cout << communities[i][communities[i].size() - 1] << std::endl;
         }
 
 
