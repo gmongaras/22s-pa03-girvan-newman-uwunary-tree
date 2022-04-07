@@ -454,7 +454,7 @@ Graph normalLoop(Graph& G) {
         Q = (1 / (2 * (float)numEdges)) * (0.5 * sum1 - sum2);
 
         // Print Values, Increment
-        std::cout << "Modularity: " << Q << std::endl << std::endl;
+        std::cout << "Modularity: " << Q << std::endl;
         i += 1;
 
     }
@@ -534,7 +534,7 @@ int main(int argc, char* argv[]) {
         if (!leftovers.empty()) { communities.push_back(leftovers); }
 
         // Print the Classes
-        std::cout << "\n\nCluster Discovery: " << std::endl;
+        std::cout << "\n\n\nCluster Discovery: " << std::endl;
         for (int i = 0; i < communities.size(); ++i) {
             std::cout << "Class " << i << ": ";
             for (auto j : communities[i]) {
@@ -555,11 +555,11 @@ int main(int argc, char* argv[]) {
 //        std::cout << "Accuracy:" << acc << std::endl;
 
         // Write Graph to File
-        std::cout << "\n\nWriting New Graph (data/output.graphml)" << std::endl;
-        std::ofstream O("data/output.graphml");
+        std::cout << "\n\n\nWriting New Graph (Original: " << argv[1] << ")" << std::endl;
+        std::ofstream O("data/output/output.graphml");
         boost::dynamic_properties D(boost::ignore_other_properties); // Dynamic Properties
         boost::write_graphml(O, G, D);
-        std::cout << "New Graph Written";
+        std::cout << "New Graph Written (To: data/output/output.graphml)";
 
     } else { std::cout << "なに ですか？ Err: Provide Program Argument (Graphml Path)"; }
 }
