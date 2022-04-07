@@ -3,6 +3,12 @@ import torch
 import os
 
 
+device = torch.device('cpu')
+if torch.cuda.is_available():
+    device = torch.device('cuda')
+
+
+
 class network(nn.Module):
     # Initialize the network
     # Inputs:
@@ -44,7 +50,7 @@ class network(nn.Module):
             layers.append(nn.Linear(self.Encoder_layers[l], self.Encoder_layers[l+1]))
             layers.append(enc_activation)
         layers.append(nn.Linear(self.Encoder_layers[l+1], self.Encoder_layers[l+2]))
-        self.Encoder = nn.Sequential(*layers)
+        self.Encoder = nn.Sequential(*layers).to(device)
         
         # Create the Decoder
         layers = []
@@ -52,7 +58,7 @@ class network(nn.Module):
             layers.append(nn.Linear(self.Decoder_layers[l], self.Decoder_layers[l+1]))
             layers.append(dec_activation)
         layers.append(nn.Linear(self.Decoder_layers[l+1], self.Decoder_layers[l+2]))
-        self.Decoder = nn.Sequential(*layers)
+        self.Decoder = nn.Sequential(*layers).to(device)
         
         # Optimizer for the model
         self.optim = torch.optim.Adam(self.parameters())
@@ -66,6 +72,7 @@ class network(nn.Module):
     #   H - The encoded form of the input in the latent space
     #   M - The rebuilt form of H which should match X
     def forward(self, X):
+        X = X.to(device)
         H = self.Encoder(X)
         M = self.Decoder(H)
         return H, M
@@ -78,8 +85,8 @@ class network(nn.Module):
     #   b_i - The predictions from the model
     def loss(self, m_i, b_i):
         # Get the sigmoid values
-        sigmoid_m = torch.sigmoid(m_i)
-        sigmoid_b = torch.sigmoid(b_i)
+        sigmoid_m = torch.sigmoid(m_i).to(device)
+        sigmoid_b = torch.sigmoid(b_i).to(device)
         
         # Ensure the values don't produce a NaN value
         sigmoid_b = torch.where(sigmoid_b == 0, sigmoid_b+0.0000001, sigmoid_b)
@@ -118,5 +125,8 @@ class network(nn.Module):
             raise Exception("Specified model file does no exist")
         
         # Load the model
-        self.load_state_dict(torch.load(fileName))
+        try:
+            self.load_state_dict(torch.load(fileName, map_location=device))
+        except:
+            raise RuntimeError("The network has different paramters than the model that's being loaded in.")
         self.eval()

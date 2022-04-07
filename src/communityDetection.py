@@ -18,14 +18,14 @@ import torch
 
 
 # All Script Parameters
-mode = "NN"                         # More to evaluate the Q value, use NN for neural network
+mode = "NN"                         # Mode to evaluate the graph, use NN for neural network
                                     # and "GN" (or anything else) for normal Q function.
 commName = "community"              # The name of the community label in the graphml file
-inFile = "../data/dataset1.graphml"  # The datafile to load in
+inFile = "../data/dataset1.graphml" # The datafile to load in
 
 # Neural Network Parameters
 configFileName = "./networkParams.yml"  # The configuration file for the model
-modelFileName = "../models/1024,512,256,128"       # The saved model to load in
+modelFileName = "../models/512,1024,512"# The saved model to load in
 numClasses = 4                          # Number of classes to predict
 
 # Girvan Newman Parameters
@@ -327,9 +327,6 @@ def normalLoop(G):
         # Get the edges with the max betweeness
         a = list(betweeness.values())[np.argmax(np.array(list(betweeness.values()), dtype=np.float16))]
         maxBetweeness = np.argwhere(np.array(list(betweeness.values()), dtype=np.float16) >= a/2)
-        #maxBetweeness = np.argwhere(np.array(list(betweeness.values()), dtype=np.float16) == list(betweeness.values())[np.argmax(np.array(list(betweeness.values()), dtype=np.float16))])
-        #maxBetweeness = np.argwhere(np.array(list(betweeness.values()), dtype=np.float16) >= list(betweeness.values())[np.argmax(np.array(list(betweeness.values()), dtype=np.float16))]-(math.log2(len(list(G.edges)))))
-        #maxBetweeness = np.argwhere(np.array(list(betweeness.values()), dtype=np.float16) >= 3*math.log2(len(list(G.edges))))
         
         # Store the number of edges before removing any edges (m)
         m = len(list(G.edges))
