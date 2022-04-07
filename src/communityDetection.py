@@ -21,11 +21,11 @@ import torch
 mode = "NN"                         # Mode to evaluate the graph, use NN for neural network
                                     # and "GN" (or anything else) for normal Q function.
 commName = "community"              # The name of the community label in the graphml file
-inFile = "../data/dataset1.graphml" # The datafile to load in
+inFile = "../data/dataset10.graphml" # The datafile to load in
 
 # Neural Network Parameters
 configFileName = "./networkParams.yml"  # The configuration file for the model
-modelFileName = "../models/512,1024,512"# The saved model to load in
+modelFileName = "../models/64,32,16,8"# The saved model to load in
 numClasses = 4                          # Number of classes to predict
 
 # Girvan Newman Parameters
