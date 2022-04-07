@@ -480,6 +480,7 @@ int main(int argc, char* argv[]) {
         boost::copy_graph(G, OrigGraph);
 
         // Remove Edges from Graph to get Communities
+        std::cout << "Remove Edges: " << std::endl;
         G = normalLoop(G);
 
         // Iterate over Nodes and Find Communities
@@ -533,7 +534,7 @@ int main(int argc, char* argv[]) {
         if (!leftovers.empty()) { communities.push_back(leftovers); }
 
         // Print the Classes
-        std::cout << "\n\n";
+        std::cout << "\n\nCluster Discovery: " << std::endl;
         for (int i = 0; i < communities.size(); ++i) {
             std::cout << "Class " << i << ": ";
             for (auto j : communities[i]) {
@@ -542,37 +543,23 @@ int main(int argc, char* argv[]) {
             std::cout << communities[i][communities[i].size() - 1] << std::endl;
         }
 
+        // Get the communities for each node
+        std::vector<unsigned long> nCommunities;
+
+        auto commIndex = boost::get(&VertexProperty::value, OrigGraph);
+        for (auto node = vertices(G); node.first != node.second; ++node.first) {
+            nCommunities.push_back(commIndex[*node.first]); }
+
+        // Calculate Accuracy
+//        float acc = calculateAccuracy(communities, nCommunities);
+//        std::cout << "Accuracy:" << acc << std::endl;
 
         // Write Graph to File
-//        std::ofstream O("output/output.graphml");
-//        boost::dynamic_properties D(boost::ignore_other_properties); // Dynamic Properties
-//        boost::write_graphml(std::cout, G, D);
-
-        // Implement This:
-        // # Print the classes
-        //    print("\n\n")
-        //    for c in range(0, len(comm)):
-        //        print(f"Class {c}: ", end="")
-        //        for v in comm[c][:-1]:
-        //            print(v, end=", ")
-        //        print(comm[c][-1])
-        //
-        //    # Get the communities for each node
-        //    y_communities = dict()
-        //    for n in orig._node.keys():
-        //        try:
-        //            y_communities[orig._node[n][commName]].append(n)
-        //        except KeyError:
-        //            y_communities[orig._node[n][commName]] = [n]
-        //
-        //    # Convert the dictionary to a list
-        //    y = [i for i in y_communities.values()]
-        //
-        //    # Calculate the accuracy
-        //    acc = calculateAccuracy(comm, y) = FIXME Need to Code
-        //
-        //    # Display the accuracy
-        //    print(f"Accuracy: {acc}")
+        std::cout << "\n\nWriting New Graph (data/output.graphml)" << std::endl;
+        std::ofstream O("data/output.graphml");
+        boost::dynamic_properties D(boost::ignore_other_properties); // Dynamic Properties
+        boost::write_graphml(O, G, D);
+        std::cout << "New Graph Written";
 
     } else { std::cout << "なに ですか？ Err: Provide Program Argument (Graphml Path)"; }
 }
