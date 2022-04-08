@@ -1,77 +1,70 @@
 import yaml
 import torch
-from torch import nn
 import numpy as np
 import os
 from model import network
 
+# Note: Change These Parameters to Configure as Discussed in the Readme
 
 # Parameters
-configFileName = "./networkParams.yml"  # The configuration file for the network
-dataDir = "../networkTrainData"         # The directory that stores the data to train the mode
-numEpochs = 1000                        # Number of epochs to train the model for
-trainPercent = 1.0                      # Percent of data to trian model on
-saveFileName = "../models/model"        # The file to save the model to
+configFileName = "./networkParams.yml"  # The Configuration File for the Network
+dataDir = "../networkTrainData"  # The Directory that Stores Data to Train Model
+numEpochs = 1000  # Number of Epochs to Train the Model for
+trainPercent = 1.0  # Percent Data to Train the Model on
+saveFileName = "../models/model"  # File to Save the Model to
 
-
-
-
-
-# Load the configuration file
+# Load Configuration File
 with open(configFileName) as ymlFile:
     cfg = yaml.safe_load(ymlFile)
 
-# Save the info from the file
+# Save Info from File
 inDim = cfg["inDim"]
 EncoderInfo = cfg["Encoder"]
 DecoderInfo = cfg["Decoder"]
 
-
-# Create the network
+# Create Network
 Network = network(inDim, EncoderInfo, DecoderInfo)
 
-
-# The array to hold the data
+# Array to Hold Data
 data = []
 
-# Load in the train data
+# Load in Train Data
 for fileName in os.listdir(dataDir):
     with open(os.path.join(dataDir, fileName), "rb") as file:
         arr = np.load(file, allow_pickle=False)
         data.append(arr)
 
-# Convert the data to a numpy array
+# Convert Data to Numpy Array
 data = np.array(data)
 
-
-# Create a test/train split of the data
-trainSize = int(len(data)*trainPercent)
+# Create Test/Train Split of Data
+trainSize = int(len(data) * trainPercent)
 testSize = len(data) - trainSize
 np.random.shuffle(data)
 train = torch.tensor(data[0:trainSize], dtype=torch.float32, requires_grad=False)
 test = torch.tensor(data[trainSize:testSize], dtype=torch.float32, requires_grad=False)
 
+# Make Sure Train/Test Size = Model Dimensions
+assert train.shape[-1] == inDim, f"The shape of the training data number be the same " \
+                                 f"as the shape of the network input. Network input: {inDim}. " \
+                                 f"Data shape: {train.shape[-1]}"
 
-# Make the sure train/test size is the same as the
-# model dimensions
-assert train.shape[-1] == inDim, f"The shape of the training data number be the same as the shape of the network input. Network input: {inDim}. Data shape: {train.shape[-1]}"
+# Train Network for numEpochs Number of Epochs
+for epoch in range(1, numEpochs + 1):
 
-
-# Train the network for numEpochs number of epochs
-for epoch in range(1, numEpochs+1):
-    # Get predictions from the model
+    # Get Predictions from Model
     H, M = Network(train)
     
-    # Get the loss for the predictions
+    # Get Loss for Predictions
     loss = -Network.loss(train, M)
     
-    # Get the gradients
+    # Get Gradients
     Network.optim.zero_grad()
     loss.backward()
     
-    # Update the model
+    # Update Model
     Network.optim.step()
     print(f"Step: {epoch} \t Loss: {loss.cpu().detach().numpy().item()}")
 
-# Save the model
+# Save Model
 Network.saveModel(saveFileName)

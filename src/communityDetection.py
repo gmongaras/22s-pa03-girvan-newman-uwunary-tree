@@ -73,9 +73,9 @@ def edgeLabelling(node, parent, edges):
     if node.labeled:
         # Divide Betweenness of Parent Nodes
         if len(node.children) == 0:
-            betweenness = 1/float(len(node.parents))
+            betweenness = 1 / float(len(node.parents))
         else:
-            betweenness = node.shortestPaths/float(len(node.parents))
+            betweenness = node.shortestPaths / float(len(node.parents))
         
         # Store Betweenness of Node and Parent
         try:
@@ -516,7 +516,7 @@ def calculateAccuracy(X, y):
                 break
     
     # Calculate Accuracy, Return
-    accuracy = float(correct)/float(total)
+    accuracy = float(correct) / float(total)
     return accuracy
             
 
@@ -534,7 +534,7 @@ def main():
         
         # Iterate over Nodes and Find Communities
         comm = []  # Found Communities
-        totalVisited = []   # Total Visited Nodes
+        totalVisited = []  # Total Visited Nodes
         for node in list(G.nodes):
 
             # If Node has been Visited, Skip Iteration
