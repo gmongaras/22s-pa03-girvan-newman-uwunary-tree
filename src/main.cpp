@@ -466,7 +466,59 @@ Graph normalLoop(Graph& G) {
 // X = The Predicted Labels of Nodes in Graph
 // Y = The Actual Labels of Nodes in Graph
 // Calculate Accuracy of Graph Given Labelled Nodes and Actual Labels
-float calculateAccuracy(std::vector<std::vector<unsigned long>>& X, std::vector<unsigned long>& Y) {
+float calculateAccuracy(std::vector<std::vector<unsigned long>>& X, std::vector<std::vector<unsigned long>>& Y) {
+    int correct = 0; // Number Nodes Classified Correctly
+
+    // Calculate Total Number of Nodes in Graph
+    int total = 0;
+    for (auto index : X) {
+        total += index.size(); }
+
+    // Iterate Through all Communities in X
+    for (auto xComm : X) {
+
+        // Find Y Community that Matches Most With the X Community (Greatest Intersection)
+        std::vector<unsigned long> best; // Best Group Match
+        int bestIndex; // Index in Y of Best Match
+        int bestScore = 0; // The Best Number of Nodes that Match Between Groups
+
+        // Iterate over all Communities in Y
+        for (int i = 0; i < Y.size(); ++i) {
+            std::vector<unsigned long> yComm = Y[i];
+
+            // Get Intersection of the Two Lists (xComm, yComm)
+            std::vector<unsigned long> intersections;
+            for (auto x : xComm) {
+                for (auto y : yComm) {
+                    if (x == y) { intersections.push_back(x); }
+                }
+            }
+
+            // Store Y List if it Matches Better than Rest
+            if (intersections.size() > bestScore) {
+                best = yComm;
+                bestIndex = i;
+                bestScore = intersections.size();
+            }
+
+            // If There is a Best Score, Update Accumulators
+            if (bestScore > 0) {
+
+                // Update Number of Nodes that Were Classified Correctly
+                correct += bestScore;
+
+                // Remove Y Community From Labels
+                Y.erase(Y.begin() + bestIndex);
+
+                // Stop Loop if There are no More Nodes in Y
+                if (Y.size() == 0) { break; }
+            }
+        }
+    }
+
+    // Calculate Accuracy, Return
+    float accuracy = float(correct) / float(total);
+    return accuracy;
 
 }
 
@@ -550,16 +602,21 @@ int main(int argc, char* argv[]) {
             std::cout << communities[i][communities[i].size() - 1] << std::endl;
         }
 
-        // Get the communities for each node
-        std::vector<unsigned long> nCommunities;
-
+        // Get Communities for Each Node
+        int maxCommSize = -1; // Holds Index of the Largest Valued Community
+        IndexMap indexVal = get(boost::vertex_index, OrigGraph);
         auto commIndex = boost::get(&VertexProperty::value, OrigGraph);
         for (auto node = vertices(G); node.first != node.second; ++node.first) {
-            nCommunities.push_back(commIndex[*node.first]); }
+            if (commIndex[*node.first] > maxCommSize) { maxCommSize = commIndex[*node.first]; } }
+
+        // Initialize nCommunities With Max Community Value, Push Back
+        std::vector<std::vector<unsigned long>> nCommunities(maxCommSize + 1);
+        for (auto node = vertices(G); node.first != node.second; ++node.first) {
+            nCommunities[commIndex[*node.first]].push_back(indexVal[*node.first]); }
 
         // Calculate Accuracy
         float acc = calculateAccuracy(communities, nCommunities);
-        std::cout << "Accuracy:" << acc << std::endl;
+        std::cout << "Accuracy: " << acc << std::endl;
 
         // Write Graph to File
         std::cout << "\n\n\nWriting New Graph (Original: " << argv[1] << ")" << std::endl;
