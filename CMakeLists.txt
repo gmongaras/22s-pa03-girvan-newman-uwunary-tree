@@ -10,7 +10,7 @@ cmake_minimum_required(VERSION 3.15)
 project(22s-pa03-girvan-newman-uwunary-tree)
 
 # Executable
-add_executable(22s-pa03-girvan-newman-uwunary-tree src/main.cpp src/dataGenerator.py)
+add_executable(22s-pa03-girvan-newman-uwunary-tree src/main.cpp)
 
 # Configure Files
 file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/data DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
@@ -32,19 +32,19 @@ message(STATUS "Boost version: ${Boost_VERSION}")
 # endif()
 
 # Find Python Packages (Interpreter and Development Artifacts)
-find_package(Python REQUIRED COMPONENTS Interpreter Development)
-message(STATUS "Python version: ${Python_VERSION}")
-find_package(PythonLibs REQUIRED)
+# find_package(Python REQUIRED COMPONENTS Interpreter Development)
+# message(STATUS "Python version: ${Python_VERSION}")
+# find_package(PythonLibs REQUIRED)
 
 # Include Python Directories (Important Stuff)
-include_directories(${PYTHON_INCLUDE_DIRS})
+# include_directories(${PYTHON_INCLUDE_DIRS})
 
 # Linking Correct Libraries (In Find Package) (Must End File)
 target_link_libraries(22s-pa03-girvan-newman-uwunary-tree
         PUBLIC Boost::graph
         PUBLIC Boost::system
-        PUBLIC Boost::filesystem
-        PUBLIC ${PYTHON_LIBRARIES})
+        PUBLIC Boost::filesystem)
+#        PUBLIC ${PYTHON_LIBRARIES})
 
 # Only One Target Link is Allowed, See Above
 # target_link_libraries(22s-pa03-girvan-newman-uwunary-tree ${PYTHON_LIBRARIES})
