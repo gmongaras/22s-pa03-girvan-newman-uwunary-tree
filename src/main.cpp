@@ -17,7 +17,7 @@ typedef boost::adjacency_list<boost::vecS, boost::vecS, boost::undirectedS, Vert
 typedef boost::property_map<Graph, boost::vertex_index_t>::type IndexMap;
 typedef std::map<std::tuple<unsigned long, unsigned long>, float> EdgeStd;
 
-// Nowode Class! OwO :)
+// Nowode Class! UwU :)
 class Node {
 
 public:
@@ -477,7 +477,7 @@ float calculateAccuracy(std::vector<std::vector<unsigned long>>& X, std::vector<
     // Iterate Through all Communities in X
     for (auto xComm : X) {
 
-        // Find Y Community that Matches Most With the X Community (Greatest Intersection)
+        // Find Y Community that Matches Most With the X Community (The Greatest Intersection)
         std::vector<unsigned long> best; // Best Group Match
         int bestIndex; // Index in Y of Best Match
         int bestScore = 0; // The Best Number of Nodes that Match Between Groups
@@ -570,8 +570,6 @@ int main(int argc, char* argv[]) {
             }
         }
 
-        // Graphing
-
         std::vector<unsigned long> leftovers;
 
         // Put all Leftover Nodes (Nodes Without Class) Into Same Class
@@ -592,14 +590,17 @@ int main(int argc, char* argv[]) {
 
         if (!leftovers.empty()) { communities.push_back(leftovers); }
 
-        // Print the Classes
-        std::cout << "\n\n\nCluster Discovery: " << std::endl;
+        // Output Object
+        std::ofstream O1("data/output/output.txt");
+
+        // Output Cluster Discovery
+        O1 << "Cluster Discovery: " << std::endl;
         for (int i = 0; i < communities.size(); ++i) {
-            std::cout << "Class " << i << ": ";
+            O1 << "Class " << i << ": ";
             for (auto j : communities[i]) {
                 if (j == communities[i][communities[i].size() - 1]) { break; }
-                std::cout << j << ", "; }
-            std::cout << communities[i][communities[i].size() - 1] << std::endl;
+                O1 << j << ", "; }
+            O1 << communities[i][communities[i].size() - 1] << std::endl;
         }
 
         // Get Communities for Each Node
@@ -614,15 +615,16 @@ int main(int argc, char* argv[]) {
         for (auto node = vertices(G); node.first != node.second; ++node.first) {
             nCommunities[commIndex[*node.first]].push_back(indexVal[*node.first]); }
 
-        // Calculate Accuracy
+        // Calculate Accuracy, Output
         float acc = calculateAccuracy(communities, nCommunities);
-        std::cout << "Accuracy: " << acc << std::endl;
+        O1 << "Accuracy: " << acc << std::endl;
+        std::cout << "\nInformation Written (To: data/output/output.txt)" << std::endl;
 
         // Write Graph to File
-        std::cout << "\n\n\nWriting New Graph (Original: " << argv[1] << ")" << std::endl;
-        std::ofstream O("data/output/output.graphml");
+        std::cout << "Writing New Graph (Original: " << argv[1] << ")" << std::endl;
+        std::ofstream O2("data/output/output.graphml");
         boost::dynamic_properties D(boost::ignore_other_properties); // Dynamic Properties
-        boost::write_graphml(O, G, D);
+        boost::write_graphml(O2, G, D);
         std::cout << "New Graph Written (To: data/output/output.graphml)";
 
     } else { std::cout << "なに ですか？ Err: Provide Program Argument (Graphml Path, Type)"; }
