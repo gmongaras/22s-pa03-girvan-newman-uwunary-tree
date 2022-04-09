@@ -15,14 +15,15 @@ import torch
 # Note: Change These Parameters to Configure as Discussed in the Readme
 
 # All Script Parameters
-mode = "NN"  # Mode to Evaluate Graph, "NN" = Neural Network, "GN" = Normal Q Function
-commName = "community"  # Name of the Community Label in graphml file
-inFile = "../data/dataset10.graphml"  # Datafile to Load in
+mode = "NN"                         # Mode to evaluate the graph, use NN for neural network
+                                    # and "GN" (or anything else) for normal Q function.
+commName = "community"              # The name of the community label in the graphml file
+inFile = "../data/dataset1.graphml" # The datafile to load in
 
 # Neural Network Parameters
-configFileName = "./networkParams.yml"  # Configuration File for the Model
-modelFileName = "../models/64,32,16,8"  # The Saved Model to Load in (See .yml)
-numClasses = 4  # Number of Classes to Predict
+configFileName = "./networkParams.yml"  # The configuration file for the model
+modelFileName = "../models/256,128"# The saved model to load in
+numClasses = 4                          # Number of classes to predict
 
 # Girvan Newman Parameters
 nodeSubsetPercent = 0.8  # Percent of Random Nodes to Pick in the Betweenness Algorithm
