@@ -3,153 +3,145 @@ import networkx as nx
 from names import get_full_name
 import random
 
+# Note: Change These Parameters to Configure as Discussed in the Readme
 
+# Hyper Parameters
+outFile = "../data/dataset.graphml"  # File to Save Graph to
+vertices = 128  # Number of vertices In Graph (Nodes)
+communities = 4  # Number of Communities in Graph
+communitySize = vertices//communities   # Number of Vertices in Each Community
+rand = True  # True to Generate Random Values
+names = True  # True to Generate Random Names
+P_out = 0.03  # Probability of Edge Between Vertices of Different Group
+P_in = -4.1171 * P_out + 0.3063  # Probability of Edge Between Vertices of Same Group
+stats = True  # True to see Stats After Running
 
-# Hyperparameters
-outFile = "../data/dataset.graphml"     # File to save the graph to
-vertices = 128                          # Number of vertices (nodes) in the graph
-communities = 4                         # Number of communities in the graph
-communitySize = vertices//communities   # Number of vertices in each community
-rand = True                             # True to generate random values
-names = True                            # True to generate random names
-P_out = 0.03                            # Probability of edge between vertices of different group
-P_in = -4.1171*P_out + 0.3063           # Probability of edge between vertices of same group
-stats = True                            # True to see stats after running
-
-
-# Make sure P_in is greater than P_out
+# Necessary Assertion
 assert P_in > P_out
 
-
-
-# Initialize the graph
+# Initialize Graph
 G = nx.Graph()
 
-
-# Classify each node into a community
+# Classify Each Node into a Community
 comm = sum([[i for j in range(0, communitySize)] for i in range(0, communities)], [])
 while len(comm) < vertices:
     comm.append(random.choice([i for i in range(0, communitySize)]))
 random.shuffle(comm)
 
+# Add Nodes to Graph
 
-### Add the nodes to the graph
-
-# Store names
-if names == True:
+# Store Name
+if names:
     nodes = []
     vals = []
     
-    # Store vertices number of nodes
-    for i in range(0, vertices-1):
-        # Get a name
+    # Store Vertices Number of Nodes
+    for i in range(0, vertices - 1):
+
+        # Get a Name
         v = get_full_name()
         
-        # ensure the name is new
+        # Ensure the Name is New
         while v in vals:
             v = get_full_name()
         
-        # Store the name
-        nodes.append((v, {"community":comm[i]}))
+        # Store Name
+        nodes.append((v, {"community": comm[i]}))
         vals.append(v)
     
-    vals.append("Sussy Baka")
-    nodes.append(("Sussy Baka", {"community":comm[i]}))
+    vals.append("Sussy Baka")  # Hehe Rawr (●´ω｀●)
+    nodes.append(("Sussy Baka", {"community": comm[i]}))
         
-# Store sequential numbers
-elif rand == False:
+# Store Sequential Numbers
+elif not rand:
     vals = [i for i in range(0, vertices)]
-    nodes = [(i, {"community":comm[i]}) for i in range(0, vertices)]
+    nodes = [(i, {"community": comm[i]}) for i in range(0, vertices)]
     
-# Store random numbers
-elif rand == True:
+# Store Random Numbers
+elif rand:
     nodes = []
     vals = []
     
-    # Store vertices number of nodes
+    # Store Vertices Number of Nodes
     for i in range(0, vertices):
-        # Get a random number
-        v = random.randint(0, vertices*100)
+
+        # Get a Random Number
+        v = random.randint(0, vertices * 100)
         
-        # ensure the number is new
+        # Ensure the Number is New
         while v in vals:
-            v = random.randint(0, vertices*100)
+            v = random.randint(0, vertices * 100)
         
-        # Store the number
-        nodes.append((v, {"community":comm[i]}))
+        # Store Number
+        nodes.append((v, {"community": comm[i]}))
         vals.append(v)
 
-# Add the nodes to the graph
+# Add Nodes to Graph
 G.add_nodes_from(nodes)
 
+# Add Edges
 
-
-### Add the edges
-
-# Iterate over all nodes
+# Iterate over all Nodes
 for n1 in range(0, vertices):
-    # Iterate over all nodes again without connections
-    # to the current node, n1
+
+    # Iterate over all Nodes Again Without Connections to Current (n1)
     for n2 in range(0, vertices):
-        # If the nodes are equal, skip this iteration
+
+        # If Nodes are Equal, Skip Iteration
         if vals[n1] == vals[n2]:
             continue
         
-        # Get a random value between 0 and 1.
+        # Get a Random Value Between 0 and 1.
         v = random.random()
         
-        # If the nodes are a part of the same community and the
-        # random value is less than P_in, add an edge between
-        # the two nodes
+        # If the Nodes are Part of the Same Community and the Random
+        # Value is Less than P_in, add an Edge Between the Two Nodes
         if comm[n1] == comm[n2] and v < P_in:
             G.add_edge(vals[n1], vals[n2])
         
-        # If the nodes are not a part of the same community and the
-        # ranodm value is less than P_out, add an edge between
-        # the two nodes
+        # If the Nodes are not Part of the Same Community and the Random
+        # Value is Less than P_out, add an Edge Between the Two Nodes
         elif comm[n1] != comm[n2] and v < P_out:
             G.add_edge(vals[n1], vals[n2])
 
-
-# Save the graph
+# Save Graph
 graphml.write_graphml(G, outFile)
 
+# If Stats, Show Stats on the Graph
+if stats:
 
-# If stats is True, show stats on the graph
-if stats == True:
-    ### Get the average degree of all nodes
+    # Get the Average Degree of all Nodes
     
-    # Holds all nodes degree counts
-    # Format:
-    #   node: {Total, in count, out count}
+    # Holds all Nodes Degree Counts
+    # Format: node: {Total, in count, out count}
     degreeCts = dict()
     
-    # Iterate over all edges in the graph
+    # Iterate over all Edges in the Graph
     for e in list(G.edges):
-        ## Increase the degree counts for each part of the edge
+
+        # Increase the Degree Counts for Each Part of the Edge
         
-        # Make sure the edges are in the dictionary
+        # Make sure the Edges are in the Dictionary
         if e[0] not in degreeCts.keys():
             degreeCts[e[0]] = [0, 0, 0]
         if e[1] not in degreeCts.keys():
             degreeCts[e[1]] = [0, 0, 0]
         
-        # If the communities are the same, increase the in count
-        # for both edges
+        # If the Communities are the Same, Increase in Count for Both Edges
         if comm[vals.index(e[0])] == comm[vals.index(e[1])]:
             degreeCts[e[0]][1] += 1
             degreeCts[e[1]][1] += 1
-        # If the communities are different, increase the out count
-        # for both edges
+
+        # If the Communities are Different, Increase the out Count for Both Edges
         else:
             degreeCts[e[0]][2] += 1
             degreeCts[e[1]][2] += 1
         
-        # Increase the total count of both edges
+        # Increase Total Count of Both Edges
         degreeCts[e[0]][0] += 1
         degreeCts[e[1]][0] += 1
     
-    # Get the average of the degree counts
+    # Get Average of the Degree Counts
     print(f"Number of nodes: {len(degreeCts.keys())}")
     print(f"Number of edges: {len(list(G.edges))}")
     print(f"Average degree count: {sum([i[0] for i in degreeCts.values()])/len(degreeCts.keys())}")

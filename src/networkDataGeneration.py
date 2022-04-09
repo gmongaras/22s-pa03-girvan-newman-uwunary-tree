@@ -3,24 +3,22 @@ import random
 import numpy as np
 import os
 
+# Note: Change These Parameters to Configure as Discussed in the Readme
 
 # Parameters
-dirName = "../networkTrainData"                  # Directory to save arrays to
-numNodes = 128                                   # Number of nodes in the graph
-percentFunc = lambda : random.uniform(0.01, 0.6) # Function to get random percent
-numGraphs = 1000                                 # Number of graphs to generate
+dirName = "../networkTrainData"  # Directory to save arrays to
+numNodes = 128  # Number of nodes in the graph
+percentFunc = lambda: random.uniform(0.01, 0.6)  # Function to get random percent
+numGraphs = 1000  # Number of graphs to generate
 
-
-
-# Create the graph object
+# Create Graph Object
 G = nx.Graph()
 
-# Add numNodes number of nodes to the graph
+# Add numNodes Number of Nodes to Graph
 for n in range(0, numNodes):
     G.add_node(n)
 
-
-# Get a list of all possible edges in the graph
+# Get List of all Possible Edges in Graph
 edges = []
 for n1 in range(0, numNodes):
     for n2 in range(0, numNodes):
@@ -28,63 +26,55 @@ for n1 in range(0, numNodes):
             edges.append((n1, n2))
 numEdges = len(edges)
 
-
-
-# Generate numGraphs number of graphs
+# Generate numGraphs Number of Graphs
 for g in range(0, numGraphs):
-    # Open the file to write to
+
+    # Open File to Write to
     file = open(os.path.join(dirName, str(g)+".npy"), "wb")
     
-    # Get the number of edges
+    # Get Number of Edges
     numEdges_sample = int(percentFunc()*numEdges)
     
-    # Get a subset of the edges
+    # Get Subset of Edges
     random.shuffle(edges)
     sub = edges[:numEdges_sample]
     
-    # Create a copy of the graph
+    # Create Copy of Graph
     Gcp = G.copy()
     
-    # Add the edges to the copied graph
+    # Add Edges to Copied Graph
     Gcp.add_edges_from(sub)
     
-    
-    
-    ### Compute the B value
-    # - B_ij = (A - (k_i-k_j)/2m)
-    #    - A_ij = Number of edges between node i and j
-    #    - k_i = degree of node i
-    #    - k_j = degree of node j
-    #    - m = number of edges in the old graph
-    
-    # The B matrix
+    # B Matrix
     B = []
     
-    # Calculate the m value
+    # Calculate m Value
     m = len(list(Gcp.edges()))
     
-    # Iterate over all nodes in the old graph (i)
+    # Iterate over Nodes in Old Graph (i)
     for i in list(Gcp.nodes):
         neighbors_i = list(Gcp.neighbors(i))
         k_i = len(neighbors_i)
-        
-        # B vector for node i
+
+        # B Vector
         B_i = []
         
-        # Iterate over all nodes in the new graph (j)
+        # Iterate over Nodes in New Graph (j)
         for j in list(Gcp.nodes):
-            # Calculate the B value
+
+            # Calculate B Value
             neighbors_j = list(Gcp.neighbors(j))
             k_j = len(neighbors_j)
             A_ij = 1 if ((i, j) in Gcp.edges or (j, i) in Gcp.edges) else 0
-            
-            B_ij = A_ij - (k_i*k_j)/(2*m)
+
+            # Calculating B
+            B_ij = A_ij - (k_i * k_j) / (2 * m)
         
-            # Add the value to the B vector
+            # Add Value to B Vector
             B_i.append(B_ij)
         
-        # Add the vector to the B matrix
+        # Add Vector to B Matrix
         B.append(B_i)
     
-    # Save the B matrix to the file
+    # Save B Matrix to File
     np.save(file, B, allow_pickle=False)
