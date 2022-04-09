@@ -1,3 +1,9 @@
+To-do:
+- link medium articles
+- spell check
+- Python Project Configuration
+
+
 # Medium Articles
 
 We wrote articles discussing the theory behind these implementations! Please read:
@@ -8,6 +14,27 @@ We wrote articles discussing the theory behind these implementations! Please rea
 
 - [General Project Information](#general-project-information)
 - [Project Description](#project-description)
+  - The Problem
+  - The Implementation
+    - Community Detection
+    - Girvan Newman
+    - Neural Network
+      - Results
+- [Installation, Configuration, Execution](#installation-configuration-execution)
+  - Project Installation
+  - Cpp Project Configuration
+  - Cpp Main Project Execution
+  - Python Project Configuration
+  - Python Main Project Execution
+    - All Script Parameters
+    - Neural Network Parameters
+    - Girvan Newman Parameters
+  - Network Training
+  - Network Data Generation
+    - Model Configuration
+  - Data Generation
+  - GML To GraphML Conversion
+- [References](#references)
 
 
 
@@ -44,7 +71,21 @@ To know when to stop removing edges, a value known as Modularity is calculated, 
 
 ### Neural Network
 
-The second method we used to solve the community detection problem was through the use of a nueral network. In this section, we explain how a neural network can be used to classify nodes into a set predicted number of communities. (Gabriel U do this)
+The second method we used to solve the community detection problem was through the use of a nueral network. Instead of using the graph structure, the graph is encoded to an <i>N</i>x<i>N</i> matrix where <i>N</i> is the number of nodes in the graph. This matrix encodes how each node relates to each other node in the graph and is called the modularity matrix. This matrix is computed as follows:
+
+<p align="center">
+<img src="https://render.githubusercontent.com/render/math?math=\color{white}\Large\B_{ij} = A_{ij} - \frac{k_i k_j}{2m}"></br>
+</p>
+- A_ij - Number of edges between node i and j (usually 0 or 1)</br>
+- k_i - Degree of node i</br>
+- k_j - Degree of node j</br>
+- m - Number of edges in the old graph</br>
+
+This matrix is then fed through a neural network which encodes the matrix into a <i>d</i>x<i>N</i> matrix where <i>d</i> is a new size to encode each row in the matrix. We can then use a clustering algorithm like <i>k</i>-means clustering to classify each node into <i>k</i> number of communities and use these communities as the predicted communities.
+
+#### Results
+
+The neural network algorithm tended to show more accuracte results and took significantly less time than the Girvan Newman algorithm after the network was trained.
 
 # Installation, Configuration, Execution
 
@@ -228,7 +269,7 @@ Parameters:
 
 
 
-### Network Configuration (networkParams.yml)
+### Model Configuration (networkParams.yml)
 
 The network configuration can be found in the `networkParams.yml` file. This file is written using the yaml style with the following parts:
 - inDim: The size of input into the neural network (this value is the same as the number of nodes in the graph)
@@ -272,10 +313,10 @@ This script converts a GML graph file to a GraphML graph file. The input is a .g
 
 [1] M. Girvan and M. E. J. Newman, “Community structure in social and biological networks,” Proceedings of the National Academy of Sciences, vol. 99, no. 12, pp. 7821–7826, Jun. 2002, doi: 10.1073/pnas.122653799.
 
-Q function: https://www.pnas.org/doi/full/10.1073/pnas.0601602103
+Girvan Newman Algorithm: https://www.pnas.org/doi/epdf/10.1073/pnas.122653799
 
-BFS: http://infolab.stanford.edu/~ullman/mmds/book0n.pdf (10.2 - page 361 (page 381 in PDF))
+Modulatiry function (Q Function): https://www.pnas.org/doi/full/10.1073/pnas.0601602103
 
-GN Algo: https://www.pnas.org/doi/epdf/10.1073/pnas.122653799
+Breadth First Search (BFS): http://infolab.stanford.edu/~ullman/mmds/book0n.pdf (10.2 - page 361 (page 381 in PDF))
 
-NN Algo: https://www.ijcai.org/Proceedings/16/Papers/321.pdf
+Neural Network Algorithm: https://www.ijcai.org/Proceedings/16/Papers/321.pdf
