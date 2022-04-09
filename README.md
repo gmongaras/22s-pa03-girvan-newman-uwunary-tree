@@ -1,10 +1,15 @@
-Q function: https://www.pnas.org/doi/full/10.1073/pnas.0601602103
+# Medium Articles
 
-BFS: http://infolab.stanford.edu/~ullman/mmds/book0n.pdf (10.2 - page 361 (page 381 in PDF))
+We wrote articles discussing the theory behind these implementations! Please read:
+- Part One: [Why Girvan-Newman](https://medium.com/smucs) </br>
+- Part Two: [Community Detection With Neural Networks](https://medium.com/smucs)
 
-GN Algo: https://www.pnas.org/doi/epdf/10.1073/pnas.122653799
+# Contents
 
-NN Algo: https://www.ijcai.org/Proceedings/16/Papers/321.pdf
+- [General Project Information](#general-project-information)
+- [Project Description](#project-description)
+
+
 
 
 
@@ -24,20 +29,22 @@ NN Algo: https://www.ijcai.org/Proceedings/16/Papers/321.pdf
 
 ## The Problem
 
-???
+In this project, we aim to implement the community detection algorithm proposed by Girvan and Newman, otherwise known as the Girvan-Newman Algorithm, for undirected, unweighted graphs. We implement community detection in both Cpp and Python, including a Neural Network to predict the solution to this problem.
 
-## The Algorithm
+## The Implementations
 
+### Community Detection
+
+Before discussing the implementations of community detection seen in this repository, let us first identify the problem at hand. Community Detection refers to the automated discovery of highly interconnected collections of nodes in a graph. For example, when looking at American Football Conferences, one would expect clear patterns, or communities, to emerge, since certain teams are more inclined to play against each other. The methods below attempt to solve this problem.
 
 ### Girvan Newman
 
-The first method used to solve the community detection problem is the Girvan Newman algorithm
-
+The first method we looked at in order to solve the communty detection problem was the Girvan-Newman Algorithm, per the requirements in the project description linked above. The Girvan-Newman Algorithm relies on repeatedly calculating edge betweenness, a value for each edge which represents the number of shortest paths between all pairs of nodes that travel through said edge. After calculating betweenness for all edges, the edge with the highest credit is removed, and betweenness is recalculated for all remaining edges.
+To know when to stop removing edges, a value known as Modularity is calculated, and when the Modularity increases and immediately sharply decreases, we stop the program and take the graph at best Modularity in order to achieve optimal community detection. In other words, this calculation allows us to optimize our program.
 
 ### Neural Network
 
-The first method used to solve the community detection problem is through the use of a nueral network. In this section, we explain how a neural network can be used to classify nodes into a set predicted number of communities.
-
+The second method we used to solve the community detection problem was through the use of a nueral network. In this section, we explain how a neural network can be used to classify nodes into a set predicted number of communities. (Gabriel U do this)
 
 # Installation, Configuration, Execution
 
@@ -51,7 +58,7 @@ First, clone the project from GitHub onto your local machine by pressing the gre
 
 Once you have the repository on your machine, make sure that you locate the folder and know the path.
 
-## Project Configuration
+## Cpp Project Configuration
 
 In this section, we look at building, linking, and creating the executable for this project. Note that you must have cmake, a compiler, such as gcc, and an environment, such as wsl on your machine. Information about these necessary installations will be listed here:
 
@@ -74,7 +81,7 @@ cmake -S [Project Directory Path] -B [cmake-build-debug path]
 If you are in the project directory, it will look something like this:
 
 ```bash
-cmake -S ../22s-pa02-amogus -B cmake-build-debug
+cmake -S ../22s-pa03-girvan-newman-uwunary-tree -B cmake-build-debug
 ```
 
 4. You will see some messages about compiler information and configuration. You can check the cmake-build-debug folder to make sure it has been populated with the necessary files.
@@ -92,22 +99,28 @@ cmake --build cmake-build-debug
 
 Once finished with this process, the cmake-build-debug folder should have the executable in it. Check to make sure the data folder and output folder have been pushed into the folder. If they haven't copy and paste them into the cmake-build-debug directory.
 
-## Main Project Execution - C++ (main.cpp)
+## Cpp Main Project Execution - <i>(main.cpp)</i>
 
 The following command can be used to run the project: </br>
 
 ```bash
-./22s-pa02-amogus
+./22s-pa03-girvan-newman-uwunary-tree
 ```
 
+## Python Project Configuration
 
-## Main Project Execution - Python - (communityDetection.py)
+In this section, we look at downloading and using a python interpreter... (Ill do this eventually)
+
+## Python Main Project Execution - <i>(communityDetection.py)</i>
 
 The following command can be used to run the project: </br>
 
-```python communityDetection.py```
+```bash
+python communityDetection.py
+```
 
 ### All Script Parameters
+
 These parameters can be changed and will effect both the Girvan Newman algorithm and the Neural Network algorithm
 
 <b>mode</b> - Options: "NN" or "GN"
@@ -254,3 +267,15 @@ Example of the output can be found in the `data/` directory.
 This script converts a GML graph file to a GraphML graph file. The input is a .gml file and the output is the corresponding .graphml file. The parameters are as follows:
 - <b>inFile</b> - The .gml graph file to convert to a .graphml graph file
 - <b>outFile</b> - The name of the .graphml output file to write to
+
+# References
+
+[1] M. Girvan and M. E. J. Newman, “Community structure in social and biological networks,” Proceedings of the National Academy of Sciences, vol. 99, no. 12, pp. 7821–7826, Jun. 2002, doi: 10.1073/pnas.122653799.
+
+Q function: https://www.pnas.org/doi/full/10.1073/pnas.0601602103
+
+BFS: http://infolab.stanford.edu/~ullman/mmds/book0n.pdf (10.2 - page 361 (page 381 in PDF))
+
+GN Algo: https://www.pnas.org/doi/epdf/10.1073/pnas.122653799
+
+NN Algo: https://www.ijcai.org/Proceedings/16/Papers/321.pdf
