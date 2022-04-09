@@ -19,7 +19,10 @@ We wrote articles discussing the theory behind these implementations! Please rea
     - Community Detection
     - Girvan Newman
     - Neural Network
-      - Results
+  - Final Results
+    - Algorithm Time
+    - Algorithm Accuracy Aginst Each Other
+    - Algorithm Accuracy Aginst The Graph Structure
 - [Installation, Configuration, Execution](#installation-configuration-execution)
   - Project Installation
   - Cpp Project Configuration
@@ -83,9 +86,57 @@ The second method we used to solve the community detection problem was through t
 
 This matrix is then fed through a neural network which encodes the matrix into a <i>d</i>x<i>N</i> matrix where <i>d</i> is a new size to encode each row in the matrix. We can then use a clustering algorithm like <i>k</i>-means clustering to classify each node into <i>k</i> number of communities and use these communities as the predicted communities.
 
-#### Results
+## Final Results
 
 The neural network algorithm tended to show more accuracte results and took significantly less time than the Girvan Newman algorithm after the network was trained.
+
+Note: The data for this section can be found in [this spreadsheet](https://github.com/smu-cs-3353/22s-pa03-girvan-newman-uwunary-tree/blob/main/README_data/Python/Time_Acc_Data.xlsx)
+
+Second note: Neural networks in the data are represented by the number of nodes in each layer. So, the algorithm labelled as 256,128 is a neural network with 2 layers where the first layer has 256 nodes and the second has 128 nodes.
+
+Third note: The 80% part on the Girvan Newman algorithm means we used an 80% sample when calculating the betweeness for the Girvan Newman algorithm which sped up the computation and gave us results in a quicker time with a very slight decrease in accuracy.
+
+### Algorithm Time
+
+First, let's take a look at how long it took each algorithm to make it's final prediction:
+
+<img src="https://github.com/smu-cs-3353/22s-pa03-girvan-newman-uwunary-tree/blob/main/README_data/Python/Algorithm%20Predicting%20Speeds%20on%20Datasets.png"></br>
+
+Clearly the Girvan Newman algorithm took the longest to run on every dataset. This is the expected behavior since the Girvan Newman algorithm is an iterative method while the neural network is just a function transformation. Let's see how the neural networks did against each other time-wise:
+
+<img src="https://github.com/smu-cs-3353/22s-pa03-girvan-newman-uwunary-tree/blob/main/README_data/Python/Algorithm%20Predicting%20Speeds%20on%20Datasets%20(GN%20Removed).png"></br>
+
+None of the neural networks seemed to show a signifiacant time change on any of the datasets (besides the one outlier which was a neural network with nodes 128,64,32). This is the expected behavior since all the neural networks have about the same number of layers and take about the same number of computations to compute the final result.
+
+### Algorithm Accuracy Aginst Each Other
+
+Now let's take a look at the accuracy between the neural network and the Girvan Newman algorithm:
+
+<img src="https://github.com/smu-cs-3353/22s-pa03-girvan-newman-uwunary-tree/blob/main/README_data/Python/Algorithm%20Accuracy%20on%20Datasets.png"></br>
+
+<img src="https://github.com/smu-cs-3353/22s-pa03-girvan-newman-uwunary-tree/blob/main/README_data/Python/Average%20Accuracy%20By%20Algorithm.png"></br>
+
+Looking at the data, we can see that the Girvan Newman algorithm was usually the second worst algorithm. The Girvan Newman algorithm likely performed as almost the worst algorithm due to it being a very naive approach at the Community Detection problem.
+
+Interestingly, the neural network with layers 64,32,16,8 had the worst accuracy which is liekly because of how small the dimensions of the latent space are (the latent space is 8-dimensional).
+
+The best algorithm was the neural network with layers 256,128 and this algorithm performed significantly better than the Girvan Newman. On average over all the datasets, this algorithm was over 20% more accurate than the Girvan Newman algorithm.
+
+### Algorithm Accuracy Aginst The Graph Structure
+
+Finally, we will examine the accuracy of the algorithms in relation to the structure of the graph.
+
+The metric of the graph we will examine is the average out degree of each node. The out-degree of a node is the number of neighbors the node has that are outside it's community.
+
+Below are the results for each algorithm:
+
+<img src="https://github.com/smu-cs-3353/22s-pa03-girvan-newman-uwunary-tree/blob/main/README_data/Python/Average%20Out%20Degree%20Count%20Vs.%20Algorithm%20Accuracy.png"></br>
+
+The data shows a very clear negative slope, meaning as the number of out-degrees in the graph increase so does the accuracy of the algorithm. Let's take a look at the average accuracy between all algorithms:
+
+<img src="https://github.com/smu-cs-3353/22s-pa03-girvan-newman-uwunary-tree/blob/main/README_data/Python/Average%20Out%20Degree%20Count%20Vs.%20Average%20Accuracy%20Across%20Algorithms.png"></br>
+
+The graph shows a negative quadtratic relationship between the average node out-degree and the average accuracy of all algorithms on that graph. So, communities with high out-degrees give both of these algorithms trobule.
 
 # Installation, Configuration, Execution
 
