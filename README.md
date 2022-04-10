@@ -39,10 +39,6 @@ We wrote articles discussing the theory behind these implementations! Please rea
   - GML To GraphML Conversion
 - [References](#references)
 
-
-
-
-
 # General Project Information
 
 **Title:** Project 3 - [Community Detection in Networks](https://docs.google.com/document/d/1kzxZlTZV8M57DKrXZFGYVOAaDaBW9JjPwcKYHjFEC04/edit)</br>
@@ -71,8 +67,7 @@ Before discussing the implementations of community detection seen in this reposi
 
 The first method we looked at in order to solve the communty detection problem was the Girvan-Newman Algorithm, per the requirements in the project description linked above. The Girvan-Newman Algorithm relies on repeatedly calculating edge betweenness, a value for each edge which represents the number of shortest paths between all pairs of nodes that travel through said edge. After calculating betweenness for all edges, the edge with the highest credit is removed, and betweenness is recalculated for all remaining edges.
 To know when to stop removing edges, a value known as Modularity is calculated, and when the Modularity increases and immediately sharply decreases, we stop the program and take the graph at best Modularity in order to achieve optimal community detection. In other words, this calculation allows us to optimize our program.
-
-If you would like to learn more about the implementation, you can read this [medium article]()
+If you would like to learn more about the implementation, you can read this [medium article](https://medium.com/smucs).
 
 ### Neural Network
 
@@ -85,16 +80,12 @@ The second method we used to solve the community detection problem was through t
 - k_i - Degree of node i</br>
 - k_j - Degree of node j</br>
 - m - Number of edges in the old graph</br>
-
-This matrix is then fed through a neural network which encodes the matrix into a <i>d</i>x<i>N</i> matrix where <i>d</i> is a new size to encode each row in the matrix. We can then use a clustering algorithm like <i>k</i>-means clustering to classify each node into <i>k</i> number of communities and use these communities as the predicted communities.
-
-If you would like to learn more about the implementation, you can read this [medium article]()
+</br>
+This matrix is then fed through a neural network which encodes the matrix into a <i>d</i>x<i>N</i> matrix where <i>d</i> is a new size to encode each row in the matrix. We can then use a clustering algorithm like <i>k</i>-means clustering to classify each node into <i>k</i> number of communities and use these communities as the predicted communities. If you would like to learn more about the implementation, you can read this [medium article](https://medium.com/smucs).
 
 ## Final Results
 
-The neural network algorithm tended to show more accuracte results and took significantly less time than the Girvan Newman algorithm after the network was trained.
-
-Note: The data for this section can be found in [this spreadsheet](https://github.com/smu-cs-3353/22s-pa03-girvan-newman-uwunary-tree/blob/main/README_data/Python/Time_Acc_Data.xlsx)
+The neural network algorithm tended to show more accuracte results and took significantly less time than the Girvan Newman algorithm after the network was trained. Note: The data for this section can be found in [this spreadsheet](https://github.com/smu-cs-3353/22s-pa03-girvan-newman-uwunary-tree/blob/main/README_data/Python/Time_Acc_Data.xlsx)
 
 Second note: Neural networks in the data are represented by the number of nodes in each layer. So, the algorithm labelled as 256,128 is a neural network with 2 layers where the first layer has 256 nodes and the second has 128 nodes.
 
@@ -102,11 +93,11 @@ Third note: The 80% part on the Girvan Newman algorithm means we used an 80% sam
 
 ### Algorithm Time
 
-First, let's take a look at how long it took each algorithm to make it's final prediction:
+First, let's take a look at how long it took each algorithm to make its final prediction:
 
 <img src="https://github.com/smu-cs-3353/22s-pa03-girvan-newman-uwunary-tree/blob/main/README_data/Python/Algorithm%20Predicting%20Speeds%20on%20Datasets.png"></br>
 
-Clearly the Girvan Newman algorithm took the longest to run on every dataset. This is the expected behavior since the Girvan Newman algorithm is an iterative method while the neural network is just a function transformation. Let's see how the neural networks did against each other time-wise:
+Clearly the Girvan Newman algorithm took the longest to run on every dataset. This is the expected behavior since the Girvan Newman algorithm is an iterative method while the neural network is a function transformation. Let's see how the neural networks did against each other time-wise:
 
 <img src="https://github.com/smu-cs-3353/22s-pa03-girvan-newman-uwunary-tree/blob/main/README_data/Python/Algorithm%20Predicting%20Speeds%20on%20Datasets%20(GN%20Removed).png"></br>
 
@@ -122,7 +113,7 @@ Now let's take a look at the accuracy between the neural network and the Girvan 
 
 Looking at the data, we can see that the Girvan Newman algorithm was usually the second worst algorithm. The Girvan Newman algorithm likely performed as almost the worst algorithm due to it being a very naive approach at the Community Detection problem.
 
-Interestingly, the neural network with layers 64,32,16,8 had the worst accuracy which is liekly because of how small the dimensions of the latent space are (the latent space is 8-dimensional).
+Interestingly, the neural network with layers 64,32,16,8 had the worst accuracy which is likely because of how small the dimensions of the latent space are (the latent space is 8-dimensional).
 
 The best algorithm was the neural network with layers 256,128 and this algorithm performed significantly better than the Girvan Newman. On average over all the datasets, this algorithm was over 20% more accurate than the Girvan Newman algorithm.
 
@@ -200,12 +191,16 @@ Once finished with this process, the cmake-build-debug folder should have the ex
 The following command can be used to run the project: </br>
 
 ```bash
-./22s-pa03-girvan-newman-uwunary-tree
+./22s-pa03-girvan-newman-uwunary-tree [graphml path] [value type]
 ```
+
+To find the value type, search the specified grapml file for the "attr.type" node attribute and set it equal to that.
 
 ## Python Project Configuration
 
-In this section, we look at downloading and using a python interpreter... (Ill do this eventually)
+In this section, we look at downloading and using a python interpreter. This can be done in multiple ways, and it depends on your machine. For example, with homebrew or ubuntu, one may install by simply looking up the install command and running it. But for those who don't have either, [here](https://www.python.org/downloads/) is the official download from python's website.
+
+After doing so, you may use terminal or an IDE to run the project scripts, similarly to how it worked previously. We used Visual Studio Code, but anything works.
 
 ## Python Main Project Execution - <i>(communityDetection.py)</i>
 
@@ -237,7 +232,6 @@ These parameters can be changed and will effect both the Girvan Newman algorithm
  
 <b>inFile</b> - The graphml data file to load in to test the algorithm
 - This file is a .graphml file and stores a graph we want the model to analyze
-
 
 ### Neural Network Parameters
 
