@@ -61,7 +61,7 @@ Before discussing the implementations of community detection seen in this reposi
 
 The first method we looked at in order to solve the communty detection problem was the Girvan-Newman Algorithm, per the requirements in the project description linked above. The Girvan-Newman Algorithm relies on repeatedly calculating edge betweenness, a value for each edge which represents the number of shortest paths between all pairs of nodes that travel through said edge. After calculating betweenness for all edges, the edge with the highest credit is removed, and betweenness is recalculated for all remaining edges.
 To know when to stop removing edges, a value known as Modularity is calculated, and when the Modularity increases and immediately sharply decreases, we stop the program and take the graph at best Modularity in order to achieve optimal community detection. In other words, this calculation allows us to optimize our program.
-If you would like to learn more about the implementation, you can read this [medium article](https://medium.com/smucs).
+If you would like to learn more about the implementation, you can read this [medium article](https://medium.com/@trevordohm/why-girvan-newman-68506e824e93).
 
 ### Neural Network
 
@@ -75,7 +75,9 @@ The second method we used to solve the community detection problem was through t
 - k_j - Degree of node j</br>
 - m - Number of edges in the old graph</br>
 </br>
-This matrix is then fed through a neural network which encodes the matrix into a <i>d</i>x<i>N</i> matrix where <i>d</i> is a new size to encode each row in the matrix. We can then use a clustering algorithm like <i>k</i>-means clustering to classify each node into <i>k</i> number of communities and use these communities as the predicted communities. If you would like to learn more about the implementation, you can read this [medium article](https://medium.com/smucs).
+This matrix is then fed through a neural network which encodes the matrix into a <i>d</i>x<i>N</i> matrix where <i>d</i> is a new size to encode each row in the matrix. We can then use a clustering algorithm like <i>k</i>-means clustering to classify each node into <i>k</i> number of communities and use these communities as the predicted communities.
+
+If you would like to learn more about the implementation, you can read this [medium article](https://gmongaras.medium.com/community-detection-with-neural-networks-2e6c79a28d0c).
 
 ## Final Results
 
