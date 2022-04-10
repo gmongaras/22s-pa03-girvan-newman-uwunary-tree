@@ -1,14 +1,8 @@
-To-do:
-- link medium articles (In Medium Articles and in The Implementation)
-- spell check
-- Python Project Configuration
-
-
 # Medium Articles
 
 We wrote articles discussing the theory behind these implementations! Please read:
-- Part One: [Why Girvan-Newman](https://medium.com/smucs) </br>
-- Part Two: [Community Detection With Neural Networks](https://medium.com/smucs)
+- Part One: [Why Girvan-Newman](https://medium.com/@trevordohm/why-girvan-newman-68506e824e93) </br>
+- Part Two: [Community Detection With Neural Networks](https://gmongaras.medium.com/community-detection-with-neural-networks-2e6c79a28d0c)
 
 # Contents
 
