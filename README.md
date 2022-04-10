@@ -194,7 +194,7 @@ The following command can be used to run the project: </br>
 ./22s-pa03-girvan-newman-uwunary-tree [graphml path] [value type]
 ```
 
-To find the value type, search the specified grapml file for the "attr.type" node attribute and set it equal to that.
+To find the value type, search the specified grapml file for the "attr.name" node attribute and set it equal to that.
 
 ## Python Project Configuration
 
