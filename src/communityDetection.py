@@ -22,7 +22,7 @@ inFile = "../data/dataset1.graphml" # The datafile to load in
 
 # Neural Network Parameters
 configFileName = "./networkParams.yml"  # The configuration file for the model
-modelFileName = "../models/256,128"# The saved model to load in
+modelFileName = "../models/256,128"     # The saved model to load in
 numClasses = 4                          # Number of classes to predict
 
 # Girvan Newman Parameters
@@ -377,7 +377,7 @@ def normalLoop(G):
         Q = (1 / (2 * m)) * (0.5 * sum1 - sum2)
 
         # Print Values, Increment
-        print(f"Iter {iter} Modularity: {Q}")
+        print(f"Iter {it} Modularity: {Q}")
         it += 1
 
     # We Want Graph from Before Iteration Before Last
