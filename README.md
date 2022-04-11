@@ -13,6 +13,11 @@ We wrote articles discussing the theory behind these implementations! Please rea
     - Community Detection
     - Girvan Newman
     - Neural Network
+  - Example Output
+    - Girvan Newman - Football
+    - Girvan Newman - Dataset 4
+    - Neural Network Note
+    - Neural Network - Dataset 4
   - Final Results
     - Algorithm Time
     - Algorithm Accuracy Aginst Each Other
@@ -85,7 +90,7 @@ Below is example output from both algorithms. Each output is split into two part
 1. The graphical representation of the groups
 2. Each group and the nodes in them
 
-### Grivan Newman - Football
+### Girvan Newman - Football
 <img src="https://github.com/smu-cs-3353/22s-pa03-girvan-newman-uwunary-tree/blob/main/README_data/Python/GN_Football_Graph.png"></br>
 
 ```
