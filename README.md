@@ -79,6 +79,62 @@ This matrix is then fed through a neural network which encodes the matrix into a
 
 If you would like to learn more about the implementation, you can read this [medium article](https://gmongaras.medium.com/community-detection-with-neural-networks-2e6c79a28d0c).
 
+## Example Output
+
+Below is example output from both algorithms. Each output is split into two parts:
+1. The graphical representation of the groups
+2. Each group and the nodes in them
+
+### Grivan Newman - Football
+<img src="https://github.com/smu-cs-3353/22s-pa03-girvan-newman-uwunary-tree/blob/main/README_data/Python/GN_Football_Graph.png"></br>
+
+```
+Class 0: NewMexico, BrighamYoung, SanDiegoState, Wyoming, Utah, ColoradoState, AirForce, NevadaLasVegas
+Class 1: NorthCarolinaState, FloridaState, Virginia, GeorgiaTech, Duke, NorthCarolina, Clemson, WakeForest, Maryland
+Class 2: PennState, Iowa, Northwestern, Wisconsin, Michigan, OhioState, Purdue, Minnesota, Illinois, MichiganState, Indiana
+Class 3: Kansas, KansasState, IowaState, Baylor, TexasTech, Nebraska, Oklahoma, TexasA&M, Colorado, Texas, Missouri, OklahomaState
+Class 4: ArizonaState, SouthernCalifornia, UCLA, Arizona, Washington, Oregon, WashingtonState, Stanford, OregonState, California
+Class 5: ArkansasState, NorthTexas, UtahState, BoiseState, Idaho, NewMexicoState
+Class 6: EasternMichigan, NorthernIllinois, Toledo, BallState
+Class 7: Alabama, Auburn, Florida, Kentucky, Vanderbilt, SouthCarolina, MississippiState, Mississippi, Georgia, Tennessee, LouisianaState, Arkansas
+Class 8: Buffalo, Akron, Kent, BowlingGreenState, MiamiOhio, Ohio, Marshall
+Class 9: BostonCollege, VirginiaTech, WestVirginia, Syracuse, Pittsburgh, Temple, Rutgers, MiamiFlorida
+Class 10: Houston, EastCarolina, Louisville, SouthernMississippi, Memphis, Tulane, Cincinnati, AlabamaBirmingham, Army
+Class 11: Rice, FresnoState, SouthernMethodist, Nevada, SanJoseState, TexasElPaso, Tulsa, TexasChristian, Hawaii
+Class 12: WesternMichigan, CentralFlorida, CentralMichigan, Connecticut, LouisianaTech, LouisianaMonroe, MiddleTennesseeState, Navy, NotreDame, LouisianaLafayette
+Accuracy: 0.8608695652173913
+```
+
+### Girvan Newman - Dataset 4
+<img src="https://github.com/smu-cs-3353/22s-pa03-girvan-newman-uwunary-tree/blob/main/README_data/Python/GN_dataset4.png"></br>
+
+```
+Class 0: Teri Holstein, Franklin Davis, Jennifer Morris, Bonnie Aman, Spencer Patrick, Ralph Carradine, Sarah Ramirez, Edwin Morley, Alfredo Petty, Vada Isom, Thomas Franko, Robert Coleman, Michael Farr, Alexandra Livingston, Ella Johnson, Irene Robinson, Robert Roller, James Sindorf, Allen Poole, Thelma Wiggins, Dianna Spencer, Samantha Stone, Lillian Canales, Connie Funk, Curt Ritter, Daniel Montoya, Susanne Rivas, Eric Dietz, Tommie Lutes, James Mauk, Victor Fry, Robert Castro, Idell Nixon, Shawn Worrell, Roy Larmon, Jamie Evans, Janet Savitts, Duane Edwards, Amy Pratt, Rhonda Marshall, Miguel Hibbs, John Wiederwax, George Nehring, David Shaw, Denise Moller, Angelina Gordon, James Smith, Robert Meade, Josefina Orear, Alexander Landis, Theresa Taylor, Alexander Lloyd, Sussy Baka, Laura Escudero, Ben Sullivan, Jennifer Hunter, Ginger Dower, Donte Bringle, Melissa Gibson, Sue Eby, Fred Foster, Kenneth Gleaton, Gary Cox, Ben Nevarez, Florence Lydon, Debra Kilday
+Class 1: Jill Dodson, Betsy Lopez, Patricia Thompson, Tommy Stephens, Cynthia Horton, Donald Olivares, Wanda Fennell, Amanda Scott, Keely Campbell, Teresa Jackson, Paul Finn, Joseph Salcido, Stacy Hawke, Arlene James, Annette Parker, Keith Fonte, Teresa Walbridge, John Hunter, Elizabeth Varnado, William Llewellyn, Traci Fulks, Rubye Hamlin, Twyla Hernandez, Nancy Perez, Penelope Mckeown
+Class 2: Michael Earvin, Kandace Murphy, Jon Rager, Wayne Paredes, Jacqueline Quintana, Guy Hirko, John Matas, Gerald Mattox, Frank Hurtado, Sean Gravina, Brittany Rogers, Lillian Hollis, Luis Shutt, John Foster, Harold Burns, Mario Fletcher, Amy Davis, Delbert Paulin, David Golding, Mark Tate, Donald Benoit, Aaron Olivia
+Class 3: Dorothy Lewis, Jo Baza, Katherine Monroe
+Class 4: Sarah Rhim, Danny Perez
+Class 5: Susan Garcia, Michelle Mushrush, Brett Oneil, Mary Mariani, Lee Bow, Ron Ewing, Peter Vincent, Ha Cook, Johnny Fettig, Johnny Covington
+Accuracy: 0.609375
+```
+
+
+### Neural Network Note
+
+Note: Since the neural network has a set input, we did not test it with the football dataset, but if we did, we are confident it will be able to classify the teams with a high accuracy due to the results on the other datasets.
+
+### Neural Network - Dataset 4
+<img src="https://github.com/smu-cs-3353/22s-pa03-girvan-newman-uwunary-tree/blob/main/README_data/Python/NN_dataset4.png"></br>
+
+```
+Class 0: Donte Bringle, Jamie Evans, Duane Edwards, Miguel Hibbs, David Shaw, Laura Escudero, Janet Savitts, John Wiederwax, Denise Moller, Amy Pratt, Gary Cox, Michelle Mushrush, Robert Meade, James Smith, Alexander Landis, Jennifer Hunter, Shawn Worrell, Rhonda Marshall, Roy Larmon, Ben Nevarez, Spencer Patrick, Mary Mariani, Alexander Lloyd, Ben Sullivan, Kenneth Gleaton, Fred Foster, George Nehring, Josefina Orear, Angelina Gordon, Ginger Dower, Theresa Taylor, Sussy Baka
+Class 1: Kandace Murphy, Wayne Paredes, Luis Shutt, Jacqueline Quintana, Susan Garcia, Sean Gravina, Melissa Gibson, Sue Eby, John Foster, Brittany Rogers, Vada Isom, Michael Earvin, Lillian Hollis, Frank Hurtado, Donald Benoit, Delbert Paulin, Harold Burns, Guy Hirko, Jon Rager, Aaron Olivia, Brett Oneil, David Golding, Twyla Hernandez, Peter Vincent, Amy Davis, Mario Fletcher, Dorothy Lewis, John Matas, Gerald Mattox, Mark Tate, Penelope Mckeown
+Class 2: Robert Roller, Betsy Lopez, Donald Olivares, Jo Baza, Tommy Stephens, Keely Campbell, Teresa Walbridge, Paul Finn, Joseph Salcido, Amanda Scott, Danny Perez, Arlene James, Wanda Fennell, Rubye Hamlin, Cynthia Horton, Teresa Jackson, Annette Parker, Elizabeth Varnado, William Llewellyn, Jill Dodson, Nancy Perez, Keith Fonte, Samantha Stone, Ron Ewing, Ha Cook, Patricia Thompson, Sarah Rhim, Katherine Monroe, Johnny Fettig, Traci Fulks, Johnny Covington, John Hunter
+Class 3: Franklin Davis, Alfredo Petty, Sarah Ramirez, Alexandra Livingston, Bonnie Aman, Dianna Spencer, Teri Holstein, Thelma Wiggins, Ella Johnson, Edwin Morley, Stacy Hawke, Robert Coleman, Tommie Lutes, Michael Farr, Irene Robinson, Daniel Montoya, James Sindorf, Ralph Carradine, Victor Fry, Jennifer Morris, Susanne Rivas, Connie Funk, Curt Ritter, Allen Poole, Robert Castro, Thomas Franko, James Mauk, Lee Bow, Idell Nixon, Lillian Canales, Florence Lydon, Debra Kilday, Eric Dietz
+Accuracy: 0.984375
+```
+
+
 ## Final Results
 
 The neural network algorithm tended to show more accuracte results and took significantly less time than the Girvan Newman algorithm after the network was trained. Note: The data for this section can be found in [this spreadsheet](https://github.com/smu-cs-3353/22s-pa03-girvan-newman-uwunary-tree/blob/main/README_data/Python/Time_Acc_Data.xlsx)
